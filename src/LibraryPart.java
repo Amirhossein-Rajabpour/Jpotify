@@ -23,7 +23,7 @@ public class LibraryPart extends JPanel {
     public LibraryPart(){
 
         super();
-        setSize(100,400);
+        setSize(120,400);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -31,18 +31,18 @@ public class LibraryPart extends JPanel {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        libraryLabel = new JLabel("Library");
-        libraryLabel.setPreferredSize(dimension);
+        libraryLabel = new JLabel("Library     ");
+//        libraryLabel.setPreferredSize(dimension);
         libraryLabel.setAlignmentX(RIGHT_ALIGNMENT);
         add(libraryLabel);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- * This button is for adding e new song to the program
+ * This button is for adding a new song to the program
  */
-        fileChooserBtn = new JButton("Add to library");
-        fileChooserBtn.setPreferredSize(dimension);
+        fileChooserBtn = new JButton(" Add to library ");
+        fileChooserBtn.setPreferredSize(new Dimension(5,40));
         fileChooserBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,8 +58,8 @@ public class LibraryPart extends JPanel {
 /**
  * This button shows all existed songs according to last time played
  */
-        songsBtn = new JButton("Songs");
-        songsBtn.setPreferredSize(new Dimension(100,100));
+        songsBtn = new JButton("       Songs       ");
+//        songsBtn.setPreferredSize();
         songsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,7 +74,7 @@ public class LibraryPart extends JPanel {
 /**
  * This button shows all albums according to last time played
  */
-        albumsBtn = new JButton("Albums");
+        albumsBtn = new JButton("      Albums      ");
 //        albumsBtn.setPreferredSize(dimension);
         albumsBtn.addActionListener(new ActionListener() {
             @Override
@@ -94,7 +94,7 @@ public class LibraryPart extends JPanel {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        playlistLabel = new JLabel("PlayLists");
+        playlistLabel = new JLabel("PlayLists  ");
 //        playlistLabel.setPreferredSize(dimension);
         playlistLabel.setAlignmentX(RIGHT_ALIGNMENT);
         add(playlistLabel);
@@ -104,7 +104,7 @@ public class LibraryPart extends JPanel {
 /**
  * This button creates and adds a new playlist
  */
-        newPlaylistBtn = new JButton("New Playlist");
+        newPlaylistBtn = new JButton("  New Playlist  ");
 //        newPlaylistBtn.setPreferredSize(dimension);
         newPlaylistBtn.addActionListener(new ActionListener() {
             @Override
@@ -136,7 +136,7 @@ public class LibraryPart extends JPanel {
 /**
  * Every user has some favourite songs which is shown by this button
  */
-        favouriteBtn = new JButton("Favourites");
+        favouriteBtn = new JButton("    Favourites    ");
 //        favouriteBtn.setPreferredSize(dimension);
         favouriteBtn.addActionListener(new ActionListener() {
             @Override
