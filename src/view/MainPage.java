@@ -10,14 +10,17 @@ public class MainPage extends JFrame {
     private PlayerPart playerPart;
     private Song song;
     private ToolBar toolBar;
-    private static final int WIDTH = 700, HEIGHT = 700;
+    private static final int WIDTH = 600, HEIGHT = 450;
 
     public MainPage(String userName,String friendsId){
 
         super();
         this.setLayout(new BorderLayout());
         this.setSize(WIDTH,HEIGHT);
-        this.setLocation(300,100);
+//        this.setLocation(300,100);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 150);
+        this.setBackground(new Color(57,54,50));
 
         toolBar = new ToolBar();
         this.add(toolBar,BorderLayout.NORTH);
