@@ -1,19 +1,36 @@
 package view;
 
+import java.lang.reflect.Array;
+
 public class Song {
 
     private String title;
     private String artistName;
     private String path;
+    private String albumName;
+    private byte[] artwork;
     //artwork
 
     public Song(String path ){
 
-        this.title = title;
-        this.artistName = artistName;
         this.path = path;
     }
 
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    public void setArtwork(byte[] artwork) {
+        this.artwork = artwork;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public byte[] getArtwork() {
+        return artwork;
+    }
 
     public String getPath() {
         return path;
