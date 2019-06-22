@@ -11,7 +11,7 @@ public class MainPage extends JFrame {
     Song song;
     private static final int WIDTH = 700, HEIGHT = 700;
 
-    public MainPage(String userName){
+    public MainPage(String userName,String friendsId){
 
         super();
         this.setLayout(new BorderLayout());
@@ -26,6 +26,7 @@ public class MainPage extends JFrame {
         this.add(playerPart,BorderLayout.SOUTH);
 
 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
 
