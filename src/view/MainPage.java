@@ -5,10 +5,11 @@ import java.awt.*;
 
 public class MainPage extends JFrame {
 
-    JFrame mainFrame;
-    LibraryPart Library;
-    PlayerPart playerPart;
-    Song song;
+    private JFrame mainFrame;
+    private LibraryPart Library;
+    private PlayerPart playerPart;
+    private Song song;
+    private ToolBar toolBar;
     private static final int WIDTH = 700, HEIGHT = 700;
 
     public MainPage(String userName,String friendsId){
@@ -18,6 +19,8 @@ public class MainPage extends JFrame {
         this.setSize(WIDTH,HEIGHT);
         this.setLocation(300,100);
 
+        toolBar = new ToolBar();
+        this.add(toolBar,BorderLayout.NORTH);
 
         Library = new LibraryPart();
         this.add(new JScrollPane(Library),BorderLayout.WEST);
