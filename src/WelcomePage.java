@@ -1,72 +1,114 @@
+//package Welcome;
+
+//import AppFrame.JpotifyGUI;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Welcome page class is the first page that user sees and
- * user enter his name and friends id for connecting to the server
- */
-
 public class WelcomePage extends JFrame {
-    private static final int WIDTH = 400, HEIGHT = 200;
-    private JLabel welcomeLabel;
-    private JLabel userLabel;
-    private JTextField userTextField;
-    private JLabel IDLabel;
-    private JTextField IDTextField;
-    private JButton EnterBtn;
-    private FlowLayout layout;
 
+    private static final int WIDTH = 350, HEIGHT = 500;
 
-    public WelcomePage() throws HeadlessException {
+    private static final String MAIN_WELCOME_TXT = "Jpotify®";
+    JLabel jLabel;
+
+    private static final String WELCOME_TXT = "Millions of songs.\nFree on Jpotify.";
+    JTextField jTextField;
+
+    private static final String USERNAME_LABEL = "Username:";
+    JLabel userLabel;
+    JTextField userTextField;
+
+    private static final String ID_LABEL = "Friend's ID";
+    JLabel idLabel;
+    JTextField idTextField;
+
+    private static final String BTN_TXT = "LOG IN";
+    JButton btn;
+
+    //DataInput dataInput;
+    public WelcomePage() {
         super();
-        layout = new FlowLayout();
-        this.setLayout(layout);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        layout.setAlignment(FlowLayout.CENTER);
-        setSize(WIDTH + 100, HEIGHT);
-        this.setTitle("JPotify");
-//        this.setPreferredSize(new Dimension(WelcomePage.WIDTH, 40));
 
-        Dimension labelDimension = new Dimension(WIDTH - (WIDTH)/3, 30);
-        Dimension textFieldDimension = new Dimension(WIDTH - (WIDTH)/2, 30);
+        this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+
+        jLabel = new JLabel(MAIN_WELCOME_TXT);
+        Font font1 = new Font("Arial", Font.BOLD, 48);
+        jLabel.setFont(font1);
+        //jLabel.setForeground(new Color(105, 180, 120));
+        jLabel.setForeground(new Color(130, 35, 35));
+        jLabel.setBackground(Color.black);
+        //jLabel.setSize(250, 100);
+        jLabel.setVerticalAlignment(SwingConstants.CENTER);
+        ImageIcon imgThisImg = new ImageIcon("Jpotifyred.png");
+        jLabel.setIcon(imgThisImg);
+        this.add(jLabel);
+
+        jTextField = new JTextField();
+        Font font2 = new Font("Arial", Font.CENTER_BASELINE, 24);
+        jTextField.setFont(font2);
+        jTextField.setText("Millions of songs.");
+        jTextField.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        this.add(jTextField);
+        jTextField.setEditable(false);
+        jTextField.setBackground(new Color(130, 35, 35));
+        jTextField.setForeground(Color.WHITE);
 
 
-        welcomeLabel = new JLabel("welcome to the jpotify!!");
-        welcomeLabel.setPreferredSize(labelDimension);
-        add(welcomeLabel);
 
-        userLabel = new JLabel(" Choose Your UserName  ");
-        userLabel.setPreferredSize(labelDimension);
-        add(userLabel);
-/**
- * this textField gets the username
- */
+        // this.add(dataInput = new DataInput());
+        Font font = new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 20);
+
+        userLabel = new JLabel(USERNAME_LABEL);
+        userLabel.setFont(font);
+        userLabel.setForeground(Color.WHITE);
+        this.add(userLabel);
         userTextField = new JTextField();
-        userTextField.setPreferredSize(textFieldDimension);
-//        textField.setBounds(50,100, 200,30);
         add(userTextField);
 
-        IDLabel = new JLabel(" enter your friends ID ");
-        IDLabel.setPreferredSize(labelDimension);
-        add(IDLabel);
-/**
- * this textField gets friends id for server connection
- */
-        IDTextField = new JTextField();
-        IDTextField.setPreferredSize(textFieldDimension);
-        add(IDTextField);
+        idLabel = new JLabel(ID_LABEL);
+        idLabel.setFont(font);
+        idLabel.setForeground(Color.WHITE);
+        this.add(idLabel);
+        idTextField = new JTextField();
+        this.add(idTextField);
+//        this.setBackground(new Color(80, 30, 30));
+        this.setBackground(new Color(130, 35, 35));
 
+        btn = new JButton(BTN_TXT);
+        btn.setVerticalAlignment(SwingConstants.CENTER);
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                doClickAction();
+            }
+        });
+//        btn.setPreferredSize(new Dimension(100,100));
+        this.add(btn);
 
-        EnterBtn = new JButton("Enter!",new ImageIcon("success.png"));
-        EnterBtn.setBounds(40,100,50,30);
-//        btn.setPreferredSize(new Dimension(WelcomePage.WIDTH - (WelcomePage.WIDTH)/2, 20));
-        EnterBtn.setToolTipText("click here");
-        add(EnterBtn);
+        //this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
+        this.setBackground(new Color(40, 90, 76));
+        this.setForeground(new Color(131, 194, 161));
 
-        setVisible(true);
+        //setResizable(false);
+        setSize(WIDTH, HEIGHT);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+//        this.setLocationRelativeTo(null);
+//        this.pack();
 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    public void doClickAction(){
+//        JpotifyGUI jpotifyGUI = new JpotifyGUI();
+//        jpotifyGUI.setUser(userTextField.getText());
+//        jpotifyGUI.setFriendsId(idTextField.getText());
+        this.setVisible(false);
     }
 }
