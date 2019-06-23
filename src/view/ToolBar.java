@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 public class ToolBar extends JPanel {
 
     private JLabel options;
+    private RoundTextField searchBox;
 
     public ToolBar() {
         super();
@@ -60,8 +61,8 @@ public class ToolBar extends JPanel {
         //⦁
 
         add(Box.createRigidArea(new Dimension(25,0)));
-        searchBox = new JTextField("Search");
-        searchBox.setPreferredSize(new Dimension(50,20));
+        searchBox = new RoundTextField(30);
+//        searchBox.setPreferredSize(new Dimension(50,20));
         this.add(searchBox);
     }
 }
