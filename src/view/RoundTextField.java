@@ -19,28 +19,29 @@ public class RoundTextField extends JTextField {
         backgroundColor = new Color(38, 38, 38);
 
         color = new Color(148, 146, 143);
-        setOpaque(false); // As suggested by @AVD in comment.
+        setOpaque(false);
         RoundTextField.super.setText("🔍 Search");
+        RoundTextField.super.setFont(new Font("Arial", Font.CENTER_BASELINE, 9));
         RoundTextField.super.setForeground(color);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.white);
-        g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
+        g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 27, 27);
         super.paintComponent(g);
     }
 
     @Override
     protected void paintBorder(Graphics g) {
         g.setColor(backgroundColor);
-        g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
+        g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 27, 27);
     }
 
     @Override
     public boolean contains(int x, int y) {
         if (shape == null || !shape.getBounds().equals(getBounds())) {
-            shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
+            shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 27, 27);
         }
         return shape.contains(x, y);
     }
