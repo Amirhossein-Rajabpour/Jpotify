@@ -4,13 +4,18 @@ import com.mpatric.mp3agic.*;
 
 import java.awt.*;
 import java.io.IOException;
+import java.time.Instant;
 
+/**
+ * this class represents a song which is a mp3 file
+ */
 public class Song extends Mp3File {
 
     private String title;
     private String artistName;
     private String path;
     private String albumName;
+    private long lastTimePlayed;
     private byte[] artwork;
     Mp3File mp3file;
 
@@ -27,6 +32,10 @@ public class Song extends Mp3File {
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setLastTimePlayed(){
+        lastTimePlayed = Instant.now().toEpochMilli();
     }
 
     public String getAlbumName() {
@@ -53,6 +62,10 @@ public class Song extends Mp3File {
         return artistName;
     }
 
+    /**
+     * This method checks weather the mp3 file is id3v1 or id3v2
+     * and then set the title according to that
+     */
     public void setTitle() {
         if(mp3file.hasId3v1Tag()){
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
@@ -65,7 +78,10 @@ public class Song extends Mp3File {
         else title = "not readable title";
 
     }
-
+    /**
+     * This method checks weather the mp3 file is id3v1 or id3v2
+     * and then set the artistName according to that
+     */
     public void setArtistName() {
         if(mp3file.hasId3v1Tag()){
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
@@ -77,7 +93,10 @@ public class Song extends Mp3File {
         }
         else title = "not readable artist name";
     }
-
+    /**
+     * This method checks weather the mp3 file is id3v1 or id3v2
+     * and then set the AlbumName according to that
+     */
     public void setAlbumName() {
         if(mp3file.hasId3v1Tag()){
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
@@ -90,6 +109,10 @@ public class Song extends Mp3File {
         else title = "not readable album name";
     }
 
+    /**
+     * if the file is id3v2 it can have artwork
+     * and this method reads the file and set the artwork
+     */
     public void setArtwork() {
         if(mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
