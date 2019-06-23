@@ -266,7 +266,12 @@ public class LibraryPart extends JPanel {
 
         if(Album.containsKey(song.getAlbumName()))
         Album.get(song.getAlbumName()).add(song);
-//        else Album.put(song.getAlbumName(),Album.get(song.getAlbumName()).add(song));
+
+        else {
+            ArrayList<Song> songs = new ArrayList<>();
+            songs.add(song);
+            Album.put(song.getAlbumName(),songs);
+        }
 
     }
 
