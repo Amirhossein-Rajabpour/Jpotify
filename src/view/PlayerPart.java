@@ -90,11 +90,12 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                    previous.setBackground(new Color(55,55,55));
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+                    previous.setBackground(new Color(40,40,40));
                     // Right the ActionEvent here Amirhosein
                 }
 
@@ -135,11 +136,14 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                    playOrPause.setBackground(new Color(55,55,55));
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+
+                    playOrPause.setBackground(new Color(40,40,40));
+
                     if (playOrPause.getText().equals("▶︎")) {
                         try {
                             player.play();
@@ -183,11 +187,12 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                    next.setBackground(new Color(55,55,55));
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+                    next.setBackground(new Color(40,40,40));
                     // Right the ActionEvent here Amirhosein
                 }
 
