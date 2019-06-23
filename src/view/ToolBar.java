@@ -5,64 +5,36 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * ToolBar panel at the top of the CentralPanel and MainPage
+ */
 public class ToolBar extends JPanel {
 
-    private JLabel options;
     private RoundTextField searchBox;
+    private JTextField userNameTextField;
 
-    public ToolBar() {
+    public ToolBar(String userName) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.setBackground(new Color(24,24,24));
+//        this.setLayout(new BorderLayout());
+        this.setBackground(new Color(38, 38, 38));
 
-        Dimension minSize = new Dimension(15, 20);
-        Dimension prefSize = new Dimension(15, 20);
-        Dimension maxSize = new Dimension(15, 20);
-        add(new Box.Filler(minSize, prefSize, maxSize));
-       // add(Box.createRigidArea(new Dimension(15, 5)));
+        add(Box.createRigidArea(new Dimension(15, 15)));
 
-
-        options = new JLabel("● ● ●");
-        options.setForeground(Color.WHITE);
-        options.setFont(new Font("Arial", Font.BOLD, 8));
-//        options.setBackground(Color.BLACK);
-//        JToolTip optionTooltip = new JToolTip();
-//        optionTooltip.setTipText("options");
-        options.setToolTipText("options");
-//        options.setToo
-        options.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        //options.setOpaque(true);
-        this.add(options);
-        //⦁
-
-        add(Box.createRigidArea(new Dimension(25,0)));
-        searchBox = new RoundTextField(30);
+        searchBox = new RoundTextField(10);
+        searchBox.setDefaultText("🔍 Search");
 //        searchBox.setPreferredSize(new Dimension(50,20));
         this.add(searchBox);
+//        this.add(searchBox,BorderLayout.WEST);
+
+        add(Box.createRigidArea(new Dimension(100, 0)));
+
+        this.userNameTextField = new JTextField(userName);
+        userNameTextField.setFont(new Font("TimesNewRoman", Font.LAYOUT_RIGHT_TO_LEFT, 8));
+        userNameTextField.setForeground(new Color(245,245,245));
+        userNameTextField.setBackground(new Color(38, 38, 38));
+        userNameTextField.setEditable(false);
+//        userNameTextField.setPreferredSize(new Dimension(30,10));
+        this.add(userNameTextField);
     }
 }

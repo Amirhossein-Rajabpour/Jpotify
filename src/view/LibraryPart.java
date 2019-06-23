@@ -9,6 +9,8 @@ import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.HashMap;
 
 public class LibraryPart extends JPanel {
 
+    private JLabel options;
     private JLabel libraryLabel;
     private JButton fileChooserBtn;
     private JButton songsBtn;
@@ -29,6 +32,7 @@ public class LibraryPart extends JPanel {
     private JButton sharedPlaylistBtn;
     private JButton favouriteBtn;
     private Song song;
+    private JList<String> buttonList;
 
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
@@ -40,18 +44,61 @@ public class LibraryPart extends JPanel {
 
         super();
         setSize(120,400);
+        this.setBackground(new Color(24,24,24));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(Color.black);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//        Dimension minSize = new Dimension(5, 20);
+//        Dimension prefSize = new Dimension(15, 20);
+//        Dimension maxSize = new Dimension(15, 20);
+//        add(new Box.Filler(minSize, prefSize, maxSize));
+        // add(Box.createRigidArea(new Dimension(15, 5)));
+
+
+        options = new JLabel("● ● ●");
+        options.setForeground(Color.WHITE);
+        options.setFont(new Font("Arial", Font.BOLD, 8));
+        options.setToolTipText("options");
+        options.setHorizontalAlignment(SwingConstants.LEFT);
+        options.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        this.add(options);
+        //⦁
+
+        buttonList = new JList<>();
 
         libraryLabel = new JLabel("Library     ");
         libraryLabel.setAlignmentX(RIGHT_ALIGNMENT);
         libraryLabel.setForeground(Color.white);
+//        buttonList.add(libraryLabel);
+//        add(buttonList);
         add(libraryLabel);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This button is for adding a new song to the program
  */
@@ -79,10 +126,11 @@ public class LibraryPart extends JPanel {
         fileChooserBtn.setForeground(Color.WHITE);
         fileChooserBtn.setAlignmentX(CENTER_ALIGNMENT);
         add(fileChooserBtn);
-        add(Box.createRigidArea(new Dimension(0, 5)));
+//        add(Box.createRigidArea(new Dimension(0, 5)));
+//        buttonList.add(fileChooserBtn);
+//        add(buttonList);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * This button shows all existed songs according to last time played
  */
@@ -103,7 +151,7 @@ public class LibraryPart extends JPanel {
         add(songsBtn);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This button shows all albums according to last time played
  */
@@ -121,7 +169,7 @@ public class LibraryPart extends JPanel {
         add(albumsBtn);
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
         playlistLabel = new JLabel("PlayLists  ");
@@ -130,7 +178,7 @@ public class LibraryPart extends JPanel {
         add(playlistLabel);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This button creates and adds a new playlist
  */
@@ -147,7 +195,7 @@ public class LibraryPart extends JPanel {
         add(newPlaylistBtn);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This buttons shows user's shared playlist on network
  */
@@ -164,7 +212,7 @@ public class LibraryPart extends JPanel {
         add(sharedPlaylistBtn);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * Every user has some favourite songs which is shown by this button
  */
@@ -227,4 +275,6 @@ public class LibraryPart extends JPanel {
                 "songs=" + songs +
                 '}';
     }
+
+
 }

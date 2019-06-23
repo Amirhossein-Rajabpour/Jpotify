@@ -27,7 +27,7 @@ public class PlayerPart extends JPanel {
 //        songInfo = new JLabel(song.getTitle() + " by " + song.getArtistName());
 
         try {
-            FileInputStream input = new FileInputStream("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
+            FileInputStream input = new FileInputStream("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
             PlayPartController player = new PlayPartController(input);
 
 
