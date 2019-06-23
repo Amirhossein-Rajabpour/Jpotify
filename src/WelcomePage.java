@@ -40,10 +40,7 @@ public class WelcomePage extends JFrame {
         jLabel = new JLabel(MAIN_WELCOME_TXT);
         Font font1 = new Font("Arial", Font.BOLD, 48);
         jLabel.setFont(font1);
-        //jLabel.setForeground(new Color(105, 180, 120));
         jLabel.setForeground(new Color(130, 35, 35));
-        jLabel.setBackground(Color.black);
-        //jLabel.setSize(250, 100);
         jLabel.setVerticalAlignment(SwingConstants.EAST);
         ImageIcon imgThisImg = new ImageIcon("Jpotifyred.png");
         jLabel.setIcon(imgThisImg);
@@ -60,8 +57,6 @@ public class WelcomePage extends JFrame {
         jTextField.setForeground(Color.WHITE);
 
 
-
-        // this.add(dataInput = new DataInput());
         Font font = new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 20);
 
         userLabel = new JLabel(USERNAME_LABEL);
@@ -107,8 +102,8 @@ public class WelcomePage extends JFrame {
         this.setVisible(true);
     }
 
-    public void doClickAction(){
-        MainPage mainPage = new MainPage(userTextField.getText(),idTextField.getText());
+    public void doClickAction() {
+        MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
         this.setVisible(false);
     }
 }

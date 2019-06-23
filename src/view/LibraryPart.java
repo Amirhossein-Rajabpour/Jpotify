@@ -8,6 +8,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 
 public class LibraryPart extends JPanel {
 
+    private JLabel options;
     private JLabel libraryLabel;
     private JButton fileChooserBtn;
     private JButton songsBtn;
@@ -40,18 +43,59 @@ public class LibraryPart extends JPanel {
 
         super();
         setSize(120,400);
+        this.setBackground(new Color(24,24,24));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(Color.black);
-        buttonList = new JList<>();
 
+//        Dimension minSize = new Dimension(5, 20);
+//        Dimension prefSize = new Dimension(15, 20);
+//        Dimension maxSize = new Dimension(15, 20);
+//        add(new Box.Filler(minSize, prefSize, maxSize));
+        // add(Box.createRigidArea(new Dimension(15, 5)));
+
+
+        options = new JLabel("● ● ●");
+        options.setForeground(Color.WHITE);
+        options.setFont(new Font("Arial", Font.BOLD, 8));
+        options.setToolTipText("options");
+        options.setHorizontalAlignment(SwingConstants.LEFT);
+        options.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        this.add(options);
+        //⦁
+
+        buttonList = new JList<>();
 
         libraryLabel = new JLabel("Library     ");
         libraryLabel.setAlignmentX(RIGHT_ALIGNMENT);
         libraryLabel.setForeground(Color.white);
-        buttonList.add(libraryLabel);
-        add(buttonList);
-//        add(libraryLabel);
-//        add(Box.createRigidArea(new Dimension(0, 5)));
+//        buttonList.add(libraryLabel);
+//        add(buttonList);
+        add(libraryLabel);
+        add(Box.createRigidArea(new Dimension(0, 5)));
 
 
 /**
