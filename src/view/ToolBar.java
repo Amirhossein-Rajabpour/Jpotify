@@ -15,7 +15,7 @@ public class ToolBar extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setBackground(new Color(24,24,24));
 
-        Dimension minSize = new Dimension(15, 20);
+        Dimension minSize = new Dimension(5, 20);
         Dimension prefSize = new Dimension(15, 20);
         Dimension maxSize = new Dimension(15, 20);
         add(new Box.Filler(minSize, prefSize, maxSize));
@@ -60,8 +60,8 @@ public class ToolBar extends JPanel {
         this.add(options);
         //⦁
 
-        add(Box.createRigidArea(new Dimension(25,0)));
-        searchBox = new RoundTextField(30);
+        add(Box.createRigidArea(new Dimension(15,0)));
+        searchBox = new RoundTextField(3);
 //        searchBox.setPreferredSize(new Dimension(50,20));
         this.add(searchBox);
     }

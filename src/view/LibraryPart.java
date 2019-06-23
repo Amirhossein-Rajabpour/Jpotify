@@ -27,6 +27,7 @@ public class LibraryPart extends JPanel {
     private JButton sharedPlaylistBtn;
     private JButton favouriteBtn;
     private Song song;
+    private JList<String> buttonList;
 
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
@@ -39,16 +40,18 @@ public class LibraryPart extends JPanel {
         setSize(120,400);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.black);
+        buttonList = new JList<>();
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         libraryLabel = new JLabel("Library     ");
         libraryLabel.setAlignmentX(RIGHT_ALIGNMENT);
         libraryLabel.setForeground(Color.white);
-        add(libraryLabel);
-        add(Box.createRigidArea(new Dimension(0, 5)));
+        buttonList.add(libraryLabel);
+        add(buttonList);
+//        add(libraryLabel);
+//        add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This button is for adding a new song to the program
  */
@@ -75,10 +78,11 @@ public class LibraryPart extends JPanel {
         fileChooserBtn.setForeground(Color.WHITE);
         fileChooserBtn.setAlignmentX(CENTER_ALIGNMENT);
         add(fileChooserBtn);
-        add(Box.createRigidArea(new Dimension(0, 5)));
+//        add(Box.createRigidArea(new Dimension(0, 5)));
+//        buttonList.add(fileChooserBtn);
+//        add(buttonList);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * This button shows all existed songs according to last time played
  */
@@ -97,7 +101,7 @@ public class LibraryPart extends JPanel {
         add(songsBtn);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This button shows all albums according to last time played
  */
@@ -115,7 +119,7 @@ public class LibraryPart extends JPanel {
         add(albumsBtn);
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
         playlistLabel = new JLabel("PlayLists  ");
@@ -124,7 +128,7 @@ public class LibraryPart extends JPanel {
         add(playlistLabel);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This button creates and adds a new playlist
  */
@@ -141,7 +145,7 @@ public class LibraryPart extends JPanel {
         add(newPlaylistBtn);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This buttons shows user's shared playlist on network
  */
@@ -158,7 +162,7 @@ public class LibraryPart extends JPanel {
         add(sharedPlaylistBtn);
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * Every user has some favourite songs which is shown by this button
  */
@@ -207,4 +211,6 @@ public class LibraryPart extends JPanel {
                 "songs=" + songs +
                 '}';
     }
+
+
 }
