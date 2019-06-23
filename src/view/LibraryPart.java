@@ -11,8 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -117,6 +116,8 @@ public class LibraryPart extends JPanel {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
+                    saveSong(selectedFile.getAbsolutePath());
+                    System.out.println("song saved");
 
                 }
             }
@@ -271,6 +272,32 @@ public class LibraryPart extends JPanel {
             ArrayList<Song> songs = new ArrayList<>();
             songs.add(song);
             Album.put(song.getAlbumName(),songs);
+        }
+
+    }
+
+    /**
+     * this method save added song to the program
+     * @param path
+     */
+    public void saveSong(String path){
+
+        Song song = new Song(path);
+        FileOutputStream f = null;
+        try {
+            f = new FileOutputStream(new File( song.getTitle() + ".mp3"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+
+            o.writeObject(song);
+
+            o.close();
+            f.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
