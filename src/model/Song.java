@@ -1,10 +1,11 @@
 package model;
 
 import com.mpatric.mp3agic.*;
-
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * this class represents a song which is a mp3 file
@@ -107,6 +108,7 @@ public class Song extends Mp3File {
             albumName = id3v2Tag.getTitle();
         }
         else title = "not readable album name";
+
     }
 
     /**
@@ -120,4 +122,7 @@ public class Song extends Mp3File {
 
         }
     }
+
+
+
 }
