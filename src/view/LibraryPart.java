@@ -30,7 +30,8 @@ public class LibraryPart extends JPanel {
 
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
-    HashMap<String,ArrayList<Song>> Album = new HashMap<>();
+    HashMap<String,ArrayList<Song>> Album = new HashMap<>(); // this HashMap is for albums
+    HashMap<String,ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
 
 
     public LibraryPart(){
@@ -66,6 +67,7 @@ public class LibraryPart extends JPanel {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
+
                     System.out.println(song.getPath());
                 }
             }
@@ -188,16 +190,27 @@ public class LibraryPart extends JPanel {
         song = new Song(path);
         songs.add(song);
         System.out.println(song.getTitle());
+        addToAlbum(song);
     }
 
     /**
      * Adds a song to user's favourites songs
      * @param path
      */
-    void addFavourite(String path){
+    public void addFavourite(String path){
 
         song = new Song(path);
         favouriteSongs.add(song);
+    }
+
+    /**
+     * this method add each song to it's album HashMap
+     * @param song
+     */
+    public void addToAlbum(Song song){
+        if(song.getAlbumName() != null)
+        Album.get(song.getAlbumName()).add(song);
+
     }
 
 
