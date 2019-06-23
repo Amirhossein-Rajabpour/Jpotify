@@ -30,7 +30,7 @@ public class ToolBar extends JPanel {
 //        add(Box.createRigidArea(new Dimension(100, 0)));
 
         this.userNameTextField = new JTextField(userName);
-        userNameTextField.setFont(new Font("TimesNewRoman", Font.LAYOUT_RIGHT_TO_LEFT, 8));
+        userNameTextField.setFont(new Font("TimesNewRoman", Font.LAYOUT_RIGHT_TO_LEFT, 9));
         userNameTextField.setForeground(new Color(245,245,245));
         userNameTextField.setBackground(new Color(38, 38, 38,0));
         userNameTextField.setEditable(false);
