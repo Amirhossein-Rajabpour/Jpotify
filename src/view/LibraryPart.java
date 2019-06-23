@@ -65,8 +65,8 @@ public class LibraryPart extends JPanel {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                    readSongInfo(selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
+                    System.out.println(song.getPath());
                 }
             }
         });
@@ -199,39 +199,7 @@ public class LibraryPart extends JPanel {
         song = new Song(path);
         favouriteSongs.add(song);
     }
-    /**
-     * this method takes the song location and with mp3agic library specifies song's title, artist, album and artwork
-     * @param path
-     */
-    public void readSongInfo(String path){
 
-        Mp3File mp3file = null;
-        song = new Song(path);
-
-        try {
-            mp3file = new Mp3File(path);
-            if(mp3file.hasId3v1Tag() || mp3file.hasId3v2Tag()){
-
-                ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-                ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-
-                song.setTitle(id3v1Tag.getTitle());
-                song.setArtistName(id3v1Tag.getArtist());
-                song.setAlbumName(id3v1Tag.getAlbum());
-                song.setArtwork(id3v2Tag.getAlbumImage());
-
-                System.out.println("song added" );
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedTagException e) {
-            e.printStackTrace();
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public String toString() {
