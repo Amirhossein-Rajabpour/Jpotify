@@ -8,7 +8,6 @@ public class MainPage extends JFrame {
     private JFrame mainFrame;
     private LibraryPart Library;
     private PlayerPart playerPart;
-    private Song song;
     private ToolBar toolBar;
     private static final int WIDTH = 600, HEIGHT = 450;
 

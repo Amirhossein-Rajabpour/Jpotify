@@ -1,6 +1,8 @@
 package view;
 import javazoom.jl.player.Player;
 
+import controller.PlayPartController;
+import javazoom.jl.decoder.JavaLayerException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,59 +11,67 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class PlayerPart extends JPanel{
+public class PlayerPart extends JPanel {
 
     JButton playOrPause;
     JButton next;
     JButton previous;
     JButton favourite;
-    JLabel  songInfo;
+    JLabel songInfo;
 
 
-    public PlayerPart(){
+    public PlayerPart() {
 
         super();
-        setSize(700,400);
+        setSize(700, 400);
 //        songInfo = new JLabel(song.getTitle() + " by " + song.getArtistName());
 
-        previous = new JButton("previous");
-//        previous.setPreferredSize(new Dimension(30,30));
-        previous.setBounds(400,100,15,15);
-        previous.setToolTipText("previous song");
-        add(previous);
-
-        playOrPause = new JButton("play");
-//        playOrPause.setIcon();
-        playOrPause.setBounds(350,100,20,20);
-        playOrPause.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                FileInputStream file = null;
-                //                    file = new FileInputStream(song.getPath());
-//                    Player playMP3 = new Player(file);
-//                    playMP3.play();
+        try {
+            FileInputStream input = new FileInputStream("/Users/apple/Desktop/In the night.mpga");
+            PlayPartController player = new PlayPartController(input);
 
 
-                if(playOrPause.getText().equals("play"))
-                playOrPause.setText("pause");
-                else {
-                    playOrPause.setText("play");
+            previous = new JButton("previous");
+            previous.setBounds(400, 100, 15, 15);
+            previous.setToolTipText("previous song");
+            add(previous);
+
+
+            playOrPause = new JButton("play");
+            playOrPause.setBounds(350, 100, 20, 20);
+            playOrPause.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+
+                    if (playOrPause.getText().equals("play")) {
+                        try {
+                            player.play();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+                        playOrPause.setText("pause");
+                    } else {
+                        player.pause();
+                        playOrPause.setText("play");
+                    }
                 }
-            }
-        });
-        add(playOrPause);
+            });
+            add(playOrPause);
 
-        next = new JButton("next");
-        next.setToolTipText("next song");
-        add(next);
+            next = new JButton("next");
+            next.setToolTipText("next song");
+            add(next);
 
 //        Icon like = new ImageIcon(getClass().getResource("view/like.png"));
-        favourite = new JButton();
+            favourite = new JButton();
 //        favourite.setRolloverIcon(like);
-        favourite.setMargin(new Insets(0, 0, 0, 0));
-        add(favourite);
+            favourite.setMargin(new Insets(0, 0, 0, 0));
+            add(favourite);
 
-        setVisible(true);
+            setVisible(true);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
