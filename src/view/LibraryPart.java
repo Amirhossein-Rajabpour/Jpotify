@@ -5,6 +5,7 @@ import model.Song;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -116,7 +117,7 @@ public class LibraryPart extends JPanel {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
-                    System.out.println(song.getPath());
+
                 }
             }
         });
@@ -138,7 +139,9 @@ public class LibraryPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println(songs);
+                for(Song song: songs){
+                    System.out.println(song.getTitle());
+                }
 
             }
         });
@@ -157,6 +160,8 @@ public class LibraryPart extends JPanel {
         albumsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                System.out.println(Album.keySet());
 
             }
         });
@@ -239,6 +244,7 @@ public class LibraryPart extends JPanel {
         song = new Song(path);
         songs.add(song);
         System.out.println(song.getTitle());
+        System.out.println(song.getAlbumName());
         addToAlbum(song);
     }
 
@@ -256,9 +262,16 @@ public class LibraryPart extends JPanel {
      * this method add each song to it's album HashMap
      * @param song
      */
-    public void addToAlbum(Song song){
-        if(song.getAlbumName() != null)
+    public void addToAlbum(Song song) throws NullPointerException{
+
+        if(Album.containsKey(song.getAlbumName()))
         Album.get(song.getAlbumName()).add(song);
+
+        else {
+            ArrayList<Song> songs = new ArrayList<>();
+            songs.add(song);
+            Album.put(song.getAlbumName(),songs);
+        }
 
     }
 

@@ -21,7 +21,7 @@ public class Song extends Mp3File {
     Mp3File mp3file;
 
 
-    public Song(String path ){
+    public Song(String path){
 
         this.path = path;
         try {
@@ -33,6 +33,11 @@ public class Song extends Mp3File {
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
+
+        setAlbumName();
+        setArtistName();
+        setArtwork();
+        setTitle();
     }
 
     public void setLastTimePlayed(){
@@ -86,11 +91,11 @@ public class Song extends Mp3File {
     public void setArtistName() {
         if(mp3file.hasId3v1Tag()){
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-            artistName = id3v1Tag.getTitle();
+            artistName = id3v1Tag.getArtist();
         }
         else if(mp3file.hasId3v2Tag()){
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            artistName = id3v2Tag.getTitle();
+            artistName = id3v2Tag.getArtist();
         }
         else title = "not readable artist name";
     }
@@ -101,11 +106,11 @@ public class Song extends Mp3File {
     public void setAlbumName() {
         if(mp3file.hasId3v1Tag()){
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-            albumName = id3v1Tag.getTitle();
+            albumName = id3v1Tag.getAlbum();
         }
         else if(mp3file.hasId3v2Tag()){
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            albumName = id3v2Tag.getTitle();
+            albumName = id3v2Tag.getAlbum();
         }
         else title = "not readable album name";
 
