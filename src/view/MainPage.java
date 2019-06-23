@@ -10,7 +10,8 @@ public class MainPage extends JFrame {
     private JFrame mainFrame;
     private LibraryPart Library;
     private PlayerPart playerPart;
-    CentralPanel centralPanel;
+    private CentralPanel centralPanel;
+    private FriendActivity friendActivity;
     //    private ToolBar toolBar;
     private static final int WIDTH = 600, HEIGHT = 450;
 
@@ -35,6 +36,9 @@ public class MainPage extends JFrame {
 
         centralPanel = new CentralPanel(userName);
         this.add(centralPanel, BorderLayout.CENTER);
+
+        friendActivity = new FriendActivity();
+        this.add(friendActivity,BorderLayout.EAST);
 
         playerPart = new PlayerPart();
         this.add(playerPart, BorderLayout.SOUTH);
