@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 public class ToolBar extends JPanel {
 
     private JLabel options;
+    private JTextField searchBox;
+
 
     public ToolBar() {
         super();
@@ -58,5 +60,9 @@ public class ToolBar extends JPanel {
         //options.setOpaque(true);
         this.add(options);
         //⦁
+
+        add(Box.createRigidArea(new Dimension(25,0)));
+        searchBox = new JTextField("Search");
+        this.add(searchBox);
     }
 }

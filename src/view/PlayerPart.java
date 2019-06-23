@@ -1,5 +1,5 @@
 package view;
-//import javazoom.jl.player.Player;
+import javazoom.jl.player.Player;
 
 import javax.swing.*;
 import java.awt.*;

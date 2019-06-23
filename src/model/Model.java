@@ -1,6 +1,6 @@
 package model;
 
-import com.mpatric.mp3agic.*;
+//import com.mpatric.mp3agic.*;
 import view.Song;
 
 import java.io.FileInputStream;
@@ -40,29 +40,29 @@ public class Model {
      */
     void readSongInfo(String path){
 
-        Mp3File mp3file = null;
-        Song song = new Song(path);
-
-        try {
-            mp3file = new Mp3File(path);
-            if(mp3file.hasId3v1Tag() || mp3file.hasId3v2Tag()){
-
-                ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-                ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-
-                song.setTitle(id3v1Tag.getTitle());
-                song.setArtistName(id3v1Tag.getArtist());
-                song.setAlbumName(id3v1Tag.getAlbum());
-                song.setArtwork(id3v2Tag.getAlbumImage());
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedTagException e) {
-            e.printStackTrace();
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        }
+//        Mp3File mp3file = null;
+//        Song song = new Song(path);
+//
+//        try {
+//            mp3file = new Mp3File(path);
+//            if(mp3file.hasId3v1Tag() || mp3file.hasId3v2Tag()){
+//
+//                ID3v1 id3v1Tag = mp3file.getId3v1Tag();
+//                ID3v2 id3v2Tag = mp3file.getId3v2Tag();
+//
+//                song.setTitle(id3v1Tag.getTitle());
+//                song.setArtistName(id3v1Tag.getArtist());
+//                song.setAlbumName(id3v1Tag.getAlbum());
+//                song.setArtwork(id3v2Tag.getAlbumImage());
+//
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (UnsupportedTagException e) {
+//            e.printStackTrace();
+//        } catch (InvalidDataException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
