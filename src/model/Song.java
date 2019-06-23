@@ -21,7 +21,7 @@ public class Song extends Mp3File {
     Mp3File mp3file;
 
 
-    public Song(String path ){
+    public Song(String path){
 
         this.path = path;
         try {
@@ -33,6 +33,11 @@ public class Song extends Mp3File {
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
+
+        setAlbumName();
+        setArtistName();
+        setArtwork();
+        setTitle();
     }
 
     public void setLastTimePlayed(){
