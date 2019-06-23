@@ -3,6 +3,7 @@ package model;
 import com.mpatric.mp3agic.*;
 import java.awt.*;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 /**
  * this class represents a song which is a mp3 file
  */
-public class Song extends Mp3File {
+public class Song implements Serializable {
 
     private String title;
     private String artistName;
@@ -18,7 +19,7 @@ public class Song extends Mp3File {
     private String albumName;
     private long lastTimePlayed;
     private byte[] artwork;
-    Mp3File mp3file;
+    transient Mp3File mp3file;
 
 
     public Song(String path){
