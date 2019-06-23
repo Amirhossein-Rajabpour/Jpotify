@@ -117,7 +117,7 @@ public class LibraryPart extends JPanel {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
-                    System.out.println(song.getPath());
+
                 }
             }
         });
@@ -160,6 +160,8 @@ public class LibraryPart extends JPanel {
         albumsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                System.out.println(Album.keySet());
 
             }
         });
@@ -264,7 +266,7 @@ public class LibraryPart extends JPanel {
 
         if(Album.containsKey(song.getAlbumName()))
         Album.get(song.getAlbumName()).add(song);
-        else Album.put(song.getAlbumName(),Album.get(song.getAlbumName()).add(song));
+//        else Album.put(song.getAlbumName(),Album.get(song.getAlbumName()).add(song));
 
     }
 
