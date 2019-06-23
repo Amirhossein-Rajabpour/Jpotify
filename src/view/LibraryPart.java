@@ -4,6 +4,7 @@ import com.mpatric.mp3agic.*;
 import model.Song;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,13 +62,13 @@ public class LibraryPart extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileFilter(new FileNameExtensionFilter(".mp3 files","mp3"));
                 fileChooser.setCurrentDirectory(new File("E:/"));
                 int result = fileChooser.showOpenDialog(fileChooser);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
-
                     System.out.println(song.getPath());
                 }
             }
