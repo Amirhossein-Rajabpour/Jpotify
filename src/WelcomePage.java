@@ -14,90 +14,168 @@ public class WelcomePage extends JFrame {
 
     private static final int WIDTH = 350, HEIGHT = 500;
 
+    private Color background;
+    private Color foreground;
+
     private static final String MAIN_WELCOME_TXT = "Jpotify®";
-    JLabel jLabel;
+    private JLabel jLabel;
+    private JLabel icon;
 
-    private static final String WELCOME_TXT = "Millions of songs.\nFree on Jpotify.";
-    JTextField jTextField;
+    private static final String WELCOME_TXT1 = "Millions of songs.";
+    private JLabel msg1;
+    private static final String WELCOME_TXT2 = "Free on Jpotify.";
+    private JLabel msg2;
 
-    private static final String USERNAME_LABEL = "Username:";
-    JLabel userLabel;
-    JTextField userTextField;
+    private static final String USERNAME_LABEL = "Username";
+    private JLabel userLabel;
+    private JTextField userTextField;
 
     private static final String ID_LABEL = "Friend's ID";
-    JLabel idLabel;
-    JTextField idTextField;
+    private JLabel idLabel;
+    private JTextField idTextField;
 
     private static final String BTN_TXT = "LOG IN";
-    JButton btn;
+    private JButton btn;
 
     //DataInput dataInput;
     public WelcomePage() {
         super();
 
-        this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
+
+        background = new Color(49, 53, 53);
+        foreground = new Color(195, 195, 195);
+
+
+        /**
+         * north panel places at the top of the welcomePage
+         * contains icon & JLabel
+         */
+        JPanel north = new JPanel();
+        north.setLayout(new GridLayout(3, 1));
+        north.setBackground(background);
+
+        icon = new JLabel();
+        icon.setHorizontalAlignment(SwingConstants.CENTER);
+        ImageIcon JpotifyIcon = new ImageIcon("/Users/apple/Desktop/iconfinder_spotify-01-01_3066983.png");
+        Image image = JpotifyIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        JpotifyIcon = new ImageIcon(newimg);
+        icon.setIcon(JpotifyIcon);
+        icon.setForeground(Color.white);
+        north.add(icon);
 
         jLabel = new JLabel(MAIN_WELCOME_TXT);
         Font font1 = new Font("Arial", Font.BOLD, 48);
         jLabel.setFont(font1);
-        jLabel.setForeground(new Color(130, 35, 35));
-        jLabel.setVerticalAlignment(SwingConstants.EAST);
-        ImageIcon imgThisImg = new ImageIcon("Jpotifyred.png");
-        jLabel.setIcon(imgThisImg);
-        this.add(jLabel);
+        jLabel.setForeground(Color.white);
+        jLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        north.add(jLabel);
 
-        jTextField = new JTextField();
-        Font font2 = new Font("Arial", Font.CENTER_BASELINE, 24);
-        jTextField.setFont(font2);
-        jTextField.setText("Millions of songs.");
-        jTextField.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        this.add(jTextField);
-        jTextField.setEditable(false);
-        jTextField.setBackground(new Color(130, 35, 35));
-        jTextField.setForeground(Color.WHITE);
+        this.add(north, BorderLayout.NORTH);
 
 
-        Font font = new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 20);
+        /**
+         * center panel places at the center of the WelcomePage
+         * contains msg1 & msg2
+         */
+        JPanel center = new JPanel();
+        center.setLayout(new GridLayout(6, 1));
+        center.setBackground(background);
+
+
+        center.add(Box.createRigidArea(new Dimension(0, 5)));
+
+        Font font2 = new Font("Arial", Font.BOLD, 24);
+        msg1 = new JLabel();
+        msg1.setFont(font2);
+        msg1.setText(WELCOME_TXT1);
+        msg1.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        msg1.setForeground(Color.WHITE);
+        msg1.setBackground(this.getBackground());
+        center.add(msg1);
+
+        msg2 = new JLabel();
+        msg2.setFont(font2);
+        msg2.setText(WELCOME_TXT2);
+        msg2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        msg2.setForeground(Color.WHITE);
+        center.add(msg2);
+
+        center.add(Box.createRigidArea(new Dimension(0, 5)));
+        center.add(Box.createRigidArea(new Dimension(0, 5)));
+        center.add(Box.createRigidArea(new Dimension(0, 5)));
+        this.add(center, BorderLayout.CENTER);
+
+
+        Font font = new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14);
+
+        /**
+         * south panel places at the bottom of the WelcomePage
+         * contains userLabel & userTextField & idLabel & idTextField & btn
+         */
+        JPanel south = new JPanel();
+        south.setLayout(new BoxLayout(south, BoxLayout.Y_AXIS));
+        south.setBackground(background);
 
         userLabel = new JLabel(USERNAME_LABEL);
         userLabel.setFont(font);
         userLabel.setForeground(Color.WHITE);
-        this.add(userLabel);
+        south.add(userLabel);
         userTextField = new JTextField();
-        add(userTextField);
+        userTextField.setForeground(foreground);
+        userTextField.setBackground(new Color(255, 255, 255, 14));
+        south.add(userTextField);
+
+        south.add(Box.createRigidArea(new Dimension(0, 15)));
 
         idLabel = new JLabel(ID_LABEL);
         idLabel.setFont(font);
         idLabel.setForeground(Color.WHITE);
-        this.add(idLabel);
+        south.add(idLabel);
         idTextField = new JTextField();
-        this.add(idTextField);
-//        this.setBackground(new Color(80, 30, 30));
-        this.setBackground(new Color(130, 35, 35));
+        idTextField.setForeground(foreground);
+        idTextField.setBackground(new Color(255, 255, 255, 14));
+        south.add(idTextField);
+
+        south.add(Box.createRigidArea(new Dimension(0, 25)));
 
         btn = new JButton(BTN_TXT);
-        btn.setVerticalAlignment(SwingConstants.CENTER);
+        btn.setHorizontalAlignment(SwingConstants.CENTER);
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 doClickAction();
             }
         });
-//        btn.setPreferredSize(new Dimension(100,100));
-        this.add(btn);
+        south.add(btn);
+        this.add(south, BorderLayout.SOUTH);
 
-        //this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
-        this.setBackground(new Color(40, 90, 76));
-        this.setForeground(new Color(131, 194, 161));
-
-        //setResizable(false);
+        setResizable(false);
         setSize(WIDTH, HEIGHT);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-//        this.setLocationRelativeTo(null);
-//        this.pack();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 70);
 
+//        class ImagePanel extends JComponent {
+//            private Image image;
+//            public ImagePanel(Image image) {
+//                this.image = image;
+//            }
+//            @Override
+//            protected void paintComponent(Graphics g) {
+//                super.paintComponent(g);
+//                g.drawImage(image, 0, 0, this);
+//            }
+//        }
+//
+//// elsewhere
+//        BufferedImage myImage = ImageIO.read(...);
+//        JFrame myJFrame = new JFrame("Image pane");
+//        myJFrame.setContentPane(new ImagePanel(myImage));
+
+        this.setBackground(new Color(49, 53, 53));
+        this.setForeground(new Color(49, 53, 53));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
