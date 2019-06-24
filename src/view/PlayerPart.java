@@ -127,14 +127,24 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     previous.setBackground(new Color(40,40,40));
-                    /**
-                     * new input and player here for going to previous song
-                     */
+
                     player.pause();
                     playOrPause.setText("▶︎");
                     playOrPause.setToolTipText("Play");
                     if(songs.get(currentSong - 1) != null){
                         currentSong--;
+                        /**
+                         * new input and player here for going to previous song
+                         */
+                        try {
+                            input  = new FileInputStream(songs.get(currentSong).getPath());
+                            player = new PlayPartController(input);
+
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                     else currentSong = 0;
 
