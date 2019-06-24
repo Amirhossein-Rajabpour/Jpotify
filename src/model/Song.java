@@ -17,6 +17,7 @@ public class Song implements Serializable {
     private String artistName;
     private String path;
     private String albumName;
+    private long duration;
     private long lastTimePlayed;
     private byte[] artwork;
     transient Mp3File mp3file;
@@ -39,6 +40,7 @@ public class Song implements Serializable {
         setArtistName();
         setArtwork();
         setTitle();
+        setDuration();
     }
 
     public void setLastTimePlayed(){
@@ -69,6 +71,10 @@ public class Song implements Serializable {
         return artistName;
     }
 
+    public long getDuration() { return duration; }
+
+    public void setDuration() { duration = mp3file.getLengthInSeconds(); }
+
     /**
      * This method checks weather the mp3 file is id3v1 or id3v2
      * and then set the title according to that
@@ -98,7 +104,7 @@ public class Song implements Serializable {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             artistName = id3v2Tag.getArtist();
         }
-        else title = "not readable artist name";
+        else artistName = "not readable artist name";
     }
     /**
      * This method checks weather the mp3 file is id3v1 or id3v2
@@ -113,7 +119,7 @@ public class Song implements Serializable {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             albumName = id3v2Tag.getAlbum();
         }
-        else title = "not readable album name";
+        else albumName = "not readable album name";
 
     }
 

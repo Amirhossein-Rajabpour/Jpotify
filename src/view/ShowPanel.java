@@ -16,11 +16,9 @@ public class ShowPanel extends JPanel {
     private JButton[] songButtons;
     private JButton[] albumButtons;
     ArrayList<Song> songs = new ArrayList<>();
+    HashMap<String,ArrayList<Song>> Albums;
 
-    /**
-     * this cunstructor is for showing single songs
-     *
-     */
+
     public ShowPanel() {
 
         super();
@@ -28,6 +26,11 @@ public class ShowPanel extends JPanel {
         this.setLayout(new FlowLayout());
         this.setBackground(background);
 
+    }
+
+    public void setSongs(ArrayList<Song> songs){
+
+        this.songs = songs;
         songButtons = new JButton[songs.size()];
 
         for(int i = 0; i < songs.size() ; i++){
@@ -50,17 +53,9 @@ public class ShowPanel extends JPanel {
         setVisible(true);
     }
 
-    /**
-     * this cunstructor is for shoing albums only
-     * @param Albums
-     */
-    public ShowPanel(HashMap<String,ArrayList<Song>> Albums){
+    public void setAlbums(HashMap<String,ArrayList<Song>> Albums){
 
-        super();
-        background = new Color(33,33,33);
-        this.setLayout(new FlowLayout());
-        this.setBackground(background);
-
+        this.Albums = Albums;
         albumButtons = new JButton[Albums.size()];
 
         for(int i = 0; i < Albums.size() ; i++){
@@ -81,10 +76,6 @@ public class ShowPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
-    }
 
-    public void setSongs(ArrayList<Song> songs){
-
-        this.songs = songs;
     }
 }
