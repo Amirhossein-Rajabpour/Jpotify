@@ -8,6 +8,7 @@ public class ProgressBarPanel extends JPanel {
     private Color background;
     private JProgressBar progressBar;
     private int num;
+    private boolean isPlaying;
 
 
     public ProgressBarPanel() {
@@ -15,6 +16,7 @@ public class ProgressBarPanel extends JPanel {
         background = new Color(40, 40, 40);
         this.setForeground(new Color(179, 179, 179));
         this.setBackground(background);
+        this.isPlaying = false;
 
         JTextField passed = new JTextField("00:00");
         passed.setFont(new Font("Arial", Font.CENTER_BASELINE, 9));
@@ -26,7 +28,7 @@ public class ProgressBarPanel extends JPanel {
 
 //        UIManager.put("ProgressBar.selectionBackground",Color.WHITE);
 //        UIManager.put("ProgressBar.selectionForeground",Color.WHITE);
-        progressBar = new JProgressBar(0, 1000);
+        progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(false);
         progressBar.setBorderPainted(true);
         this.add(progressBar);
@@ -45,7 +47,7 @@ public class ProgressBarPanel extends JPanel {
     }
 
     public void iterate() {
-        while (num < 2000) {
+        while (num < 100) {
             progressBar.setValue(num);
             try {
                 Thread.sleep(1000);

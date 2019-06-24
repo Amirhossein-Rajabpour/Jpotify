@@ -26,9 +26,9 @@ public class PlayerPart extends JPanel {
     private JTextField favorite;
     private int currentSong;
     private JProgressBar progressBar;
-    ArrayList<Song> songs = new ArrayList<>();
-    PlayPartController player ;
-    FileInputStream input;
+    private ArrayList<Song> songs = new ArrayList<>();
+    private PlayPartController player ;
+    private FileInputStream input;
 
 
     public PlayerPart() {
@@ -39,8 +39,8 @@ public class PlayerPart extends JPanel {
         setSize(700, 400);
         setBackground(new Color(40, 40, 40));
         foreground = new Color(179, 179, 179);
-        Song song1 = new Song("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
-        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
+        Song song1 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
+        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
         songs.add(song1);
         songs.add(song2);
         currentSong = 0;
@@ -375,14 +375,22 @@ public class PlayerPart extends JPanel {
         }
     }
 
-    public void setSongs(ArrayList<Song> songs){
-        this.songs = songs;
-    }
-
     public void setProgressBarPanel(JProgressBar progressBar){
         this.progressBar = progressBar;
         this.progressBar.setValue(1000);
     }
 
-    //progressBar actionMethod that pauses goes to the particular point of the song
+    public void setSongs(ArrayList<Song> songs, int initialIndex){
+        this.songs = songs;
+        this.currentSong = initialIndex;
+        SetprogressBarDuration(songs.get(currentSong).getDuration);
+    }
+
+    public void SetprogressBarDuration(int duration){
+        progressBar.setMaximum(duration);
+    }
+
+
+
+    //progressBar actionMethod that pauses goes to the particular point of the song must be added here
 }
