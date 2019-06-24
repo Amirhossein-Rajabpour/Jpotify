@@ -31,7 +31,6 @@ public class LibraryPart extends JPanel {
     private JButton sharedPlaylistBtn;
     private JButton favouriteBtn;
     private Song song;
-    private ShowPanel showPanel;
     private JList<String> buttonList;
 
     ArrayList<Song> songs = new ArrayList<>();
@@ -144,7 +143,9 @@ public class LibraryPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                showPanel = new ShowPanel(songs);
+                for(Song song: songs){
+                    System.out.println(song.getTitle());
+                }
 
             }
         });
@@ -249,7 +250,6 @@ public class LibraryPart extends JPanel {
         System.out.println(song.getTitle());
         System.out.println(song.getAlbumName());
         addToAlbum(song);
-
     }
 
     /**

@@ -8,7 +8,7 @@ public class MainPage extends JFrame {
     private String userName;
     private String friendsId;
     private LibraryPart Library;
-    private BottomPanel buttomPanel;
+    private BottomPanel bottomPanel;
     private CentralPanel centralPanel;
     private FriendActivity friendActivity;
     private static final int WIDTH = 680, HEIGHT = 405;
@@ -35,8 +35,8 @@ public class MainPage extends JFrame {
         this.add(friendActivity,BorderLayout.EAST);
 
 
-        buttomPanel = new BottomPanel();
-        this.add(buttomPanel,BorderLayout.SOUTH);
+        bottomPanel = new BottomPanel();
+        this.add(bottomPanel,BorderLayout.SOUTH);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
