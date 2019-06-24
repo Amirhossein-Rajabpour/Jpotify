@@ -1,11 +1,6 @@
-//package Welcome;
-
-//import AppFrame.JpotifyGUI;
-
 import view.MainPage;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +32,6 @@ public class WelcomePage extends JFrame {
     private static final String BTN_TXT = "LOG IN";
     private JButton btn;
 
-    //DataInput dataInput;
     public WelcomePage() {
         super();
 
