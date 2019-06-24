@@ -26,15 +26,14 @@ public class MainPage extends JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 150);
         this.setBackground(new Color(57, 54, 50));
 
-        Library = new LibraryPart();
-        this.add(new JScrollPane(Library), BorderLayout.WEST);
-
-
         centralPanel = new CentralPanel(userName);
         this.add(centralPanel, BorderLayout.CENTER);
 
 
+        Library = new LibraryPart();
         Library.setShowPanel(centralPanel.getShowPanel());// added
+        this.add(new JScrollPane(Library), BorderLayout.WEST);
+
 //        centralPanel.setShowPanel(Library.getShowPanel());
 
         friendActivity = new FriendActivity();
