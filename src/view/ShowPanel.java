@@ -74,8 +74,8 @@ public class ShowPanel extends JFrame {
             Icon icon = new ImageIcon(img);
             albumButtons[i].setIcon(icon);
 
-
             albumButtons[i].setText(Albums.keySet().toArray()[i].toString());
+
             add(albumButtons[i]);
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
