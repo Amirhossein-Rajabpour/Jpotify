@@ -48,4 +48,10 @@ public class MainPage extends JFrame {
 
 
     }
+
+    public void updateShowPanel(ShowPanel showPanel){
+
+        remove(centralPanel.getShowPanel());
+        centralPanel.setShowPanel(showPanel);
+    }
 }

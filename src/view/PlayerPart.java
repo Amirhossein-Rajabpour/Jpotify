@@ -1,6 +1,7 @@
 package view;
 
 import controller.PlayPartController;
+import controller.SoundController;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import model.Song;
@@ -29,6 +30,7 @@ public class PlayerPart extends JPanel {
     ArrayList<Song> songs = new ArrayList<>();
     PlayPartController player ;
     FileInputStream input;
+    private SoundController soundController;
 
 
     public PlayerPart() {
@@ -196,8 +198,8 @@ public class PlayerPart extends JPanel {
 
                     if (playOrPause.getText().equals("▶︎")) {
                         try {
-
                             player.play();
+
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }

@@ -154,6 +154,7 @@ public class LibraryPart extends JPanel {
                 showPanel.setSongs(songs);
 
 
+
             }
         });
         songsBtn.setBackground(Color.black);
@@ -322,6 +323,10 @@ public class LibraryPart extends JPanel {
     }
     public void setShowPanel(ShowPanel showPanel) {
         this.showPanel = showPanel;
+    }
+    public void updateShowPanel(ShowPanel showPanel){
+        remove(this.showPanel);
+        setShowPanel(showPanel);
     }
 
 
