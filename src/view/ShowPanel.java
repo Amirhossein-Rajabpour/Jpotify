@@ -10,17 +10,18 @@ import java.util.HashMap;
 /**
  * this class is a container which shows songs, albums, playlists and  etc in the middle part of the program
  */
-public class ShowPanel extends JFrame {
+public class ShowPanel extends JPanel {
 
     private Color background;
     private JButton[] songButtons;
     private JButton[] albumButtons;
+    ArrayList<Song> songs = new ArrayList<>();
 
     /**
      * this cunstructor is for showing single songs
-     * @param songs
+     *
      */
-    public ShowPanel(ArrayList<Song> songs) {
+    public ShowPanel() {
 
         super();
         background = new Color(33,33,33);
@@ -69,7 +70,7 @@ public class ShowPanel extends JFrame {
             albumButtons[i].setSize(100,50);
 
 
-            ImageIcon imgIcon = new ImageIcon(Albums.get(i).get(0).getArtwork());
+            ImageIcon imgIcon = new ImageIcon(Albums.get(i).get(0).getArtwork()); // problem here
             Image img = imgIcon.getImage().getScaledInstance(40,40,i);
             Icon icon = new ImageIcon(img);
             albumButtons[i].setIcon(icon);
@@ -80,5 +81,10 @@ public class ShowPanel extends JFrame {
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
+    }
+
+    public void setSongs(ArrayList<Song> songs){
+
+        this.songs = songs;
     }
 }
