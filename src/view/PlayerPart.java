@@ -27,8 +27,6 @@ public class PlayerPart extends JPanel {
     private int currentSong;
     ArrayList<Song> songs = new ArrayList<>();
     PlayPartController player ;
-
-
     FileInputStream input;
 
 
