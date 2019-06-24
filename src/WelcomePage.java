@@ -104,6 +104,7 @@ public class WelcomePage extends JFrame {
 
     public void doClickAction() {
         MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
+//        SwingUtilities.updateComponentTreeUI(mainPage);
         this.setVisible(false);
     }
 }

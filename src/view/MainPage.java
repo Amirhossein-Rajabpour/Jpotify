@@ -43,9 +43,17 @@ public class MainPage extends JFrame {
         bottomPanel = new BottomPanel();
         this.add(bottomPanel, BorderLayout.SOUTH);
 
+        SwingUtilities.updateComponentTreeUI(this);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
 
+    }
+
+    public void updateShowPanel(ShowPanel showPanel){
+
+        remove(centralPanel.getShowPanel());
+        centralPanel.setShowPanel(showPanel);
     }
 }
