@@ -11,6 +11,7 @@ public class MainPage extends JFrame {
     private BottomPanel bottomPanel;
     private CentralPanel centralPanel;
     private FriendActivity friendActivity;
+    private ShowPanel showPanel;
     private static final int WIDTH = 680, HEIGHT = 405;
 
     public MainPage(String userName, String friendsId) {
@@ -28,8 +29,13 @@ public class MainPage extends JFrame {
         Library = new LibraryPart();
         this.add(new JScrollPane(Library), BorderLayout.WEST);
 
+
         centralPanel = new CentralPanel(userName);
         this.add(centralPanel, BorderLayout.CENTER);
+
+
+        Library.setShowPanel(centralPanel.getShowPanel());// added
+//        centralPanel.setShowPanel(Library.getShowPanel());
 
         friendActivity = new FriendActivity();
         this.add(friendActivity,BorderLayout.EAST);

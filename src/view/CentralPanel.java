@@ -10,8 +10,6 @@ public class CentralPanel extends JPanel {
 
     private ToolBar toolBar;
     private ShowPanel showPanel;
-
-
     public CentralPanel(String userName) {
         super();
 
@@ -22,9 +20,16 @@ public class CentralPanel extends JPanel {
         toolBar.setSize(new Dimension(50, 10));
         this.add(toolBar, BorderLayout.NORTH);
 
-
         showPanel = new ShowPanel();
-
         this.add(showPanel,BorderLayout.CENTER);
+    }
+
+    public void setShowPanel(ShowPanel showPanel){
+
+        this.showPanel = showPanel;
+    }
+
+    public ShowPanel getShowPanel() {
+        return showPanel;
     }
 }

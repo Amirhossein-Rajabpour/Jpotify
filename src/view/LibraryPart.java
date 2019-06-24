@@ -31,6 +31,7 @@ public class LibraryPart extends JPanel {
     private JButton sharedPlaylistBtn;
     private JButton favouriteBtn;
     private Song song;
+    private ShowPanel showPanel;
     private JList<String> buttonList;
 
     ArrayList<Song> songs = new ArrayList<>();
@@ -39,12 +40,16 @@ public class LibraryPart extends JPanel {
     HashMap<String,ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
 
 
+
+
     public LibraryPart(){
 
         super();
         setSize(120,400);
         this.setBackground(new Color(24,24,24));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+//        setShowPanel(showPanel);
+
 
 //        Dimension minSize = new Dimension(5, 20);
 //        Dimension prefSize = new Dimension(15, 20);
@@ -146,6 +151,8 @@ public class LibraryPart extends JPanel {
                 for(Song song: songs){
                     System.out.println(song.getTitle());
                 }
+                showPanel.setSongs(songs);
+
 
             }
         });
@@ -166,6 +173,7 @@ public class LibraryPart extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println(Album.keySet());
+//                showPanel = new ShowPanel(Album);
 
             }
         });
@@ -303,6 +311,17 @@ public class LibraryPart extends JPanel {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * this method is for using library's showpanel on other classes
+     * @return
+     */
+    public ShowPanel getShowPanel(){
+        return showPanel;
+    }
+    public void setShowPanel(ShowPanel showPanel) {
+        this.showPanel = showPanel;
     }
 
 
