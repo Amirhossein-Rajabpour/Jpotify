@@ -27,7 +27,6 @@ public class MainPage extends JFrame {
         this.setBackground(new Color(57, 54, 50));
 
         centralPanel = new CentralPanel(userName);
-        this.add(centralPanel, BorderLayout.CENTER);
 
 
         Library = new LibraryPart();
@@ -35,9 +34,10 @@ public class MainPage extends JFrame {
         this.add(new JScrollPane(Library), BorderLayout.WEST);
 
 //        centralPanel.setShowPanel(Library.getShowPanel());
+        this.add(centralPanel, BorderLayout.CENTER);
 
-        friendActivity = new FriendActivity();
-        this.add(friendActivity,BorderLayout.EAST);
+//        friendActivity = new FriendActivity();
+//        this.add(friendActivity,BorderLayout.EAST);
 
 
         bottomPanel = new BottomPanel();

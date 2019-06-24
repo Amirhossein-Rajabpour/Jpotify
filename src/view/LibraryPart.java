@@ -173,7 +173,7 @@ public class LibraryPart extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println(Album.keySet());
-//                showPanel = new ShowPanel(Album);
+                showPanel.setAlbums(Album);
 
             }
         });
@@ -237,7 +237,7 @@ public class LibraryPart extends JPanel {
         favouriteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                showPanel.setSongs(favouriteSongs);
             }
         });
         add(favouriteBtn);
