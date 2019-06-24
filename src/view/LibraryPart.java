@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 public class LibraryPart extends JPanel {
 
-    private JLabel options;
+    private JTextField options;
     private JLabel libraryLabel;
     private JButton fileChooserBtn;
     private JButton songsBtn;
@@ -53,11 +53,14 @@ public class LibraryPart extends JPanel {
         // add(Box.createRigidArea(new Dimension(15, 5)));
 
 
-        options = new JLabel("● ● ●");
+        options = new JTextField("● ● ●");
         options.setForeground(Color.WHITE);
         options.setFont(new Font("Arial", Font.BOLD, 8));
         options.setToolTipText("options");
         options.setHorizontalAlignment(SwingConstants.LEFT);
+        options.setEditable(false);
+        options.setBackground(new Color(24,24,24));
+        options.setPreferredSize(new Dimension(20,10));
         options.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

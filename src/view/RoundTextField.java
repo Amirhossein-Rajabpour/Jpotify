@@ -16,7 +16,7 @@ public class RoundTextField extends JTextField {
     public RoundTextField(int size) {
         super(size);
         empty = new JTextField();
-        backgroundColor = new Color(38, 38, 38);
+        backgroundColor = new Color(33, 33, 33);
 
         color = new Color(148, 146, 143);
         setOpaque(false);

@@ -17,7 +17,7 @@ public class ToolBar extends JPanel {
         super();
 //        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setLayout(new BorderLayout(15,15));
-        this.setBackground(new Color(38, 38, 38));
+        this.setBackground(new Color(33, 33, 33));
 
 //        add(Box.createRigidArea(new Dimension(15, 15)));
 
@@ -32,7 +32,7 @@ public class ToolBar extends JPanel {
         this.userNameTextField = new JTextField(userName);
         userNameTextField.setFont(new Font("TimesNewRoman", Font.LAYOUT_RIGHT_TO_LEFT, 9));
         userNameTextField.setForeground(new Color(245,245,245));
-        userNameTextField.setBackground(new Color(38, 38, 38,0));
+        userNameTextField.setBackground(new Color(33, 33, 33,0));
         userNameTextField.setEditable(false);
 //        userNameTextField.setPreferredSize(new Dimension(30,10));
 //        this.add(userNameTextField);
