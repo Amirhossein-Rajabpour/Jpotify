@@ -131,6 +131,8 @@ public class PlayerPart extends JPanel {
                      * new input and player here for going to previous song
                      */
                     player.pause();
+                    playOrPause.setText("▶︎");
+                    playOrPause.setToolTipText("Play");
                     if(songs.get(currentSong - 1) != null){
                         currentSong--;
                     }
@@ -235,6 +237,8 @@ public class PlayerPart extends JPanel {
                     next.setBackground(new Color(40,40,40));
 
                     player.pause();
+                    playOrPause.setText("▶︎");
+                    playOrPause.setToolTipText("Play");
                     if(songs.get(currentSong + 1) != null){
                         currentSong++;
                         /**
