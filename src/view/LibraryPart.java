@@ -16,65 +16,55 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * This JPanel is the left part of our program which includes library and playlists
+ * This JPanel is placed at the left side of MainPaige which includes library and playlists
  */
 
 public class LibraryPart extends JPanel {
 
-    private JTextField options;
+    private JLabel options;
     private JLabel libraryLabel;
-    private JButton fileChooserBtn;
-    private JButton songsBtn;
-    private JButton albumsBtn;
+    private JTextField fileChooserBtn;
+    private JTextField songsBtn;
+    private JTextField albumsBtn;
     private JLabel playlistLabel;
-    private JButton newPlaylistBtn;
-    private JButton sharedPlaylistBtn;
-    private JButton favouriteBtn;
+    private JTextField newPlaylistBtn;
+    private JTextField sharedPlaylistBtn;
+    private JTextField favouriteBtn;
     private Song song;
     private ShowPanel showPanel;
-    private JList<String> buttonList;
+    private Color foreground;
+    private Color pressedBackground;
 
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
-    HashMap<String,ArrayList<Song>> Album = new HashMap<>(); // this HashMap is for albums
-    HashMap<String,ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
+    HashMap<String, ArrayList<Song>> Album = new HashMap<>(); // this HashMap is for albums
+    HashMap<String, ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
 
 
-
-
-    public LibraryPart(){
+    public LibraryPart() {
 
         super();
-        setSize(120,400);
-        this.setBackground(new Color(24,24,24));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//        setShowPanel(showPanel);
+        setSize(400, 400);
+        this.setBackground(new Color(24, 24, 24));
+        setLayout(new GridLayout(20, 1));
+        foreground = new Color(179, 179, 179);
+        pressedBackground = new Color(45, 45, 45);
 
 
-//        Dimension minSize = new Dimension(5, 20);
-//        Dimension prefSize = new Dimension(15, 20);
-//        Dimension maxSize = new Dimension(15, 20);
-//        add(new Box.Filler(minSize, prefSize, maxSize));
-        // add(Box.createRigidArea(new Dimension(15, 5)));
-
-
-        options = new JTextField("● ● ●");
+        options = new JLabel("      ● ● ●");
         options.setForeground(Color.WHITE);
-        options.setFont(new Font("Arial", Font.BOLD, 8));
+        options.setFont(new Font("Arial", Font.BOLD, 6));
         options.setToolTipText("options");
-        options.setHorizontalAlignment(SwingConstants.LEFT);
-        options.setEditable(false);
-        options.setBackground(new Color(24,24,24));
-        options.setPreferredSize(new Dimension(20,10));
+        options.setBackground(new Color(24, 24, 24));
+        options.setForeground(Color.white);
         options.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
-
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
             }
 
             @Override
@@ -84,40 +74,46 @@ public class LibraryPart extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
             }
         });
         this.add(options);
-        //⦁
 
-        buttonList = new JList<>();
 
-        libraryLabel = new JLabel("Library     ");
-        libraryLabel.setAlignmentX(RIGHT_ALIGNMENT);
-        libraryLabel.setForeground(Color.white);
-//        buttonList.add(libraryLabel);
-//        add(buttonList);
+        libraryLabel = new JLabel("      LIBRARY");
+        libraryLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 8));
+        libraryLabel.setForeground(foreground);
+        libraryLabel.setBackground(this.getBackground());
         add(libraryLabel);
-        add(Box.createRigidArea(new Dimension(0, 5)));
+//        add(Box.createRigidArea(new Dimension(0, 5)));
 
 
 /**
  * This button is for adding a new song to the program
  */
-        fileChooserBtn = new JButton(" Add to library ");
-        fileChooserBtn.setPreferredSize(new Dimension(5,40));
-
-        fileChooserBtn.addActionListener(new ActionListener() {
+        fileChooserBtn = new JTextField("     Add To Library");
+        fileChooserBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        fileChooserBtn.setEditable(false);
+        fileChooserBtn.setBackground(this.getBackground());
+        fileChooserBtn.setForeground(foreground);
+        fileChooserBtn.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                fileChooserBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                fileChooserBtn.setBackground(getBackground());
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileFilter(new FileNameExtensionFilter(".mp3 files","mp3"));
+                fileChooser.setFileFilter(new FileNameExtensionFilter(".mp3 files", "mp3"));
                 fileChooser.setCurrentDirectory(new File("E:/"));
                 int result = fileChooser.showOpenDialog(fileChooser);
                 if (result == JFileChooser.APPROVE_OPTION) {
@@ -126,132 +122,215 @@ public class LibraryPart extends JPanel {
                     addSong(selectedFile.getAbsolutePath());
                     saveSong(selectedFile.getAbsolutePath());
                     System.out.println("song saved");
-
                 }
             }
-        });
 
-        fileChooserBtn.setBackground(Color.black);
-        fileChooserBtn.setForeground(Color.WHITE);
-        fileChooserBtn.setAlignmentX(CENTER_ALIGNMENT);
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
         add(fileChooserBtn);
-//        add(Box.createRigidArea(new Dimension(0, 5)));
-//        buttonList.add(fileChooserBtn);
-//        add(buttonList);
 
 
 /**
  * This button shows all existed songs according to last time played
  */
-        songsBtn = new JButton("       Songs       ");
-        songsBtn.addActionListener(new ActionListener() {
+        songsBtn = new JTextField("     Songs");
+        songsBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        songsBtn.setEditable(false);
+        songsBtn.setBackground(this.getBackground());
+        songsBtn.setForeground(foreground);
+        songsBtn.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+            }
 
-                for(Song song: songs){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                songsBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                songsBtn.setBackground(getBackground());
+                for (Song song : songs) {
                     System.out.println(song.getTitle());
                 }
                 showPanel.setSongs(songs);
+            }
 
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
 
+            @Override
+            public void mouseExited(MouseEvent e) {
             }
         });
-        songsBtn.setBackground(Color.black);
-        songsBtn.setForeground(Color.WHITE);
-        songsBtn.setAlignmentX(CENTER_ALIGNMENT);
         add(songsBtn);
-        add(Box.createRigidArea(new Dimension(0, 5)));
 
 
 /**
  * This button shows all albums according to last time played
  */
-        albumsBtn = new JButton("      Albums      ");
-
-        albumsBtn.addActionListener(new ActionListener() {
+        albumsBtn = new JTextField("     Albums");
+        albumsBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        albumsBtn.setBackground(this.getBackground());
+        albumsBtn.setForeground(foreground);
+        albumsBtn.setEditable(false);
+        albumsBtn.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                albumsBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                albumsBtn.setBackground(getBackground());
                 System.out.println(Album.keySet());
                 showPanel.setAlbums(Album);
+            }
 
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
             }
         });
-        albumsBtn.setBackground(Color.black);
-        albumsBtn.setForeground(Color.WHITE);
-        albumsBtn.setAlignmentX(CENTER_ALIGNMENT);
         add(albumsBtn);
-        add(Box.createRigidArea(new Dimension(0, 10)));
 
-
-
-
-        playlistLabel = new JLabel("PlayLists  ");
-        playlistLabel.setAlignmentX(RIGHT_ALIGNMENT);
-        playlistLabel.setForeground(Color.white);
-        add(playlistLabel);
         add(Box.createRigidArea(new Dimension(0, 5)));
+
+        playlistLabel = new JLabel("      PLAYLISTS");
+        playlistLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 8));
+        playlistLabel.setForeground(foreground);
+        playlistLabel.setBackground(this.getBackground());
+        add(playlistLabel);
 
 
 /**
  * This button creates and adds a new playlist
  */
-        newPlaylistBtn = new JButton("  New Playlist  ");
-        newPlaylistBtn.setBackground(Color.black);
-        newPlaylistBtn.setForeground(Color.WHITE);
-        newPlaylistBtn.setAlignmentX(CENTER_ALIGNMENT);
-        newPlaylistBtn.addActionListener(new ActionListener() {
+        newPlaylistBtn = new JTextField("     New Playlis");
+        newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        newPlaylistBtn.setEditable(false);
+        newPlaylistBtn.setBackground(this.getBackground());
+        newPlaylistBtn.setForeground(foreground);
+        newPlaylistBtn.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                newPlaylistBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                newPlaylistBtn.setBackground(getBackground());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
             }
         });
         add(newPlaylistBtn);
-        add(Box.createRigidArea(new Dimension(0, 5)));
 
 
 /**
  * This buttons shows user's shared playlist on network
  */
-        sharedPlaylistBtn = new JButton("Shared Playlist");
-        sharedPlaylistBtn.setBackground(Color.black);
-        sharedPlaylistBtn.setForeground(Color.WHITE);
-        sharedPlaylistBtn.setAlignmentX(CENTER_ALIGNMENT);
-        sharedPlaylistBtn.addActionListener(new ActionListener() {
+        sharedPlaylistBtn = new JTextField("     Shared Playlist");
+        sharedPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        sharedPlaylistBtn.setEditable(false);
+        sharedPlaylistBtn.setBackground(this.getBackground());
+        sharedPlaylistBtn.setForeground(foreground);
+        sharedPlaylistBtn.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                sharedPlaylistBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                sharedPlaylistBtn.setBackground(getBackground());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
             }
         });
         add(sharedPlaylistBtn);
-        add(Box.createRigidArea(new Dimension(0, 5)));
 
 
 /**
  * Every user has some favourite songs which is shown by this button
  */
-        favouriteBtn = new JButton("    Favourites    ");
-        favouriteBtn.setBackground(Color.black);
-        favouriteBtn.setForeground(Color.WHITE);
-        favouriteBtn.setAlignmentX(CENTER_ALIGNMENT);
-        favouriteBtn.addActionListener(new ActionListener() {
+        favouriteBtn = new JTextField("     Favourites");
+        favouriteBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        favouriteBtn.setEditable(false);
+        favouriteBtn.setBackground(this.getBackground());
+        favouriteBtn.setForeground(foreground);
+        favouriteBtn.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                favouriteBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                favouriteBtn.setBackground(getBackground());
                 showPanel.setSongs(favouriteSongs);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
             }
         });
         add(favouriteBtn);
-        add(Box.createRigidArea(new Dimension(0, 5)));
 
 
         setVisible(true);
     } // end of constructor
 
+
     /**
      * Adds a song to songs arraylist
+     *
      * @param path
      */
-    void addSong(String path){
+    void addSong(String path) {
 
         song = new Song(path);
         songs.add(song);
@@ -262,9 +341,10 @@ public class LibraryPart extends JPanel {
 
     /**
      * Adds a song to user's favourites songs
+     *
      * @param path
      */
-    public void addFavourite(String path){
+    public void addFavourite(String path) {
 
         song = new Song(path);
         favouriteSongs.add(song);
@@ -272,31 +352,33 @@ public class LibraryPart extends JPanel {
 
     /**
      * this method add each song to it's album HashMap
+     *
      * @param song
      */
-    public void addToAlbum(Song song) throws NullPointerException{
+    public void addToAlbum(Song song) throws NullPointerException {
 
-        if(Album.containsKey(song.getAlbumName()))
-        Album.get(song.getAlbumName()).add(song);
+        if (Album.containsKey(song.getAlbumName()))
+            Album.get(song.getAlbumName()).add(song);
 
         else {
             ArrayList<Song> songs = new ArrayList<>();
             songs.add(song);
-            Album.put(song.getAlbumName(),songs);
+            Album.put(song.getAlbumName(), songs);
         }
 
     }
 
     /**
      * this method save added song to the program
+     *
      * @param path
      */
-    public void saveSong(String path){
+    public void saveSong(String path) {
 
         Song song = new Song(path);
         FileOutputStream f = null;
         try {
-            f = new FileOutputStream(new File( song.getTitle() + ".mp3"));
+            f = new FileOutputStream(new File(song.getTitle() + ".mp3"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(song);
@@ -315,11 +397,13 @@ public class LibraryPart extends JPanel {
 
     /**
      * this method is for using library's showpanel on other classes
+     *
      * @return
      */
-    public ShowPanel getShowPanel(){
+    public ShowPanel getShowPanel() {
         return showPanel;
     }
+
     public void setShowPanel(ShowPanel showPanel) {
         this.showPanel = showPanel;
     }
