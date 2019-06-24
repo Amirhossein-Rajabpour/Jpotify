@@ -25,6 +25,7 @@ public class PlayerPart extends JPanel {
     private JTextField repeat;
     private JTextField favorite;
     private int currentSong;
+    private JProgressBar progressBar;
     ArrayList<Song> songs = new ArrayList<>();
     PlayPartController player ;
     FileInputStream input;
@@ -373,4 +374,15 @@ public class PlayerPart extends JPanel {
             throw new RuntimeException(e);
         }
     }
+
+    public void setSongs(ArrayList<Song> songs){
+        this.songs = songs;
+    }
+
+    public void setProgressBarPanel(JProgressBar progressBar){
+        this.progressBar = progressBar;
+        this.progressBar.setValue(1000);
+    }
+
+    //progressBar actionMethod that pauses goes to the particular point of the song
 }

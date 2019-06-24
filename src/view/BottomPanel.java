@@ -7,8 +7,8 @@ public class BottomPanel extends JPanel {
 
     private Color background;
     private PlayerPart playerPart;
-    private JPanel progressBarPanel;
-    private JProgressBar progressBar;
+    private ProgressBarPanel progressBarPanel;
+
     public BottomPanel() {
         super();
 
@@ -19,38 +19,12 @@ public class BottomPanel extends JPanel {
         playerPart = new PlayerPart();
         this.add(playerPart, BorderLayout.CENTER);
 
-        progressBarPanel = new JPanel();
-        progressBarPanel.setForeground(new Color(179,179,179));
-        progressBarPanel.setBackground(background);
-
-        JTextField passed = new JTextField("00:00");
-        passed.setFont(new Font("Arial", Font.CENTER_BASELINE,9));
-        passed.setEditable(false);
-        passed.setBackground(background);
-        passed.setForeground(new Color(179,179,179));
-        progressBarPanel.add(passed);
-
-
-//        UIManager.put("ProgressBar.selectionBackground",Color.WHITE);
-//        UIManager.put("ProgressBar.selectionForeground",Color.WHITE);
-        progressBar = new JProgressBar(0,1000);
-        progressBar.setStringPainted(false);
-        progressBar.setBorderPainted(true);
-        progressBarPanel.add(progressBar);
-//        progressBar.setValue(300);
-//        progressBar.setBackground(Color.white);
-//        progressBar.setForeground(Color.WHITE);
-//        progressBar.setSize(9000,2000);
-
-
-        JTextField total = new JTextField("00:00");
-        total.setFont(new Font("Arial", Font.CENTER_BASELINE,9));
-        total.setEditable(false);
-        total.setBackground(background);
-        total.setForeground(new Color(179,179,179));
-        progressBarPanel.add(total);
-
+        progressBarPanel = new ProgressBarPanel();
         this.add(progressBarPanel,BorderLayout.SOUTH);
 
+        playerPart.setProgressBarPanel(progressBarPanel.getProgressBar());
+
     }
+
+
 }
