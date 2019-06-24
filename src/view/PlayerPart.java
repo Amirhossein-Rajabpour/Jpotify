@@ -27,8 +27,10 @@ public class PlayerPart extends JPanel {
     private int currentSong;
     private JProgressBar progressBar;
     private ArrayList<Song> songs = new ArrayList<>();
-    private PlayPartController player ;
+    private PlayPartController player;
     private FileInputStream input;
+    private int num;
+    private boolean isPlaying;
 
 
     public PlayerPart() {
@@ -44,8 +46,7 @@ public class PlayerPart extends JPanel {
         songs.add(song1);
         songs.add(song2);
         currentSong = 0;
-
-
+        this.isPlaying = false;
 
 
         try {
@@ -53,7 +54,7 @@ public class PlayerPart extends JPanel {
  * new input and player in constructor in order to resume a song
  */
             try {
-                input  = new FileInputStream(songs.get(currentSong).getPath());
+                input = new FileInputStream(songs.get(currentSong).getPath());
                 player = new PlayPartController(input);
 
             } catch (FileNotFoundException e1) {
@@ -61,7 +62,6 @@ public class PlayerPart extends JPanel {
             } catch (JavaLayerException e1) {
                 e1.printStackTrace();
             }
-
 
 
             shuffle = new JTextField("🔀");
@@ -120,23 +120,24 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    previous.setBackground(new Color(55,55,55));
+                    previous.setBackground(new Color(55, 55, 55));
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    previous.setBackground(new Color(40,40,40));
+                    previous.setBackground(new Color(40, 40, 40));
 
                     player.pause();
+                    isPlaying = false;
                     playOrPause.setText("▶︎");
                     playOrPause.setToolTipText("Play");
-                    if(songs.get(currentSong - 1) != null){
+                    if (songs.get(currentSong - 1) != null) {
                         currentSong--;
                         /**
                          * new input and player here for going to previous song
                          */
                         try {
-                            input  = new FileInputStream(songs.get(currentSong).getPath());
+                            input = new FileInputStream(songs.get(currentSong).getPath());
                             player = new PlayPartController(input);
 
                         } catch (FileNotFoundException e1) {
@@ -144,8 +145,7 @@ public class PlayerPart extends JPanel {
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                    }
-                    else currentSong = 0;
+                    } else currentSong = 0;
 
                 }
 
@@ -186,13 +186,13 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    playOrPause.setBackground(new Color(55,55,55));
+                    playOrPause.setBackground(new Color(55, 55, 55));
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
 
-                    playOrPause.setBackground(new Color(40,40,40));
+                    playOrPause.setBackground(new Color(40, 40, 40));
 
                     if (playOrPause.getText().equals("▶︎")) {
                         try {
@@ -238,23 +238,23 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    next.setBackground(new Color(55,55,55));
+                    next.setBackground(new Color(55, 55, 55));
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    next.setBackground(new Color(40,40,40));
+                    next.setBackground(new Color(40, 40, 40));
 
                     player.pause();
                     playOrPause.setText("▶︎");
                     playOrPause.setToolTipText("Play");
-                    if(songs.get(currentSong + 1) != null){
+                    if (songs.get(currentSong + 1) != null) {
                         currentSong++;
                         /**
                          * new input and player here for going to next song
                          */
                         try {
-                            input  = new FileInputStream(songs.get(currentSong).getPath());
+                            input = new FileInputStream(songs.get(currentSong).getPath());
                             player = new PlayPartController(input);
 
                         } catch (FileNotFoundException e1) {
@@ -262,8 +262,7 @@ public class PlayerPart extends JPanel {
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                    }
-                    else currentSong = 0;
+                    } else currentSong = 0;
 
 
                 }
@@ -375,21 +374,32 @@ public class PlayerPart extends JPanel {
         }
     }
 
-    public void setProgressBarPanel(JProgressBar progressBar){
+    public void setProgressBarPanel(JProgressBar progressBar) {
         this.progressBar = progressBar;
-        this.progressBar.setValue(1000);
+        this.progressBar.setValue(50);
     }
 
-    public void setSongs(ArrayList<Song> songs, int initialIndex){
+    public void setSongs(ArrayList<Song> songs, int initialIndex) {
         this.songs = songs;
         this.currentSong = initialIndex;
-        SetprogressBarDuration(songs.get(currentSong).getDuration);
+        SetProgressBarDuration(songs.get(currentSong).getDuration());
     }
 
-    public void SetprogressBarDuration(int duration){
-        progressBar.setMaximum(duration);
+    public void SetProgressBarDuration(long duration) {
+        int newDuration = (int) duration;
+        progressBar.setMaximum(newDuration);
     }
 
+    public void iterate() {
+        while (num < 100 && isPlaying == true) {
+            progressBar.setValue(num);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+            num += 95;
+        }
+    }
 
 
     //progressBar actionMethod that pauses goes to the particular point of the song must be added here
