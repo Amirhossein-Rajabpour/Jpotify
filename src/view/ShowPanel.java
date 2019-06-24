@@ -5,27 +5,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * this class is a container which shows songs, albums, playlists and  etc in the middle part of the program
  */
-public class ShowPanel extends JPanel {
+public class ShowPanel extends JFrame {
 
     private Color background;
     private JButton[] songButtons;
-//    ArrayList<Song> songs = new ArrayList<>();
+    private JButton[] albumButtons;
 
+    /**
+     * this cunstructor is for showing single songs
+     * @param songs
+     */
     public ShowPanel(ArrayList<Song> songs) {
 
         super();
         background = new Color(33,33,33);
         this.setLayout(new FlowLayout());
         this.setBackground(background);
-
-//        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
-//        Song song1 = new Song("C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
-//        songs.add(song1);
-//        songs.add(song2);
 
         songButtons = new JButton[songs.size()];
 
@@ -47,5 +47,38 @@ public class ShowPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         setVisible(true);
+    }
+
+    /**
+     * this cunstructor is for shoing albums only
+     * @param Albums
+     */
+    public ShowPanel(HashMap<String,ArrayList<Song>> Albums){
+
+        super();
+        background = new Color(33,33,33);
+        this.setLayout(new FlowLayout());
+        this.setBackground(background);
+
+        albumButtons = new JButton[Albums.size()];
+
+        for(int i = 0; i < Albums.size() ; i++){
+
+//            songButtons[i].addActionListener((ActionListener) this);
+            albumButtons[i] = new JButton();
+            albumButtons[i].setSize(100,50);
+
+
+            ImageIcon imgIcon = new ImageIcon(Albums.get(i).get(0).getArtwork());
+            Image img = imgIcon.getImage().getScaledInstance(40,40,i);
+            Icon icon = new ImageIcon(img);
+            albumButtons[i].setIcon(icon);
+
+
+            albumButtons[i].setText(Albums.keySet().toArray()[i].toString());
+            add(albumButtons[i]);
+            this.add(Box.createRigidArea(new Dimension(10, 10)));
+        }
+        this.setVisible(true);
     }
 }

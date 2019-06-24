@@ -32,6 +32,6 @@ public class CentralPanel extends JPanel {
 //        for showpanel if it is supposed be new here
 //        intori nemishe azash shey sakht manzorme kollan vali librarypart ro bbin buttone songs
 
-        this.add(showPanel,BorderLayout.CENTER);
+//        this.add(showPanel,BorderLayout.CENTER);
     }
 }

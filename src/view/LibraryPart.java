@@ -165,6 +165,7 @@ public class LibraryPart extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println(Album.keySet());
+                showPanel = new ShowPanel(Album);
 
             }
         });
