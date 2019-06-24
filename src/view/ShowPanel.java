@@ -13,19 +13,19 @@ public class ShowPanel extends JPanel {
 
     private Color background;
     private JButton[] songButtons;
-    ArrayList<Song> songs = new ArrayList<>();
+//    ArrayList<Song> songs = new ArrayList<>();
 
-    public ShowPanel() {
+    public ShowPanel(ArrayList<Song> songs) {
 
         super();
         background = new Color(33,33,33);
         this.setLayout(new FlowLayout());
         this.setBackground(background);
 
-        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
-        Song song1 = new Song("C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
-        songs.add(song1);
-        songs.add(song2);
+//        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
+//        Song song1 = new Song("C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
+//        songs.add(song1);
+//        songs.add(song2);
 
         songButtons = new JButton[songs.size()];
 
@@ -46,8 +46,6 @@ public class ShowPanel extends JPanel {
             add(songButtons[i]);
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
-
-
         setVisible(true);
     }
 }
