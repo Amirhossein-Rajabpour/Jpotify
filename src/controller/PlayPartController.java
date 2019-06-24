@@ -26,10 +26,6 @@ public class PlayPartController {
         this.player = new Player(inputStream);
     }
 
-    public PlayPartController(final InputStream inputStream, final AudioDevice audioDevice) throws JavaLayerException {
-        this.player = new Player(inputStream, audioDevice);
-    }
-
     /**
      * Starts playback (resumes if paused)
      */

@@ -250,6 +250,7 @@ public class LibraryPart extends JPanel {
         System.out.println(song.getTitle());
         System.out.println(song.getAlbumName());
         addToAlbum(song);
+
     }
 
     /**

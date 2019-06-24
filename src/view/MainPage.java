@@ -40,9 +40,9 @@ public class MainPage extends JFrame {
         friendActivity = new FriendActivity();
         this.add(friendActivity,BorderLayout.EAST);
 
+
         playerPart = new PlayerPart();
         this.add(playerPart, BorderLayout.SOUTH);
-
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);

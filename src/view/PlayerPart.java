@@ -2,12 +2,17 @@ package view;
 
 import controller.PlayPartController;
 import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+import model.Song;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PlayerPart extends JPanel {
 
@@ -19,19 +24,45 @@ public class PlayerPart extends JPanel {
     private JTextField next;
     private JTextField repeat;
     private JTextField favorite;
+    private int currentSong;
+    ArrayList<Song> songs = new ArrayList<>();
+    PlayPartController player ;
+
+
+    FileInputStream input;
 
 
     public PlayerPart() {
+        // player part should work according to the playing song's place for example if the song is in play list
+        // next and previous button should work with that playlist ArrayList
 
         super();
         setSize(700, 400);
         setBackground(new Color(40, 40, 40));
         foreground = new Color(179, 179, 179);
+        Song song1 = new Song("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
+        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
+        songs.add(song1);
+        songs.add(song2);
+        currentSong = 0;
+
+
 
 
         try {
-            FileInputStream input = new FileInputStream("/Users/apple/Desktop/In the night.mpga");
-            PlayPartController player = new PlayPartController(input);
+/**
+ * new input and player in constructor in order to resume a song
+ */
+            try {
+                input  = new FileInputStream(songs.get(currentSong).getPath());
+                player = new PlayPartController(input);
+
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (JavaLayerException e1) {
+                e1.printStackTrace();
+            }
+
 
 
             shuffle = new JTextField("🔀");
@@ -96,7 +127,15 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     previous.setBackground(new Color(40,40,40));
-                    // Right the ActionEvent here Amirhosein
+                    /**
+                     * new input and player here for going to previous song
+                     */
+                    player.pause();
+                    if(songs.get(currentSong - 1) != null){
+                        currentSong--;
+                    }
+                    else currentSong = 0;
+
                 }
 
                 @Override
@@ -146,6 +185,7 @@ public class PlayerPart extends JPanel {
 
                     if (playOrPause.getText().equals("▶︎")) {
                         try {
+
                             player.play();
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
@@ -193,7 +233,26 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     next.setBackground(new Color(40,40,40));
-                    // Right the ActionEvent here Amirhosein
+
+                    player.pause();
+                    if(songs.get(currentSong + 1) != null){
+                        currentSong++;
+                        /**
+                         * new input and player here for going to next song
+                         */
+                        try {
+                            input  = new FileInputStream(songs.get(currentSong).getPath());
+                            player = new PlayPartController(input);
+
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    else currentSong = 0;
+
+
                 }
 
                 @Override
