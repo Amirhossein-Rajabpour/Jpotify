@@ -13,7 +13,7 @@ public class MainPage extends JFrame {
     private CentralPanel centralPanel;
     private FriendActivity friendActivity;
     //    private ToolBar toolBar;
-    private static final int WIDTH = 600, HEIGHT = 450;
+    private static final int WIDTH = 680, HEIGHT = 405;
 
     public MainPage(String userName, String friendsId) {
 
