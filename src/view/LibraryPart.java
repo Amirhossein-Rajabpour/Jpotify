@@ -16,9 +16,11 @@ import java.awt.event.MouseListener;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import java.util.stream.Stream;
 
 /**
  * This JPanel is placed at the left side of MainPaige which includes library and playlists
@@ -64,12 +66,11 @@ public class LibraryPart extends JPanel {
         pressedBackground = new Color(45, 45, 45);
 
         username = user;
-//        System.out.println(username);
-//        if(new File(username + "/songs").exists()){
-//            System.out.println("zart");
-//            songs = loadSongs(username);
-//        }
-//        else System.out.println("not entered");
+        if(new File(username + "/songs/").list().length > 0){
+            System.out.println("existed");
+            songs = loadSongs(username);
+        }
+        else System.out.println("not entered");
 
 
         options = new JLabel("      ● ● ●");
@@ -448,7 +449,7 @@ public class LibraryPart extends JPanel {
         Song song = new Song(path);
         FileOutputStream f = null;
         try {
-            f = new FileOutputStream(new File( username +"/songs/"+ song.getTitle()));
+            f = new FileOutputStream(new File( username +"/songs/" + song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(song);
@@ -485,28 +486,40 @@ public class LibraryPart extends JPanel {
             ArrayList<Song> loadedSongs = new ArrayList<Song>();
             boolean cont = true;
 
-            try {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(username + "/songs" ));
-                while(cont){
-                    Object obj=null;
+//            Files.walk(Paths.get(username +"/songs/")).filter(Files::isRegularFile).forEach();
+        try (Stream<Path> filePathStream=Files.walk(Paths.get(username + "/songs/"))) {
+            filePathStream.forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+
+                    System.out.println(filePath);
+
                     try {
-                        obj = ois.readObject();
+                        FileInputStream fis = new FileInputStream(String.valueOf(filePath));
+                        ObjectInputStream ois = new ObjectInputStream(fis);
+                        Object obj = null;
+//                        while(cont){
+//                            if(fis.available() != 0){
+                                System.out.println("1");
+                                obj = ois.readObject();
+                                loadedSongs.add((Song) obj);
+//                            }
+//                            else cont = false;
+
+                        }
+                    catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-                    if(obj != null)
-                        loadedSongs.add((Song) obj);
-                    else
-                        cont = false;
                 }
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return loadedSongs;
+
+
+            });
+        }
+
+        return loadedSongs;
     }
 
     /**
