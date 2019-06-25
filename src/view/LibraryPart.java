@@ -2,6 +2,7 @@ package view;
 
 import com.mpatric.mp3agic.*;
 import model.Album;
+import model.Playlist;
 import model.Song;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
  * This JPanel is placed at the left side of MainPaige which includes library and playlists
@@ -42,11 +44,13 @@ public class LibraryPart extends JPanel {
     private Color pressedBackground;
     private Album album;
     private String username;
+    private NewPlaylist newPlaylist;
 
 
     ArrayList<Song> songs = new ArrayList<>();
-    ArrayList<Song> favouriteSongs = new ArrayList<>();
+    ArrayList<Playlist> playlists = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
+    ArrayList<Song> favouriteSongs = new ArrayList<>();
     ArrayList<Song> sharedSongs = new ArrayList<>();
 
 
@@ -278,6 +282,15 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 newPlaylistBtn.setBackground(getBackground());
+                newPlaylist = new NewPlaylist(songs);
+                if(newPlaylist.isDone()){
+                    playlists.add(newPlaylist.getPlaylist());
+                    System.out.println("ff"+playlists.isEmpty());
+                    System.out.println(playlists.size());
+                    System.out.println(playlists.get(0).getPlaylistName());
+                }
+                else System.out.println("not entered");
+
             }
 
             @Override
