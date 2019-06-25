@@ -1,6 +1,7 @@
 package view;
 
 import com.mpatric.mp3agic.*;
+import model.Album;
 import model.Song;
 
 import javax.swing.*;
@@ -37,10 +38,12 @@ public class LibraryPart extends JPanel {
     private ShowPanel showPanel;
     private Color foreground;
     private Color pressedBackground;
+    private Album album;
+
 
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
-    HashMap<String, ArrayList<Song>> Album = new HashMap<>(); // this HashMap is for albums
+    ArrayList<Album> albums = new ArrayList<>();
     HashMap<String, ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
 
 
@@ -219,8 +222,7 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 albumsBtn.setBackground(getBackground());
-                System.out.println(Album.keySet());
-                showPanel.setAlbums(Album);
+                showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
 
@@ -382,13 +384,19 @@ public class LibraryPart extends JPanel {
      */
     public void addToAlbum(Song song) throws NullPointerException {
 
-        if (Album.containsKey(song.getAlbumName()))
-            Album.get(song.getAlbumName()).add(song);
+        if (albums.contains(song.getAlbumName())) {
+            for(Album album: albums){
+                if(song.getAlbumName() == album.getAlbumName()){
+                    album.addSong(song);
+                }
+            }
 
-        else {
-            ArrayList<Song> songs = new ArrayList<>();
-            songs.add(song);
-            Album.put(song.getAlbumName(), songs);
+
+        } else {
+            album = new Album(song.getAlbumName());
+            albums.add(album);
+            album.addSong(song);
+
         }
 
     }

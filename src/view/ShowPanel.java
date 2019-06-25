@@ -1,5 +1,6 @@
 package view;
 
+import model.Album;
 import model.Song;
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ public class ShowPanel extends JPanel {
     private JButton[] songButtons;
     private JButton[] albumButtons;
     ArrayList<Song> songs = new ArrayList<>();
-    HashMap<String,ArrayList<Song>> Albums;
+    ArrayList<Album> albums = new ArrayList<>();
 
 
     public ShowPanel() {
@@ -53,25 +54,25 @@ public class ShowPanel extends JPanel {
         setVisible(true);
     }
 
-    public void setAlbums(HashMap<String,ArrayList<Song>> Albums){
+    public void setAlbums(ArrayList<Album> albums){
 
-        this.Albums = Albums;
-        albumButtons = new JButton[Albums.size()];
+        this.albums = albums;
+        albumButtons = new JButton[albums.size()];
 
-        for(int i = 0; i < Albums.size() ; i++){
+        for(int i = 0; i < albums.size() ; i++){
 
 //            songButtons[i].addActionListener((ActionListener) this);
             albumButtons[i] = new JButton();
             albumButtons[i].setSize(100,50);
 
 
-            System.out.println(Albums.isEmpty());
-            ImageIcon imgIcon = new ImageIcon(Albums.get(i).get(0).getArtwork()); // problem here
+            ImageIcon imgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork()); // problem here
             Image img = imgIcon.getImage().getScaledInstance(40,40,i);
             Icon icon = new ImageIcon(img);
             albumButtons[i].setIcon(icon);
 
-            albumButtons[i].setText(Albums.keySet().toArray()[i].toString());
+
+            albumButtons[i].setText(albums.get(i).getAlbumName());
 
             add(albumButtons[i]);
             this.add(Box.createRigidArea(new Dimension(10, 10)));
