@@ -184,6 +184,7 @@ public class LibraryPart extends JPanel {
                 for (Song song : songs) {
                     System.out.println(song.getTitle());
                 }
+                showPanel.removeAll();
                 showPanel.setSongs(songs);
                 showPanel.revalidate();
 
@@ -222,6 +223,7 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 albumsBtn.setBackground(getBackground());
+                showPanel.removeAll();
                 showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
