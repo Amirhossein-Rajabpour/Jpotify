@@ -52,10 +52,10 @@ public class NewPlaylist extends JFrame {
         nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         north.add(nameLabel, BorderLayout.CENTER);
 
+
         nameTextField = new JTextField();
         nameTextField.setText("Playlist name");
         nameTextField.setForeground(foreground);
-        nameTextField.setOpaque(false);
         nameTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
