@@ -33,6 +33,7 @@ public class PlayerPart extends JPanel {
     private FileInputStream input;
     private boolean repeatAllIsOn;
     private boolean repeatOneIsOn;
+    private SongInfoPanel songInfoPanel;
 
 
     public PlayerPart() {
@@ -449,6 +450,15 @@ public class PlayerPart extends JPanel {
 
     public void setProgressBarPanel(ProgressBarPanel progressBarPanel) {
         this.progressBarPanel = progressBarPanel;
+    }
+
+    public void setSongInfoPanel(SongInfoPanel songInfoPanel){
+        this.songInfoPanel = songInfoPanel;
+    }
+
+    public void setSongLocationInSeconds(int second) {
+        player.pause();
+//        player.s
     }
 
 //    public static<T> void shuffle(ArrayList<Song> songs)

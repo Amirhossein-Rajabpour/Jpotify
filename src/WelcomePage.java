@@ -140,7 +140,11 @@ public class WelcomePage extends JFrame {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doClickAction();
+                try {
+                    doClickAction();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         south.add(btn);
@@ -175,13 +179,16 @@ public class WelcomePage extends JFrame {
         this.setVisible(true);
     }
 
-    public void doClickAction() {
-        MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
+    public void doClickAction() throws IOException {
 
         if(new File(userTextField.getText()).exists())
-            System.out.println("shit");
-        else
-        new File(userTextField.getText()).mkdir();
+            System.out.println("shit repetetive id");
+        else{
+            new File(userTextField.getText()).mkdir();
+            new File(userTextField.getText() + "/songs/").mkdir();
+            System.out.println("new id");
+        }
+        MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
 
         this.setVisible(false);
     }

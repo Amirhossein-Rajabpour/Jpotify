@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainPage extends JFrame {
 
@@ -14,7 +15,7 @@ public class MainPage extends JFrame {
     private ShowPanel showPanel;
     private static final int WIDTH = 780, HEIGHT = 475;
 
-    public MainPage(String userName, String friendsId) {
+    public MainPage(String userName, String friendsId) throws IOException {
 
         super();
         this.userName = userName;
@@ -29,8 +30,8 @@ public class MainPage extends JFrame {
         centralPanel = new CentralPanel(userName);
         this.add(centralPanel, BorderLayout.CENTER);
 
-        Library = new LibraryPart();
-        Library.setUsername(getUserName());
+        Library = new LibraryPart(getUserName());
+//        Library.setUsername(getUserName());
         Library.setShowPanel(centralPanel.getShowPanel());
         this.add(new JScrollPane(Library), BorderLayout.WEST);
 

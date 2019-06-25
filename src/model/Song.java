@@ -20,6 +20,8 @@ public class Song implements Serializable {
     private long duration;
     private long lastTimePlayed;
     private byte[] artwork;
+    private boolean isFavourite;
+    private boolean isSharable;
     transient Mp3File mp3file;
 
 
@@ -41,7 +43,17 @@ public class Song implements Serializable {
         setArtwork();
         setTitle();
         setDuration();
+        isFavourite = false;
+        isSharable = false;
     }
+
+    public boolean isSharable() { return isSharable; }
+
+    public void setSharable(boolean sharable) { isSharable = sharable; }
+
+    public void setFavourite(boolean favourite) { isFavourite = favourite; }
+
+    public boolean isFavourite() { return isFavourite; }
 
     public void setLastTimePlayed(){
         lastTimePlayed = Instant.now().toEpochMilli();

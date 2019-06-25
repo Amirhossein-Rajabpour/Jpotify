@@ -1,5 +1,6 @@
 package view;
 
+import model.Playlist;
 import model.Song;
 
 import javax.swing.*;
@@ -20,12 +21,14 @@ public class NewPlaylist extends JFrame {
     private JCheckBox[] songCheckbox;
     private int arrayListSize;
     private String name;
-    private HashMap<String, ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
+    private Playlist playlist;
+    private boolean isDone;
 
 
     public NewPlaylist(ArrayList<Song> songs) {
 
         super();
+        isDone = false;
 
         foreground = new Color(195, 195, 195);
         background = new Color(59, 63, 63);
@@ -54,7 +57,7 @@ public class NewPlaylist extends JFrame {
 
 
         nameTextField = new JTextField();
-        nameTextField.setText("Playlist name");
+//        nameTextField.setText("Playlist name");
         nameTextField.setForeground(foreground);
         nameTextField.addFocusListener(new FocusListener() {
             @Override
@@ -65,7 +68,7 @@ public class NewPlaylist extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-                nameTextField.setText("Playlist name");
+//                nameTextField.setText("Playlist name");
                 nameTextField.setForeground(foreground);
             }
         });
@@ -97,18 +100,19 @@ public class NewPlaylist extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 name = nameTextField.getText();
-                System.out.println(name);
 
-                Playlist = new HashMap<String, ArrayList<Song>>();
-                ArrayList<Song> playlistSongs = new ArrayList<>();
+                playlist = new Playlist(name);
 
                 for (int i = 0; i < arrayListSize; i++) {
 
                     if (songCheckbox[i].isSelected()) {
-                        playlistSongs.add(songs.get(i));
-                        Playlist.put(name, playlistSongs);
+                        playlist.addSong(songs.get(i));
                     }
                 }
+                isDone = true;
+                setVisible(false);
+                System.out.println(isDone);
+                System.out.println(this);
             }
         });
 
@@ -121,4 +125,8 @@ public class NewPlaylist extends JFrame {
 //        pack();
         setVisible(true);
     }
+    public Playlist getPlaylist(){
+        return this.playlist;
+    }
+    public boolean isDone(){ return isDone;}
 }

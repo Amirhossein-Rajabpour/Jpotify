@@ -9,6 +9,7 @@ public class BottomPanel extends JPanel {
     private PlayerPart playerPart;
     private ProgressBarPanel progressBarPanel;
     private SongInfoPanel songInfoPanel;
+    private VolumeSliderPanel volumeSliderPanel;
 
     public BottomPanel() {
         super();
@@ -27,7 +28,8 @@ public class BottomPanel extends JPanel {
         songInfoPanel = new SongInfoPanel();
         this.add(songInfoPanel,BorderLayout.WEST);
 
-
+        volumeSliderPanel = new VolumeSliderPanel();
+        this.add(volumeSliderPanel,BorderLayout.EAST);
     }
 
 
