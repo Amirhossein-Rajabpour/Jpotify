@@ -22,11 +22,11 @@ public class BottomPanel extends JPanel {
 
         progressBarPanel = new ProgressBarPanel();
         this.add(progressBarPanel,BorderLayout.SOUTH);
+        playerPart.setProgressBarPanel(progressBarPanel);
 
         songInfoPanel = new SongInfoPanel();
         this.add(songInfoPanel,BorderLayout.WEST);
 
-        playerPart.setProgressBarPanel(progressBarPanel.getProgressBar());
 
     }
 
