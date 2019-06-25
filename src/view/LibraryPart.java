@@ -181,9 +181,9 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
 
                 songsBtn.setBackground(getBackground());
-                for (Song song : songs) {
-                    System.out.println(song.getTitle());
-                }
+//                for (Song song : songs) {
+//                    System.out.println(song.getTitle());
+//                }
                 showPanel.removeAll();
                 showPanel.setSongs(songs);
                 showPanel.revalidate();
@@ -392,13 +392,10 @@ public class LibraryPart extends JPanel {
                     album.addSong(song);
                 }
             }
-
-
         } else {
             album = new Album(song.getAlbumName());
             albums.add(album);
             album.addSong(song);
-
         }
 
     }
