@@ -176,11 +176,15 @@ public class LibraryPart extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+
                 songsBtn.setBackground(getBackground());
                 for (Song song : songs) {
                     System.out.println(song.getTitle());
                 }
                 showPanel.setSongs(songs);
+                showPanel.revalidate();
+
+
             }
 
             @Override
@@ -217,6 +221,7 @@ public class LibraryPart extends JPanel {
                 albumsBtn.setBackground(getBackground());
                 System.out.println(Album.keySet());
                 showPanel.setAlbums(Album);
+                showPanel.revalidate();
             }
 
             @Override

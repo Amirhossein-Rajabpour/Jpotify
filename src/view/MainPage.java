@@ -46,7 +46,18 @@ public class MainPage extends JFrame {
         SwingUtilities.updateComponentTreeUI(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.revalidate();
         this.setVisible(true);
+//
+//        public static void refresh(Library.getShowPanel()){
+//
+//            if( centralPanel.getShowPanel()!= null){
+//                centralPanel.getShowPanel().setVisible(false);
+//                this.remove(centralPanel.getShowPanel());
+//            }
+//            centralPanel.setShowPanel(Library.);
+//
+//        }
 
 
     }
@@ -56,4 +67,6 @@ public class MainPage extends JFrame {
         remove(centralPanel.getShowPanel());
         centralPanel.setShowPanel(showPanel);
     }
+
+
 }
