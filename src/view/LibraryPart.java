@@ -54,7 +54,7 @@ public class LibraryPart extends JPanel {
     ArrayList<Song> sharedSongs = new ArrayList<>();
 
 
-    public LibraryPart() throws IOException {
+    public LibraryPart(String user) throws IOException {
 
         super();
         setSize(400, 400);
@@ -63,7 +63,7 @@ public class LibraryPart extends JPanel {
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
 
-//        username = user;
+        username = user;
 //        System.out.println(username);
 //        if(new File(username + "/songs").exists()){
 //            System.out.println("zart");
@@ -283,6 +283,7 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 newPlaylistBtn.setBackground(getBackground());
                 newPlaylist = new NewPlaylist(songs);
+
                 if(newPlaylist.isDone()){
                     playlists.add(newPlaylist.getPlaylist());
                     System.out.println("ff"+playlists.isEmpty());
@@ -290,6 +291,7 @@ public class LibraryPart extends JPanel {
                     System.out.println(playlists.get(0).getPlaylistName());
                 }
                 else System.out.println("not entered");
+                System.out.println(newPlaylist);
 
             }
 
@@ -444,7 +446,6 @@ public class LibraryPart extends JPanel {
     public void saveSong(String path) {
 
         Song song = new Song(path);
-//        new File( username + "/songs/" + song.getTitle()).mkdir();
         FileOutputStream f = null;
         try {
             f = new FileOutputStream(new File( username +"/songs/"+ song.getTitle()));

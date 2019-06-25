@@ -30,8 +30,8 @@ public class MainPage extends JFrame {
         centralPanel = new CentralPanel(userName);
         this.add(centralPanel, BorderLayout.CENTER);
 
-        Library = new LibraryPart();
-        Library.setUsername(getUserName());
+        Library = new LibraryPart(getUserName());
+//        Library.setUsername(getUserName());
         Library.setShowPanel(centralPanel.getShowPanel());
         this.add(new JScrollPane(Library), BorderLayout.WEST);
 

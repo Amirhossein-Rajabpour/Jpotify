@@ -112,6 +112,7 @@ public class NewPlaylist extends JFrame {
                 isDone = true;
                 setVisible(false);
                 System.out.println(isDone);
+                System.out.println(this);
             }
         });
 
