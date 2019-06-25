@@ -65,10 +65,10 @@ public class ShowPanel extends JPanel {
             albumButtons[i].setSize(100,50);
 
 
-            ImageIcon imgIcon = new ImageIcon(Albums.get(i).get(0).getArtwork()); // problem here
-            Image img = imgIcon.getImage().getScaledInstance(40,40,i);
-            Icon icon = new ImageIcon(img);
-            albumButtons[i].setIcon(icon);
+//            ImageIcon imgIcon = new ImageIcon(Albums.get(i).get(0).getArtwork()); // problem here
+//            Image img = imgIcon.getImage().getScaledInstance(40,40,i);
+//            Icon icon = new ImageIcon(img);
+//            albumButtons[i].setIcon(icon);
 
             albumButtons[i].setText(Albums.keySet().toArray()[i].toString());
 

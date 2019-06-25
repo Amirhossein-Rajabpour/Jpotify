@@ -41,8 +41,8 @@ public class PlayerPart extends JPanel {
         setSize(700, 400);
         setBackground(new Color(40, 40, 40));
         foreground = new Color(179, 179, 179);
-        Song song1 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
-        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
+        Song song1 = new Song("C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3");
+        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
         songs.add(song1);
         songs.add(song2);
         currentSong = 0;
