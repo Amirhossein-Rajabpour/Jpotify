@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainPage extends JFrame {
 
@@ -14,7 +15,7 @@ public class MainPage extends JFrame {
     private ShowPanel showPanel;
     private static final int WIDTH = 780, HEIGHT = 475;
 
-    public MainPage(String userName, String friendsId) {
+    public MainPage(String userName, String friendsId) throws IOException {
 
         super();
         this.userName = userName;

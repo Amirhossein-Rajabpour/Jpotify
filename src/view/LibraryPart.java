@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,9 +47,10 @@ public class LibraryPart extends JPanel {
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
+    ArrayList<Song> sharedSongs = new ArrayList<>();
 
 
-    public LibraryPart() {
+    public LibraryPart() throws IOException {
 
         super();
         setSize(400, 400);
@@ -55,6 +58,15 @@ public class LibraryPart extends JPanel {
         setLayout(new GridLayout(15, 1));
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
+
+//        username = user;
+//        System.out.println(username);
+//        if(new File(username + "/songs").exists()){
+//            System.out.println("zart");
+//            songs = loadSongs(username);
+//        }
+//        else System.out.println("not entered");
+
 
         options = new JLabel("      ● ● ●");
         options.setForeground(Color.WHITE);
@@ -300,6 +312,13 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 sharedPlaylistBtn.setBackground(getBackground());
+                for(Song song: songs){
+                    if(song.isSharable() == true)
+                    {
+                        sharedSongs.add(song);
+                    }
+                }
+                showPanel.setSongs(sharedSongs);
             }
 
             @Override
@@ -334,6 +353,12 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 favouriteBtn.setBackground(getBackground());
+                for(Song song: songs){
+                    if(song.isFavourite() == true)
+                    {
+                        favouriteSongs.add(song);
+                    }
+                }
                 showPanel.setSongs(favouriteSongs);
             }
 
@@ -406,9 +431,10 @@ public class LibraryPart extends JPanel {
     public void saveSong(String path) {
 
         Song song = new Song(path);
+//        new File( username + "/songs/" + song.getTitle()).mkdir();
         FileOutputStream f = null;
         try {
-            f = new FileOutputStream(new File( username +"/" + song.getTitle()));
+            f = new FileOutputStream(new File( username +"/songs/"+ song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(song);
@@ -436,37 +462,37 @@ public class LibraryPart extends JPanel {
     }
 
     public void setUsername(String username) {
+        username = new String();
         this.username = username;
     }
 
-    public ArrayList<Song> loadSongs(String username){
+    public ArrayList<Song> loadSongs(String username) throws IOException {
 
-        ArrayList<Song> loadedSongs = new ArrayList<Song>();
-        boolean cont = true;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("outputFile"));
-            while(cont){
-                Object obj=null;
-                try {
-                    obj = ois.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+            ArrayList<Song> loadedSongs = new ArrayList<Song>();
+            boolean cont = true;
+
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(username + "/songs" ));
+                while(cont){
+                    Object obj=null;
+                    try {
+                        obj = ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if(obj != null)
+                        loadedSongs.add((Song) obj);
+                    else
+                        cont = false;
                 }
-                if(obj != null)
-                    loadedSongs.add((Song) obj);
-                else
-                    cont = false;
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return loadedSongs;
-
+            return loadedSongs;
     }
 
     @Override
