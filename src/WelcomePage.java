@@ -180,7 +180,6 @@ public class WelcomePage extends JFrame {
     }
 
     public void doClickAction() throws IOException {
-
         if(new File(userTextField.getText()).exists())
             System.out.println("shit repetetive id");
         else{
@@ -189,6 +188,8 @@ public class WelcomePage extends JFrame {
             System.out.println("new id");
         }
         MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
+
+
 
         this.setVisible(false);
     }

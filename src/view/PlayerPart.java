@@ -45,8 +45,11 @@ public class PlayerPart extends JPanel {
         setBackground(new Color(40, 40, 40));
         foreground = new Color(179, 179, 179);
         Song song1 = new Song("/Users/apple/Desktop/In the night.mpga");
-        Song song2 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
-        Song song3 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
+        //C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3
+        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
+        //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
+        Song song3 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
+        //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
         songs.add(song1);
         songs.add(song2);
         songs.add(song3);
@@ -452,7 +455,7 @@ public class PlayerPart extends JPanel {
         this.progressBarPanel = progressBarPanel;
     }
 
-    public void setSongInfoPanel(SongInfoPanel songInfoPanel){
+    public void setSongInfoPanel(SongInfoPanel songInfoPanel) {
         this.songInfoPanel = songInfoPanel;
     }
 
