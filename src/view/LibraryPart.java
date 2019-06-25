@@ -22,6 +22,9 @@ import java.util.HashMap;
 public class LibraryPart extends JPanel {
 
     private JLabel options;
+    private JLabel icon;
+    private JLabel Jpotify;
+    private static final String JPOTIFY_LABEL = "Jpotify";
     private JLabel libraryLabel;
     private JTextField fileChooserBtn;
     private JTextField songsBtn;
@@ -46,10 +49,9 @@ public class LibraryPart extends JPanel {
         super();
         setSize(400, 400);
         this.setBackground(new Color(24, 24, 24));
-        setLayout(new GridLayout(20, 1));
+        setLayout(new GridLayout(15, 1));
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
-
 
         options = new JLabel("      ● ● ●");
         options.setForeground(Color.WHITE);
@@ -82,9 +84,27 @@ public class LibraryPart extends JPanel {
         });
         this.add(options);
 
+//        add(Box.createRigidArea(new Dimension(0, 5)));
 
-        libraryLabel = new JLabel("      LIBRARY");
-        libraryLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 8));
+        icon = new JLabel();
+        icon.setHorizontalAlignment(SwingConstants.CENTER);
+        ImageIcon JpotifyIcon = new ImageIcon("/Users/apple/Downloads/iconfinder_spotify_1217164.png");
+        Image image = JpotifyIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        JpotifyIcon = new ImageIcon(newimg);
+        icon.setIcon(JpotifyIcon);
+        add(icon);
+
+        Jpotify = new JLabel(JPOTIFY_LABEL);
+        Jpotify.setFont(new Font("Arial", Font.BOLD, 10));
+        Jpotify.setForeground(foreground);
+        Jpotify.setBackground(this.getBackground());
+        Jpotify.setHorizontalAlignment(SwingConstants.CENTER);
+        add(Jpotify);
+
+
+        libraryLabel = new JLabel("    LIBRARY");
+        libraryLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 9));
         libraryLabel.setForeground(foreground);
         libraryLabel.setBackground(this.getBackground());
         add(libraryLabel);
@@ -94,8 +114,8 @@ public class LibraryPart extends JPanel {
 /**
  * This button is for adding a new song to the program
  */
-        fileChooserBtn = new JTextField("     Add To Library");
-        fileChooserBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        fileChooserBtn = new JTextField("   Add To Library");
+        fileChooserBtn.setFont(new Font("Arial", Font.BOLD, 9));
         fileChooserBtn.setEditable(false);
         fileChooserBtn.setBackground(this.getBackground());
         fileChooserBtn.setForeground(foreground);
@@ -139,8 +159,8 @@ public class LibraryPart extends JPanel {
 /**
  * This button shows all existed songs according to last time played
  */
-        songsBtn = new JTextField("     Songs");
-        songsBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        songsBtn = new JTextField("   Songs");
+        songsBtn.setFont(new Font("Arial", Font.BOLD, 9));
         songsBtn.setEditable(false);
         songsBtn.setBackground(this.getBackground());
         songsBtn.setForeground(foreground);
@@ -177,8 +197,8 @@ public class LibraryPart extends JPanel {
 /**
  * This button shows all albums according to last time played
  */
-        albumsBtn = new JTextField("     Albums");
-        albumsBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        albumsBtn = new JTextField("   Albums");
+        albumsBtn.setFont(new Font("Arial", Font.BOLD, 9));
         albumsBtn.setBackground(this.getBackground());
         albumsBtn.setForeground(foreground);
         albumsBtn.setEditable(false);
@@ -211,8 +231,8 @@ public class LibraryPart extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0, 5)));
 
-        playlistLabel = new JLabel("      PLAYLISTS");
-        playlistLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 8));
+        playlistLabel = new JLabel("    PLAYLISTS");
+        playlistLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 9));
         playlistLabel.setForeground(foreground);
         playlistLabel.setBackground(this.getBackground());
         add(playlistLabel);
@@ -221,8 +241,8 @@ public class LibraryPart extends JPanel {
 /**
  * This button creates and adds a new playlist
  */
-        newPlaylistBtn = new JTextField("     New Playlis");
-        newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        newPlaylistBtn = new JTextField("   New Playlis");
+        newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
         newPlaylistBtn.setEditable(false);
         newPlaylistBtn.setBackground(this.getBackground());
         newPlaylistBtn.setForeground(foreground);
@@ -255,8 +275,8 @@ public class LibraryPart extends JPanel {
 /**
  * This buttons shows user's shared playlist on network
  */
-        sharedPlaylistBtn = new JTextField("     Shared Playlist");
-        sharedPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        sharedPlaylistBtn = new JTextField("   Shared Playlist");
+        sharedPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
         sharedPlaylistBtn.setEditable(false);
         sharedPlaylistBtn.setBackground(this.getBackground());
         sharedPlaylistBtn.setForeground(foreground);
@@ -289,8 +309,8 @@ public class LibraryPart extends JPanel {
 /**
  * Every user has some favourite songs which is shown by this button
  */
-        favouriteBtn = new JTextField("     Favourites");
-        favouriteBtn.setFont(new Font("Arial", Font.BOLD, 8));
+        favouriteBtn = new JTextField("   Favourites");
+        favouriteBtn.setFont(new Font("Arial", Font.BOLD, 9));
         favouriteBtn.setEditable(false);
         favouriteBtn.setBackground(this.getBackground());
         favouriteBtn.setForeground(foreground);
