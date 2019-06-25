@@ -508,6 +508,22 @@ public class LibraryPart extends JPanel {
             return loadedSongs;
     }
 
+    /**
+     * this method takes an arraylis and an index and put the index song at the beggining of the arraylist and shift other parts
+     * @param songs
+     * @param index
+     * @return
+     */
+    public ArrayList<Song> sortSongs(ArrayList<Song> songs, int index){
+
+        Song tmp = new Song(songs.get(index).getPath());
+        for(int i = index; i > 1 ; i--){
+            songs.set(i,songs.get(i-1));
+        }
+        songs.set(0,tmp);
+        return songs;
+    }
+
     @Override
     public String toString() {
         return "LibraryPart{" +

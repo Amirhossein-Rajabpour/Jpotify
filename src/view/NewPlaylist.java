@@ -22,12 +22,13 @@ public class NewPlaylist extends JFrame {
     private int arrayListSize;
     private String name;
     private Playlist playlist;
-    private boolean isDone = false;
+    private boolean isDone;
 
 
     public NewPlaylist(ArrayList<Song> songs) {
 
         super();
+        isDone = false;
 
         foreground = new Color(195, 195, 195);
         background = new Color(59, 63, 63);
@@ -110,6 +111,7 @@ public class NewPlaylist extends JFrame {
                 }
                 isDone = true;
                 setVisible(false);
+                System.out.println(isDone);
             }
         });
 
