@@ -30,11 +30,9 @@ public class MainPage extends JFrame {
         this.add(centralPanel, BorderLayout.CENTER);
 
         Library = new LibraryPart();
+        Library.setUsername(getUserName());
         Library.setShowPanel(centralPanel.getShowPanel());
         this.add(new JScrollPane(Library), BorderLayout.WEST);
-
-//        centralPanel.setShowPanel(Library.getShowPanel());
-
 
 //        friendActivity = new FriendActivity();
 //        this.add(friendActivity,BorderLayout.EAST);
@@ -48,25 +46,10 @@ public class MainPage extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.revalidate();
         this.setVisible(true);
-//
-//        public static void refresh(Library.getShowPanel()){
-//
-//            if( centralPanel.getShowPanel()!= null){
-//                centralPanel.getShowPanel().setVisible(false);
-//                this.remove(centralPanel.getShowPanel());
-//            }
-//            centralPanel.setShowPanel(Library.);
-//
-//        }
-
 
     }
 
-    public void updateShowPanel(ShowPanel showPanel){
-
-        remove(centralPanel.getShowPanel());
-        centralPanel.setShowPanel(showPanel);
+    public String getUserName() {
+        return userName;
     }
-
-
 }

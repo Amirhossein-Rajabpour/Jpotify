@@ -1,6 +1,7 @@
 package view;
 
 import model.Album;
+import model.Playlist;
 import model.Song;
 import javax.swing.*;
 import java.awt.*;
@@ -78,6 +79,5 @@ public class ShowPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
-
     }
 }

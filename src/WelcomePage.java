@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 public class WelcomePage extends JFrame {
 
@@ -176,7 +177,12 @@ public class WelcomePage extends JFrame {
 
     public void doClickAction() {
         MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
-//        SwingUtilities.updateComponentTreeUI(mainPage);
+
+        if(new File(userTextField.getText()).exists())
+            System.out.println("shit");
+        else
+        new File(userTextField.getText()).mkdir();
+
         this.setVisible(false);
     }
 }

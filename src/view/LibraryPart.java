@@ -39,12 +39,12 @@ public class LibraryPart extends JPanel {
     private Color foreground;
     private Color pressedBackground;
     private Album album;
+    private String username;
 
 
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
-    HashMap<String, ArrayList<Song>> Playlist = new HashMap<>(); // this HashMap is for Playlist
 
 
     public LibraryPart() {
@@ -187,8 +187,6 @@ public class LibraryPart extends JPanel {
                 showPanel.removeAll();
                 showPanel.setSongs(songs);
                 showPanel.revalidate();
-
-
             }
 
             @Override
@@ -410,7 +408,7 @@ public class LibraryPart extends JPanel {
         Song song = new Song(path);
         FileOutputStream f = null;
         try {
-            f = new FileOutputStream(new File(song.getTitle() + ".mp3"));
+            f = new FileOutputStream(new File( username +"/" + song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(song);
@@ -432,14 +430,44 @@ public class LibraryPart extends JPanel {
      *
      * @return
      */
-    public ShowPanel getShowPanel() {
-        return showPanel;
-    }
 
     public void setShowPanel(ShowPanel showPanel) {
         this.showPanel = showPanel;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public ArrayList<Song> loadSongs(String username){
+
+        ArrayList<Song> loadedSongs = new ArrayList<Song>();
+        boolean cont = true;
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("outputFile"));
+            while(cont){
+                Object obj=null;
+                try {
+                    obj = ois.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if(obj != null)
+                    loadedSongs.add((Song) obj);
+                else
+                    cont = false;
+            }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return loadedSongs;
+
+    }
 
     @Override
     public String toString() {
