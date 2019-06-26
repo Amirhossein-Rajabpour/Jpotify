@@ -1,10 +1,10 @@
 package view;
 
 import controller.PlayPartController;
+import controller.SoundController;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import model.Song;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -34,6 +34,7 @@ public class PlayerPart extends JPanel {
     private boolean repeatAllIsOn;
     private boolean repeatOneIsOn;
     private SongInfoPanel songInfoPanel;
+    private SoundController soundController;
 
 
     public PlayerPart() {
@@ -41,6 +42,7 @@ public class PlayerPart extends JPanel {
         // next and previous button should work with that playlist ArrayList
 
         super();
+        soundController = new SoundController();
         setSize(700, 400);
         setBackground(new Color(40, 40, 40));
         foreground = new Color(179, 179, 179);
@@ -243,6 +245,7 @@ public class PlayerPart extends JPanel {
                         try {
 
                             player.play();
+//                            soundController.setGain();
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
