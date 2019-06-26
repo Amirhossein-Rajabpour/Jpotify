@@ -69,6 +69,7 @@ public class LibraryPart extends JPanel {
         if(new File(username + "/songs/").list().length > 0){
             System.out.println("existed");
             songs = loadSongs(username);
+            System.out.println(songs.get(0).getAlbumName() + "zartzart");
         }
         else System.out.println("not entered");
 
@@ -502,6 +503,7 @@ public class LibraryPart extends JPanel {
                                 System.out.println("1");
                                 obj = ois.readObject();
                                 loadedSongs.add((Song) obj);
+                                addToAlbum((Song) obj);
 //                            }
 //                            else cont = false;
 
