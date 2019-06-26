@@ -57,9 +57,10 @@ public class LibraryPart extends JPanel {
     public LibraryPart(String user) throws IOException {
 
         super();
+        this.setPreferredSize(new Dimension(110,700));
         setSize(400, 400);
         this.setBackground(new Color(24, 24, 24));
-        setLayout(new GridLayout(15, 1));
+        setLayout(new GridLayout(29, 1));
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
 
@@ -126,7 +127,7 @@ public class LibraryPart extends JPanel {
         add(jSeparator);
 
 
-        libraryLabel = new JLabel("    LIBRARY");
+        libraryLabel = new JLabel("    LIBRARY      ");
         libraryLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 9));
         libraryLabel.setForeground(foreground);
         libraryLabel.setBackground(this.getBackground());
