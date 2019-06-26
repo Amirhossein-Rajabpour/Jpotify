@@ -3,6 +3,7 @@ package view.Center;
 import model.Album;
 import model.Playlist;
 import model.Song;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -24,26 +25,31 @@ public class ShowPanel extends JPanel {
     public ShowPanel() {
 
         super();
-        background = new Color(33,33,33);
+        background = new Color(33, 33, 33);
         this.setLayout(new FlowLayout());
         this.setBackground(background);
 
     }
 
-    public void setSongs(ArrayList<Song> songs){
+    public void setSongs(ArrayList<Song> songs) {
 
         this.songs = songs;
         songButtons = new JButton[songs.size()];
 
-        for(int i = 0; i < songs.size() ; i++){
+        for (int i = 0; i < songs.size(); i++) {
 
 //            songButtons[i].addActionListener((ActionListener) this);
             songButtons[i] = new JButton();
-            songButtons[i].setSize(100,50);
+            songButtons[i].setSize(100, 50);
 
 
-            ImageIcon imgIcon = new ImageIcon(songs.get(i).getArtwork());
-            Image img = imgIcon.getImage().getScaledInstance(40,40,i);
+            ImageIcon imgIcon;
+            if (songs.get(i).getArtwork() != null) {
+                imgIcon = new ImageIcon(songs.get(i).getArtwork());
+            } else {
+                imgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+            }
+            Image img = imgIcon.getImage().getScaledInstance(40, 40, i);
             Icon icon = new ImageIcon(img);
             songButtons[i].setIcon(icon);
 
@@ -55,20 +61,25 @@ public class ShowPanel extends JPanel {
         setVisible(true);
     }
 
-    public void setAlbums(ArrayList<Album> albums){
+    public void setAlbums(ArrayList<Album> albums) {
 
         this.albums = albums;
         albumButtons = new JButton[albums.size()];
 
-        for(int i = 0; i < albums.size() ; i++){
+        for (int i = 0; i < albums.size(); i++) {
 
 //            songButtons[i].addActionListener((ActionListener) this);
             albumButtons[i] = new JButton();
-            albumButtons[i].setSize(100,50);
+            albumButtons[i].setSize(100, 50);
 
 
-            ImageIcon imgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork()); // problem here
-            Image img = imgIcon.getImage().getScaledInstance(40,40,i);
+            ImageIcon albumImgIcon;
+            if (songs.get(i).getArtwork() != null) {
+                albumImgIcon = new ImageIcon(songs.get(i).getArtwork());
+            } else {
+                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+            }
+            Image img = albumImgIcon.getImage().getScaledInstance(40, 40, i);
             Icon icon = new ImageIcon(img);
             albumButtons[i].setIcon(icon);
 
