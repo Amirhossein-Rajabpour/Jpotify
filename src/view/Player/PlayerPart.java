@@ -1,8 +1,7 @@
-package view;
+package view.Player;
 
 import controller.PlayPartController;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 import model.Song;
 
 import javax.swing.*;
@@ -44,16 +43,16 @@ public class PlayerPart extends JPanel {
         setSize(700, 400);
         setBackground(new Color(40, 40, 40));
         foreground = new Color(179, 179, 179);
-//        Song song1 = new Song("/Users/apple/Desktop/In the night.mpga");
-        Song song1 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
+        Song song1 = new Song("/Users/apple/Desktop/In the night.mpga");
+//        Song song1 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
 
         //C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3
-//        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
-        Song song2 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
+        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
+//        Song song2 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
 
         //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
-//        Song song3 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
-        Song song3 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
+        Song song3 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
+//        Song song3 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
 
         //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
         songs.add(song1);
@@ -158,6 +157,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -169,6 +169,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -184,6 +185,7 @@ public class PlayerPart extends JPanel {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
                                 player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
                                 e1.printStackTrace();
                             } catch (JavaLayerException e1) {
@@ -298,6 +300,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -309,6 +312,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -324,6 +328,7 @@ public class PlayerPart extends JPanel {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
                                 player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
                                 e1.printStackTrace();
                             } catch (JavaLayerException e1) {
@@ -455,6 +460,7 @@ public class PlayerPart extends JPanel {
         }
         Collections.shuffle(shuffleSongs);
         this.progressBarPanel.refresh((int) this.playingSongs.get(currentSong).getDuration());
+        songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
     }
 
     public void setProgressBarPanel(ProgressBarPanel progressBarPanel) {

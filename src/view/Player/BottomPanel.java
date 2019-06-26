@@ -1,4 +1,4 @@
-package view;
+package view.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +27,7 @@ public class BottomPanel extends JPanel {
 
         songInfoPanel = new SongInfoPanel();
         this.add(songInfoPanel,BorderLayout.WEST);
+        playerPart.setSongInfoPanel(songInfoPanel);
 
         volumeSliderPanel = new VolumeSliderPanel();
         this.add(volumeSliderPanel,BorderLayout.EAST);

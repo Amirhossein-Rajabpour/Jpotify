@@ -1,5 +1,7 @@
 package view;
 
+import view.Player.BottomPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;

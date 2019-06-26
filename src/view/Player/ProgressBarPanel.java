@@ -1,4 +1,4 @@
-package view;
+package view.Player;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
