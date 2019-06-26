@@ -37,5 +37,6 @@ public class ToolBar extends JPanel {
 //        userNameTextField.setPreferredSize(new Dimension(30,10));
 //        this.add(userNameTextField);
         this.add(userNameTextField, BorderLayout.EAST);
+        revalidate();
     }
 }

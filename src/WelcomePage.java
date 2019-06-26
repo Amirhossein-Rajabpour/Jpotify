@@ -118,8 +118,8 @@ public class WelcomePage extends JFrame {
         userLabel.setForeground(Color.WHITE);
         south.add(userLabel);
         userTextField = new JTextField();
-        userTextField.setForeground(foreground);
-        userTextField.setBackground(new Color(255, 255, 255, 14));
+//        userTextField.setForeground(foreground);
+//        userTextField.setBackground(new Color(255, 255, 255, 14));
         south.add(userTextField);
 
         south.add(Box.createRigidArea(new Dimension(0, 15)));
@@ -129,8 +129,8 @@ public class WelcomePage extends JFrame {
         idLabel.setForeground(Color.WHITE);
         south.add(idLabel);
         idTextField = new JTextField();
-        idTextField.setForeground(foreground);
-        idTextField.setBackground(new Color(255, 255, 255, 14));
+//        idTextField.setForeground(foreground);
+//        idTextField.setBackground(new Color(255, 255, 255, 14));
         south.add(idTextField);
 
         south.add(Box.createRigidArea(new Dimension(0, 25)));

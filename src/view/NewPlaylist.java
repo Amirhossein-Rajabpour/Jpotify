@@ -25,7 +25,7 @@ public class NewPlaylist extends JFrame {
     private boolean isDone;
 
 
-    public NewPlaylist(ArrayList<Song> songs) {
+    public NewPlaylist(ArrayList<Song> songs, LibraryPart libraryPart) {
 
         super();
         isDone = false;
@@ -109,10 +109,8 @@ public class NewPlaylist extends JFrame {
                         playlist.addSong(songs.get(i));
                     }
                 }
-                isDone = true;
+                libraryPart.addPlaylist(playlist);
                 setVisible(false);
-                System.out.println(isDone);
-                System.out.println(this);
             }
         });
 

@@ -1,16 +1,11 @@
 package view;
 
-import com.mpatric.mp3agic.*;
 import model.Album;
 import model.Playlist;
 import model.Song;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
@@ -18,8 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.stream.Stream;
 
 /**
@@ -285,17 +278,8 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 newPlaylistBtn.setBackground(getBackground());
-                newPlaylist = new NewPlaylist(songs);
 
-                if(newPlaylist.isDone()){
-                    playlists.add(newPlaylist.getPlaylist());
-                    System.out.println("ff"+playlists.isEmpty());
-                    System.out.println(playlists.size());
-                    System.out.println(playlists.get(0).getPlaylistName());
-                }
-                else System.out.println("not entered");
-                System.out.println(newPlaylist);
-
+                newPlaylist = new NewPlaylist(songs, getLibrarypartItself());
             }
 
             @Override
@@ -337,6 +321,7 @@ public class LibraryPart extends JPanel {
                     }
                 }
                 showPanel.setSongs(sharedSongs);
+
             }
 
             @Override
@@ -538,6 +523,13 @@ public class LibraryPart extends JPanel {
         }
         songs.set(0,tmp);
         return songs;
+    }
+
+    public void addPlaylist(Playlist playlist){
+        playlists.add(playlist);
+    }
+    LibraryPart getLibrarypartItself(){
+        return this;
     }
 
     @Override
