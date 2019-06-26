@@ -1,5 +1,11 @@
 package view;
 
+import view.Center.CentralPanel;
+import view.Center.ShowPanel;
+import view.Friends.FriendActivity;
+import view.Library.LibraryPart;
+import view.Player.BottomPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;

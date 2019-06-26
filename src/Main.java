@@ -1,7 +1,4 @@
-import model.Song;
-import view.NewPlaylist;
-
-import java.util.ArrayList;
+import view.WelcomePage;
 
 public class Main {
 

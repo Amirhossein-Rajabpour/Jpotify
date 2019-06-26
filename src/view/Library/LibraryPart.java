@@ -1,8 +1,10 @@
-package view;
+package view.Library;
 
 import model.Album;
 import model.Playlist;
 import model.Song;
+import view.Center.ShowPanel;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -25,6 +27,7 @@ public class LibraryPart extends JPanel {
     private JLabel icon;
     private JLabel Jpotify;
     private static final String JPOTIFY_LABEL = "Jpotify";
+    private JSeparator jSeparator;
     private JLabel libraryLabel;
     private JTextField fileChooserBtn;
     private JTextField songsBtn;
@@ -102,7 +105,7 @@ public class LibraryPart extends JPanel {
 
         icon = new JLabel();
         icon.setHorizontalAlignment(SwingConstants.CENTER);
-        ImageIcon JpotifyIcon = new ImageIcon("/Users/apple/Downloads/iconfinder_spotify_1217164.png");
+        ImageIcon JpotifyIcon = new ImageIcon("/Users/apple/Desktop/JpotifyIcon.png");
         Image image = JpotifyIcon.getImage(); // transform it
         Image newimg = image.getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         JpotifyIcon = new ImageIcon(newimg);
@@ -115,6 +118,11 @@ public class LibraryPart extends JPanel {
         Jpotify.setBackground(this.getBackground());
         Jpotify.setHorizontalAlignment(SwingConstants.CENTER);
         add(Jpotify);
+
+
+        jSeparator = new JSeparator(SwingConstants.HORIZONTAL);
+        jSeparator.setForeground(new Color(39,39,39));
+        add(jSeparator);
 
 
         libraryLabel = new JLabel("    LIBRARY");

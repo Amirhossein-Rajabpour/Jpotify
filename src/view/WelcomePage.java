@@ -1,3 +1,5 @@
+package view;
+
 import view.MainPage;
 
 import javax.swing.*;
@@ -71,7 +73,7 @@ public class WelcomePage extends JFrame {
 
 
         /**
-         * center panel places at the center of the WelcomePage
+         * center panel places at the center of the view.WelcomePage
          * contains msg1 & msg2
          */
         JPanel center = new JPanel();
@@ -106,7 +108,7 @@ public class WelcomePage extends JFrame {
         Font font = new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14);
 
         /**
-         * south panel places at the bottom of the WelcomePage
+         * south panel places at the bottom of the view.WelcomePage
          * contains userLabel & userTextField & idLabel & idTextField & btn
          */
         JPanel south = new JPanel();

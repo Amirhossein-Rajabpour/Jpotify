@@ -1,4 +1,4 @@
-package view;
+package view.Friends;
 
 import javax.swing.*;
 import java.awt.*;
