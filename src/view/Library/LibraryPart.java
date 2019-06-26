@@ -27,6 +27,7 @@ public class LibraryPart extends JPanel {
     private JLabel icon;
     private JLabel Jpotify;
     private static final String JPOTIFY_LABEL = "Jpotify";
+    private JSeparator jSeparator;
     private JLabel libraryLabel;
     private JTextField fileChooserBtn;
     private JTextField songsBtn;
@@ -117,6 +118,10 @@ public class LibraryPart extends JPanel {
         Jpotify.setBackground(this.getBackground());
         Jpotify.setHorizontalAlignment(SwingConstants.CENTER);
         add(Jpotify);
+
+
+        jSeparator = new JSeparator(SwingConstants.HORIZONTAL);
+        add(jSeparator);
 
 
         libraryLabel = new JLabel("    LIBRARY");
