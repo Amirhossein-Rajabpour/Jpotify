@@ -45,6 +45,7 @@ public class LibraryPart extends JPanel {
     private Album album;
     private String username;
     private NewPlaylist newPlaylist;
+    private RemoveSong removeSong;
 
 
     ArrayList<Song> songs = new ArrayList<>();
@@ -202,10 +203,13 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
 
                 songsBtn.setBackground(getBackground());
-//                for (Song song : songs) {
-//                    System.out.println(song.getTitle());
-//                }
+
                 showPanel.removeAll();
+//                try {
+//                    refreshSongs();
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                }
                 showPanel.setSongs(songs);
                 showPanel.revalidate();
             }
@@ -277,6 +281,9 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 EditBtn.setBackground(getBackground());
+
+                removeSong = new RemoveSong(songs,getLibrarypartItself());
+
             }
 
             @Override
@@ -428,10 +435,13 @@ public class LibraryPart extends JPanel {
     void addSong(String path) {
 
         song = new Song(path);
-        songs.add(song);
-        System.out.println(song.getTitle());
-        System.out.println(song.getAlbumName());
-        addToAlbum(song);
+        if(!songs.contains(song)){
+            songs.add(song);
+            System.out.println(song.getTitle());
+            System.out.println(song.getAlbumName());
+            addToAlbum(song);
+        }
+
     }
 
     /**
@@ -523,14 +533,11 @@ public class LibraryPart extends JPanel {
                         FileInputStream fis = new FileInputStream(String.valueOf(filePath));
                         ObjectInputStream ois = new ObjectInputStream(fis);
                         Object obj = null;
-//                        while(cont){
-//                            if(fis.available() != 0){
+
                         System.out.println("1");
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
-//                            }
-//                            else cont = false;
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -550,72 +557,83 @@ public class LibraryPart extends JPanel {
 
     /**
      * this method writes playlist into file
+     * it creates a file with playlist name and then write each song separately on it.
      *
      * @param savingplaylist
      */
-    public void savePlaylists(Playlist savingplaylist) {
-
-        try {
-            FileOutputStream f = new FileOutputStream(new File(username + "/playlists/" + savingplaylist.getPlaylistName()));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(savingplaylist);
-
-            o.close();
-            f.close();
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    public void savePlaylists(Playlist savingplaylist) {
+//
+//        new File(username + "/playlists/" + savingplaylist.getPlaylistName()).mkdir();
+//        for(int i = 0; i < savingplaylist.getPlaylistSongs().size(); i++){
+//
+//            try {
+//                FileOutputStream f = new FileOutputStream(new File(username + "/playlists/" + savingplaylist.getPlaylistName() +"/" +
+//                        savingplaylist.getPlaylistSongs().get(i).getTitle()));
+//                ObjectOutputStream o = new ObjectOutputStream(f);
+//
+//                o.writeObject(savingplaylist);
+//
+//                o.close();
+//                f.close();
+//
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//
+//    }
 
     /**
-     * this method reads users previous playlists
+     * this method reads users previous playlists (not working)
      *
      * @param username
      * @return
      * @throws IOException
      */
-    public ArrayList<Playlist> loadPlaylists(String username) throws IOException {
-
-        ArrayList<Playlist> loadedPlaylists = new ArrayList<Playlist>();
-
-
-        try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/playlists/"))) {
-            filePathStream.forEach(filePath -> {
-                if (Files.isRegularFile(filePath)) {
-
-                    System.out.println(filePath);
-
-                    try {
-                        FileInputStream fis = new FileInputStream(String.valueOf(filePath));
-                        ObjectInputStream ois = new ObjectInputStream(fis);
-                        Object obj = null;
+//    public ArrayList<Playlist> loadPlaylists(String username) throws IOException {
 //
-                        System.out.println("1");
-                        obj = ois.readObject();
-                        loadedPlaylists.add((Playlist) obj);
+//        ArrayList<Playlist> loadedPlaylists = new ArrayList<Playlist>();
 //
-
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            });
-        }
-
-        return loadedPlaylists;
-    }
+//        for(int i =0; i < loadedPlaylists.size() ; i++){
+//
+//            try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/playlists"))) {
+//                filePathStream.forEach(filePath -> {
+//                    if (Files.isRegularFile(filePath)) {
+//
+//                        System.out.println(filePath);
+//
+//                        try {
+//                            FileInputStream fis = new FileInputStream(String.valueOf(filePath));
+//                            ObjectInputStream ois = new ObjectInputStream(fis);
+//                            Object obj = null;
+////
+//                            System.out.println("1");
+//                            obj = ois.readObject();
+//                            loadedPlaylists.add((Playlist) obj);
+////
+//
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        } catch (ClassNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//
+//                });
+//            }
+//        }
+//
+//
+//
+//        return loadedPlaylists;
+//    }
 
 
     /**
@@ -635,20 +653,16 @@ public class LibraryPart extends JPanel {
         return songs;
     }
 
-    public void addPlaylist(Playlist playlist) {
-        playlists.add(playlist);
-    }
+    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
-    LibraryPart getLibrarypartItself() {
-        return this;
-    }
+    LibraryPart getLibrarypartItself() { return this; }
 
-    @Override
-    public String toString() {
-        return "LibraryPart{" +
-                "songs=" + songs +
-                '}';
-    }
+    public void removeSpecificSong(String path){ new File(path).delete(); }
+
+    public String getUsername() { return username; }
+
+    public void setSongs(ArrayList<Song> songs) { this.songs = songs; }
+
 
 
 }
