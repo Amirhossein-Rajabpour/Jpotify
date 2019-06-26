@@ -121,7 +121,7 @@ public class LibraryPart extends JPanel {
 
 
         jSeparator = new JSeparator(SwingConstants.HORIZONTAL);
-        jSeparator.setForeground(new Color(38,38,38));
+        jSeparator.setForeground(new Color(39,39,39));
         add(jSeparator);
 
 
