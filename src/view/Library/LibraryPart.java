@@ -7,6 +7,7 @@ import view.Center.ShowPanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.EditorKit;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,6 +33,7 @@ public class LibraryPart extends JPanel {
     private JTextField fileChooserBtn;
     private JTextField songsBtn;
     private JTextField albumsBtn;
+    private JTextField EditBtn;
     private JLabel playlistLabel;
     private JTextField newPlaylistBtn;
     private JTextField sharedPlaylistBtn;
@@ -62,12 +64,11 @@ public class LibraryPart extends JPanel {
         pressedBackground = new Color(45, 45, 45);
 
         username = user;
-        if(new File(username + "/songs/").list().length > 0){
+        if (new File(username + "/songs/").list().length > 0) {
             System.out.println("existed");
             songs = loadSongs(username);
             System.out.println(songs.get(0).getAlbumName() + "zartzart");
-        }
-        else System.out.println("not entered");
+        } else System.out.println("not entered");
 
 
         options = new JLabel("      ● ● ●");
@@ -121,7 +122,7 @@ public class LibraryPart extends JPanel {
 
 
         jSeparator = new JSeparator(SwingConstants.HORIZONTAL);
-        jSeparator.setForeground(new Color(39,39,39));
+        jSeparator.setForeground(new Color(39, 39, 39));
         add(jSeparator);
 
 
@@ -256,6 +257,38 @@ public class LibraryPart extends JPanel {
         });
         add(albumsBtn);
 
+
+        EditBtn = new JTextField("   Edit");
+        EditBtn.setFont(new Font("Arial", Font.BOLD, 9));
+        EditBtn.setBackground(this.getBackground());
+        EditBtn.setForeground(foreground);
+        EditBtn.setEditable(false);
+        EditBtn.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                EditBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                EditBtn.setBackground(getBackground());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        add(EditBtn);
+
+
         add(Box.createRigidArea(new Dimension(0, 5)));
 
         playlistLabel = new JLabel("    PLAYLISTS");
@@ -322,9 +355,8 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 sharedPlaylistBtn.setBackground(getBackground());
-                for(Song song: songs){
-                    if(song.isSharable() == true)
-                    {
+                for (Song song : songs) {
+                    if (song.isSharable() == true) {
                         sharedSongs.add(song);
                     }
                 }
@@ -364,9 +396,8 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 favouriteBtn.setBackground(getBackground());
-                for(Song song: songs){
-                    if(song.isFavourite() == true)
-                    {
+                for (Song song : songs) {
+                    if (song.isFavourite() == true) {
                         favouriteSongs.add(song);
                     }
                 }
@@ -421,8 +452,8 @@ public class LibraryPart extends JPanel {
     public void addToAlbum(Song song) throws NullPointerException {
 
         if (albums.contains(song.getAlbumName())) {
-            for(Album album: albums){
-                if(song.getAlbumName() == album.getAlbumName()){
+            for (Album album : albums) {
+                if (song.getAlbumName() == album.getAlbumName()) {
                     album.addSong(song);
                 }
             }
@@ -443,7 +474,7 @@ public class LibraryPart extends JPanel {
 
         Song song = new Song(path);
         try {
-            FileOutputStream f = new FileOutputStream(new File( username +"/songs/"+ song.getTitle()));
+            FileOutputStream f = new FileOutputStream(new File(username + "/songs/" + song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(song);
@@ -477,11 +508,11 @@ public class LibraryPart extends JPanel {
 
     public ArrayList<Song> loadSongs(String username) throws IOException {
 
-            ArrayList<Song> loadedSongs = new ArrayList<Song>();
-            boolean cont = true;
+        ArrayList<Song> loadedSongs = new ArrayList<Song>();
+        boolean cont = true;
 
 //            Files.walk(Paths.get(username +"/songs/")).filter(Files::isRegularFile).forEach();
-        try (Stream<Path> filePathStream=Files.walk(Paths.get(username + "/songs/"))) {
+        try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/songs/"))) {
             filePathStream.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
 
@@ -493,15 +524,14 @@ public class LibraryPart extends JPanel {
                         Object obj = null;
 //                        while(cont){
 //                            if(fis.available() != 0){
-                                System.out.println("1");
-                                obj = ois.readObject();
-                                loadedSongs.add((Song) obj);
-                                addToAlbum((Song) obj);
+                        System.out.println("1");
+                        obj = ois.readObject();
+                        loadedSongs.add((Song) obj);
+                        addToAlbum((Song) obj);
 //                            }
 //                            else cont = false;
 
-                        }
-                    catch (FileNotFoundException e) {
+                    } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -519,30 +549,32 @@ public class LibraryPart extends JPanel {
 
     /**
      * this method writes playlist into file
+     *
      * @param savingplaylist
      */
-    public void savePlaylists(Playlist savingplaylist){
+    public void savePlaylists(Playlist savingplaylist) {
 
-            try {
-                FileOutputStream f = new FileOutputStream(new File( username +"/playlists/"+ savingplaylist.getPlaylistName()));
-                ObjectOutputStream o = new ObjectOutputStream(f);
+        try {
+            FileOutputStream f = new FileOutputStream(new File(username + "/playlists/" + savingplaylist.getPlaylistName()));
+            ObjectOutputStream o = new ObjectOutputStream(f);
 
-                o.writeObject(savingplaylist);
+            o.writeObject(savingplaylist);
 
-                o.close();
-                f.close();
+            o.close();
+            f.close();
 
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     /**
      * this method reads users previous playlists
+     *
      * @param username
      * @return
      * @throws IOException
@@ -552,7 +584,7 @@ public class LibraryPart extends JPanel {
         ArrayList<Playlist> loadedPlaylists = new ArrayList<Playlist>();
 
 
-        try (Stream<Path> filePathStream=Files.walk(Paths.get(username + "/playlists/"))) {
+        try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/playlists/"))) {
             filePathStream.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
 
@@ -568,8 +600,7 @@ public class LibraryPart extends JPanel {
                         loadedPlaylists.add((Playlist) obj);
 //
 
-                    }
-                    catch (FileNotFoundException e) {
+                    } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -588,24 +619,26 @@ public class LibraryPart extends JPanel {
 
     /**
      * this method takes an arraylis and an index and put the index song at the beggining of the arraylist and shift other parts
+     *
      * @param songs
      * @param index
      * @return
      */
-    public ArrayList<Song> sortSongs(ArrayList<Song> songs, int index){
+    public ArrayList<Song> sortSongs(ArrayList<Song> songs, int index) {
 
         Song tmp = new Song(songs.get(index).getPath());
-        for(int i = index; i > 1 ; i--){
-            songs.set(i,songs.get(i-1));
+        for (int i = index; i > 1; i--) {
+            songs.set(i, songs.get(i - 1));
         }
-        songs.set(0,tmp);
+        songs.set(0, tmp);
         return songs;
     }
 
-    public void addPlaylist(Playlist playlist){
+    public void addPlaylist(Playlist playlist) {
         playlists.add(playlist);
     }
-    LibraryPart getLibrarypartItself(){
+
+    LibraryPart getLibrarypartItself() {
         return this;
     }
 
