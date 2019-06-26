@@ -697,6 +697,7 @@ public class LibraryPart extends JPanel {
             addToAlbum(song);
     }
 
-
-
+    public void setAlbums(ArrayList<Album> albums) {
+        this.albums = albums;
+    }
 }
