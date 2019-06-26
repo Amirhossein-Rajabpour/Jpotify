@@ -49,6 +49,7 @@ public class RemoveSong extends JFrame {
                     e1.printStackTrace();
                 }
 
+                libraryPart.getShowPanel().revalidate();
                 setVisible(false);
             }
         });

@@ -102,7 +102,6 @@ public class NewPlaylist extends JFrame {
                 name = nameTextField.getText();
 
                 playlist = new Playlist(name);
-                libraryPart.addPlaylist(playlist);
 
 //                for (int i = 0; i < arrayListSize; i++) {
 //
@@ -110,6 +109,8 @@ public class NewPlaylist extends JFrame {
 //                        playlist.addSong(songs.get(i));
 //                    }
 //                }
+//                libraryPart.addPlaylist(playlist);
+
                 /**
                  * here instead of adding songs to playlist, i add playlist to songs(almost like album)
                  */

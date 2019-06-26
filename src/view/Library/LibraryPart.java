@@ -49,7 +49,10 @@ public class LibraryPart extends JPanel {
 
 
     ArrayList<Song> songs = new ArrayList<>();
-    ArrayList<Playlist> playlists = new ArrayList<>();
+    /**
+     * playlist doesnt have arraylist in library and they are shown in showpanel exactly like favourite songs.
+     */
+//    ArrayList<Playlist> playlists = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
     ArrayList<Song> sharedSongs = new ArrayList<>();
@@ -166,6 +169,11 @@ public class LibraryPart extends JPanel {
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
                     saveSong(selectedFile.getAbsolutePath());
+//                    try {
+//                        songs = loadSongs(username);
+//                    } catch (IOException e1) {
+//                        e1.printStackTrace();
+//                    }
                     System.out.println("song saved");
                 }
             }
@@ -205,11 +213,7 @@ public class LibraryPart extends JPanel {
                 songsBtn.setBackground(getBackground());
 
                 showPanel.removeAll();
-//                try {
-//                    refreshSongs();
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
+                showPanel.repaint();
                 showPanel.setSongs(songs);
                 showPanel.revalidate();
             }
@@ -248,6 +252,20 @@ public class LibraryPart extends JPanel {
                 albumsBtn.setBackground(getBackground());
                 showPanel.removeAll();
                 showPanel.repaint();
+
+//                ArrayList<Song> songsForAlbum = new ArrayList<>();
+////              ArrayList<Album> updatedAlbums = new ArrayList<>();
+//                try {
+//                    songsForAlbum = loadSongs(username);
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                }
+//
+//                for(Song song: songsForAlbum){
+//
+//                    addToAlbum(song);
+//                }
+
                 showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
@@ -434,8 +452,14 @@ public class LibraryPart extends JPanel {
      */
     void addSong(String path) {
 
+        int exist = 0;
         song = new Song(path);
-        if(!songs.contains(song)){
+
+        for(Song song: songs){
+            if(song.getPath().equals(path) )
+                exist = 1;
+        }
+        if(exist == 0){
             songs.add(song);
             System.out.println(song.getTitle());
             System.out.println(song.getAlbumName());
@@ -464,7 +488,7 @@ public class LibraryPart extends JPanel {
 
         if (albums.contains(song.getAlbumName())) {
             for (Album album : albums) {
-                if (song.getAlbumName() == album.getAlbumName()) {
+                if (song.getAlbumName().equals(album.getAlbumName()) ) {
                     album.addSong(song);
                 }
             }
@@ -475,6 +499,12 @@ public class LibraryPart extends JPanel {
         }
 
     }
+//    public ArrayList<Album> updateAlbums(ArrayList<Song> songArrayList){
+//
+//        for(int i = 0; i < songArrayList.size() ; i++){
+//
+//        }
+//    }
 
     /**
      * this method save added song to the program
@@ -484,6 +514,7 @@ public class LibraryPart extends JPanel {
     public void saveSong(String path) {
 
         Song song = new Song(path);
+//        addToAlbum(song);
         try {
             FileOutputStream f = new FileOutputStream(new File(username + "/songs/" + song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -508,9 +539,9 @@ public class LibraryPart extends JPanel {
      * @return
      */
 
-    public void setShowPanel(ShowPanel showPanel) {
-        this.showPanel = showPanel;
-    }
+    public void setShowPanel(ShowPanel showPanel) { this.showPanel = showPanel; }
+
+    public ShowPanel getShowPanel() { return showPanel; }
 
     public void setUsername(String username) {
         username = new String();
@@ -522,7 +553,6 @@ public class LibraryPart extends JPanel {
         ArrayList<Song> loadedSongs = new ArrayList<Song>();
         boolean cont = true;
 
-//            Files.walk(Paths.get(username +"/songs/")).filter(Files::isRegularFile).forEach();
         try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/songs/"))) {
             filePathStream.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
@@ -537,7 +567,7 @@ public class LibraryPart extends JPanel {
                         System.out.println("1");
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
-                        addToAlbum((Song) obj);
+//                        addToAlbum((Song) obj);
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -653,7 +683,7 @@ public class LibraryPart extends JPanel {
         return songs;
     }
 
-    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
+//    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
     LibraryPart getLibrarypartItself() { return this; }
 
@@ -661,7 +691,11 @@ public class LibraryPart extends JPanel {
 
     public String getUsername() { return username; }
 
-    public void setSongs(ArrayList<Song> songs) { this.songs = songs; }
+    public void setSongs(ArrayList<Song> songs) {
+        this.songs = songs;
+        for(Song song: songs)
+            addToAlbum(song);
+    }
 
 
 
