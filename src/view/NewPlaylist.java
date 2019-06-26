@@ -110,6 +110,7 @@ public class NewPlaylist extends JFrame {
                     }
                 }
                 libraryPart.addPlaylist(playlist);
+                libraryPart.savePlaylists(playlist);
                 setVisible(false);
             }
         });

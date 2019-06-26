@@ -180,17 +180,21 @@ public class WelcomePage extends JFrame {
     }
 
     public void doClickAction() throws IOException {
-        if(new File(userTextField.getText()).exists())
-            System.out.println("shit repetetive id");
-        else{
-            new File(userTextField.getText()).mkdir();
-            new File(userTextField.getText() + "/songs/").mkdir();
-            System.out.println("new id");
+
+        if( !userTextField.getText().equals("")){
+            if(new File(userTextField.getText()).exists())
+                System.out.println("shit repetetive id");
+            else{
+                new File(userTextField.getText()).mkdir();
+                new File(userTextField.getText() + "/songs/").mkdir();
+                new File(userTextField.getText() + "/playlists/").mkdir();
+                System.out.println("new id");
+            }
+            MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
+            this.setVisible(false);
         }
-        MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
+        else System.out.println("write something");
 
 
-
-        this.setVisible(false);
     }
 }
