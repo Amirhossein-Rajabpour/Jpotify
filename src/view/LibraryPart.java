@@ -510,6 +510,75 @@ public class LibraryPart extends JPanel {
     }
 
     /**
+     * this method writes playlist into file
+     * @param savingplaylist
+     */
+    public void savePlaylists(Playlist savingplaylist){
+
+            try {
+                FileOutputStream f = new FileOutputStream(new File( username +"/playlists/"+ savingplaylist.getPlaylistName()));
+                ObjectOutputStream o = new ObjectOutputStream(f);
+
+                o.writeObject(savingplaylist);
+
+                o.close();
+                f.close();
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
+    /**
+     * this method reads users previous playlists
+     * @param username
+     * @return
+     * @throws IOException
+     */
+    public ArrayList<Playlist> loadPlaylists(String username) throws IOException {
+
+        ArrayList<Playlist> loadedPlaylists = new ArrayList<Playlist>();
+
+
+        try (Stream<Path> filePathStream=Files.walk(Paths.get(username + "/playlists/"))) {
+            filePathStream.forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+
+                    System.out.println(filePath);
+
+                    try {
+                        FileInputStream fis = new FileInputStream(String.valueOf(filePath));
+                        ObjectInputStream ois = new ObjectInputStream(fis);
+                        Object obj = null;
+//
+                        System.out.println("1");
+                        obj = ois.readObject();
+                        loadedPlaylists.add((Playlist) obj);
+//
+
+                    }
+                    catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            });
+        }
+
+        return loadedPlaylists;
+    }
+
+
+    /**
      * this method takes an arraylis and an index and put the index song at the beggining of the arraylist and shift other parts
      * @param songs
      * @param index
