@@ -1,13 +1,13 @@
-package view;
+package view.Library;
 
 import model.Playlist;
 import model.Song;
+import view.Library.LibraryPart;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class NewPlaylist extends JFrame {
 

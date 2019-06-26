@@ -1,4 +1,4 @@
-package view;
+package view.Center;
 
 import model.Album;
 import model.Playlist;

@@ -1,9 +1,7 @@
-package view;
+package view.Center;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * ToolBar panel at the top of the CentralPanel and MainPage

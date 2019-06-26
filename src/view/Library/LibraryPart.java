@@ -1,8 +1,10 @@
-package view;
+package view.Library;
 
 import model.Album;
 import model.Playlist;
 import model.Song;
+import view.Center.ShowPanel;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;

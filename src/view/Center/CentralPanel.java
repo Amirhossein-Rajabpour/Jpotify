@@ -1,4 +1,4 @@
-package view;
+package view.Center;
 
 import javax.swing.*;
 import java.awt.*;
