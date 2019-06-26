@@ -102,15 +102,22 @@ public class NewPlaylist extends JFrame {
                 name = nameTextField.getText();
 
                 playlist = new Playlist(name);
-
-                for (int i = 0; i < arrayListSize; i++) {
-
-                    if (songCheckbox[i].isSelected()) {
-                        playlist.addSong(songs.get(i));
-                    }
-                }
                 libraryPart.addPlaylist(playlist);
-                libraryPart.savePlaylists(playlist);
+
+//                for (int i = 0; i < arrayListSize; i++) {
+//
+//                    if (songCheckbox[i].isSelected()) {
+//                        playlist.addSong(songs.get(i));
+//                    }
+//                }
+                /**
+                 * here instead of adding songs to playlist, i add playlist to songs(almost like album)
+                 */
+                for(int i = 0; i < songs.size() ; i++){
+
+                    songs.get(i).addPlaylist(playlist);
+                }
+//                libraryPart.savePlaylists(playlist);
                 setVisible(false);
             }
         });

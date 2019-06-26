@@ -74,8 +74,8 @@ public class ShowPanel extends JPanel {
 
 
             ImageIcon albumImgIcon;
-            if (songs.get(i).getArtwork() != null) {
-                albumImgIcon = new ImageIcon(songs.get(i).getArtwork());
+            if (albums.get(i).getFirstSong().getArtwork() != null) {
+                albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
             } else {
                 albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
             }

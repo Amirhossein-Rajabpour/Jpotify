@@ -50,11 +50,11 @@ public class PlayerPart extends JPanel {
 
         //C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3
 //        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
-        Song song2 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
+        Song song2 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
 
         //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
 //        Song song3 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
-        Song song3 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
+        Song song3 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
 
         //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
         songs.add(song1);

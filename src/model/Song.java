@@ -24,6 +24,8 @@ public class Song implements Serializable {
     private boolean isSharable;
     transient Mp3File mp3file;
 
+    ArrayList<Playlist> playlists = new ArrayList<>();
+
 
     public Song(String path){
 
@@ -46,6 +48,8 @@ public class Song implements Serializable {
         isFavourite = false;
         isSharable = false;
     }
+
+    public void addPlaylist(Playlist playlist){ playlists.add(playlist);}
 
     public boolean isSharable() { return isSharable; }
 
