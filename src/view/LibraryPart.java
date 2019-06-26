@@ -239,6 +239,7 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 albumsBtn.setBackground(getBackground());
                 showPanel.removeAll();
+                showPanel.repaint();
                 showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
@@ -447,9 +448,8 @@ public class LibraryPart extends JPanel {
     public void saveSong(String path) {
 
         Song song = new Song(path);
-        FileOutputStream f = null;
         try {
-            f = new FileOutputStream(new File( username +"/songs/" + song.getTitle()));
+            FileOutputStream f = new FileOutputStream(new File( username +"/songs/"+ song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(song);
