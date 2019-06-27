@@ -1,7 +1,7 @@
 package view.Player;
 
 import controller.PlayPartController;
-import controller.SoundController;
+import controller.AudioController;
 import javazoom.jl.decoder.JavaLayerException;
 import model.Song;
 import view.Library.LibraryPart;
@@ -37,7 +37,7 @@ public class PlayerPart extends JPanel {
     private boolean repeatAllIsOn;
     private boolean repeatOneIsOn;
     private SongInfoPanel songInfoPanel;
-    private SoundController soundController;
+    private AudioController audioController;
     private LibraryPart libraryPart;
 
 
@@ -46,7 +46,7 @@ public class PlayerPart extends JPanel {
         // next and previous button should work with that playlist ArrayList
 
         super();
-        soundController = new SoundController();
+        audioController = new AudioController();
         setSize(700, 400);
 
         background = new Color(40, 40, 40);
