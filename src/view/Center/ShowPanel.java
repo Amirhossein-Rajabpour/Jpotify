@@ -35,8 +35,10 @@ public class ShowPanel extends JPanel {
 
     public void setSongs(ArrayList<Song> songs) {
 
+        this.songs = null;
         this.songs = songs;
-        songBtns = new SongBtn[songs.size()];
+        this.songBtns = null;
+        this.songBtns = new SongBtn[songs.size()];
 
 //        this.setLayout(new GridLayout(songs.size() + 10, 1));
 //        JScrollPane scrollPane = new JScrollPane(this);
@@ -58,7 +60,6 @@ public class ShowPanel extends JPanel {
 
         this.albums = albums;
         albumButtons = new JButton[albums.size()];
-        this.setLayout(new GridLayout(albums.size(), 1));
 
         for (int i = 0; i < albums.size(); i++) {
 
