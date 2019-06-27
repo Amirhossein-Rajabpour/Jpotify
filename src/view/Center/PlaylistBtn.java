@@ -16,6 +16,7 @@ import java.util.Objects;
  */
 public class PlaylistBtn extends JPanel {
 
+    private JLabel icon;
     private ArrayList<String> playlistNames;
     private String playlistName;
     private PlayerPart playerPart;
@@ -36,7 +37,7 @@ public class PlaylistBtn extends JPanel {
         this.songs = songs;
         this.showSongs = new ArrayList<>();
 
-        this.setPreferredSize(new Dimension(100, 40));
+        this.setPreferredSize(new Dimension(130, 145));
 
         background = new Color(50, 50, 50);
         foreground = new Color(210, 210, 210);
@@ -47,6 +48,7 @@ public class PlaylistBtn extends JPanel {
         data = new JPanel(new FlowLayout());
         data.setBackground(background);
         data.setForeground(foreground);
+        this.setLayout(new BorderLayout());
 
         name = new JLabel(playlistName);
         data.add(name);
@@ -64,6 +66,22 @@ public class PlaylistBtn extends JPanel {
             }
 
         }
+
+        icon = new JLabel();
+
+        if (showSongs.get(0) != null) {
+            ImageIcon albumImgIcon;
+            if (showSongs.get(0).getArtwork() != null) {
+                albumImgIcon = new ImageIcon(showSongs.get(0).getArtwork());
+            } else {
+                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+            }
+            Image img = albumImgIcon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
+            Icon icon1 = new ImageIcon(img);
+            icon.setIcon(icon1);
+
+        }
+        this.add(icon, BorderLayout.CENTER);
 
         this.addMouseListener(new MouseListener() {
             @Override
@@ -109,7 +127,7 @@ public class PlaylistBtn extends JPanel {
             }
         });
 
-        this.add(data);
+        this.add(data, BorderLayout.SOUTH);
 
 
     }

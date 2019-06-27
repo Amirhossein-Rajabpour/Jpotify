@@ -128,11 +128,11 @@ public class ShowPanel extends JPanel {
         for (int i = 0; i < playlistNames.size(); i++) {
 
             playlistBtns[i] = (PlaylistBtn) new PlaylistBtn(songs, playlistNames.get(i), playerPart, this);
-            playlistBtns[i].setSize(100, 40);
+//            playlistBtns[i].setSize(100, 40);
 
             add(playlistBtns[i]);
 
-            this.add(Box.createRigidArea(new Dimension(10, 10)));
+//            this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
     }
