@@ -4,6 +4,7 @@ import model.Song;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,9 +36,9 @@ public class PlaylistBtn extends JPanel {
 
             System.out.println(playlistName + ";;;;");
 
-            for (int j = 0; j<songs.get(i).getPlaylists().size(); j++){
+            for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
-                if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)){
+                if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)) {
                     showSongs.add(songs.get(i));
                     System.out.println(playlistName);
                 }
@@ -81,6 +82,18 @@ public class PlaylistBtn extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
 
+            }
+        });
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                if (me.getButton() == MouseEvent.BUTTON3) {
+                    JFrame editFrame = new JFrame();
+                    editFrame.setPreferredSize(new Dimension(400, 400));
+                    editFrame.setVisible(true);
+                    System.out.println("salam");
+                }
             }
         });
 

@@ -388,41 +388,41 @@ public class LibraryPart extends JPanel {
         add(newPlaylistBtn);
 
 
-        editPlaylistBtn = new JTextField("   Edit Playlists");
-        editPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
-        editPlaylistBtn.setEditable(false);
-        editPlaylistBtn.setBackground(this.getBackground());
-        editPlaylistBtn.setForeground(foreground);
-        editPlaylistBtn.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                editPlaylistBtn.setBackground(pressedBackground);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                editPlaylistBtn.setBackground(getBackground());
-                albumsBtn.setBackground(getBackground());
-                showPanel.removeAll();
-                showPanel.repaint();
-
-                showPanel.setPlaylists(playlistNames, songs);
-                showPanel.revalidate();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        add(editPlaylistBtn);
+//        editPlaylistBtn = new JTextField("   Edit Playlists");
+//        editPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
+//        editPlaylistBtn.setEditable(false);
+//        editPlaylistBtn.setBackground(this.getBackground());
+//        editPlaylistBtn.setForeground(foreground);
+//        editPlaylistBtn.addMouseListener(new MouseListener() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//            }
+//
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                editPlaylistBtn.setBackground(pressedBackground);
+//            }
+//
+//            @Override
+//            public void mouseReleased(MouseEvent e) {
+//                editPlaylistBtn.setBackground(getBackground());
+//                albumsBtn.setBackground(getBackground());
+//                showPanel.removeAll();
+//                showPanel.repaint();
+//
+//                showPanel.setPlaylists(playlistNames, songs);
+//                showPanel.revalidate();
+//            }
+//
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//            }
+//        });
+//        add(editPlaylistBtn);
 
 
 /**
