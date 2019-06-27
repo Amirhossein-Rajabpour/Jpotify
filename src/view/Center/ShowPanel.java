@@ -60,7 +60,11 @@ public class ShowPanel extends JPanel {
 
     public void setAlbums(ArrayList<Album> albums) {
 
-        this.albums = albums;
+
+//        for(Song song: songs){
+//            Album album = new Album(song.getAlbumName());
+//            albums.add(album);
+//        }
         albumButtons = new JButton[albums.size()];
 
         for (int i = 0; i < albums.size(); i++) {

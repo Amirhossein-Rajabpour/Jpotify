@@ -150,6 +150,9 @@ public class Song implements Serializable {
 
         }
     }
+    public void removeAlbum(){
+        albumName = null;
+    }
 
 
 }

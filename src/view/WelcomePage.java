@@ -189,7 +189,6 @@ public class WelcomePage extends JFrame {
             else{
                 new File(userTextField.getText()).mkdir();
                 new File(userTextField.getText() + "/songs/").mkdir();
-                new File(userTextField.getText() + "/playlists/").mkdir();
                 System.out.println("new id");
             }
             MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());

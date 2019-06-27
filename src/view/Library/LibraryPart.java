@@ -279,7 +279,8 @@ public class LibraryPart extends JPanel {
 //                    e1.printStackTrace();
 //                }
 //                showPanel.addAlbums(loadedAlbums);
-                showPanel.setAlbums(getAlbums());
+                    showPanel.setAlbums(albums);
+
                 showPanel.revalidate();
             }
 
@@ -436,12 +437,19 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 favouriteBtn.setBackground(getBackground());
 
+                showPanel.removeAll();
+                showPanel.repaint();
+                favouriteSongs = null;
+                favouriteSongs = new ArrayList<>();
+
                 for (Song song : songs) {
-                    if (song.isFavourite() == true) {
-                        favouriteSongs.add(song);
-                    }
+                        if (song.isFavourite() == true && !favouriteSongs.contains(song)) {
+                            favouriteSongs.add(song);
+                        }
+
                 }
                 showPanel.setSongs(favouriteSongs);
+                showPanel.revalidate();
             }
 
             @Override
@@ -561,7 +569,6 @@ public class LibraryPart extends JPanel {
     public ArrayList<Song> loadSongs(String username) throws IOException {
 
         ArrayList<Song> loadedSongs = new ArrayList<Song>();
-        boolean cont = true;
 
         try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/songs/"))) {
             filePathStream.forEach(filePath -> {
@@ -577,7 +584,9 @@ public class LibraryPart extends JPanel {
                         System.out.println("1");
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
-//                        addToAlbum((Song) obj);
+                        addToAlbum((Song) obj);
+                        if(((Song)obj).isFavourite() == true)
+                            favouriteSongs.add((Song) obj);
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
