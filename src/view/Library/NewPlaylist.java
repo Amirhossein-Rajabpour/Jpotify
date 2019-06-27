@@ -5,6 +5,7 @@ import model.Song;
 import view.Library.LibraryPart;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -32,13 +33,15 @@ public class NewPlaylist extends JFrame {
 
         foreground = new Color(195, 195, 195);
         background = new Color(59, 63, 63);
+        this.setSize(new Dimension(260, 400));
+        this.setResizable(false);
 
         /**
          * panel is the container of north and center panels
          */
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBackground(new Color(59, 63, 63));
+        panel.setBackground(background);
         this.add(panel);
 
         /**
@@ -48,6 +51,8 @@ public class NewPlaylist extends JFrame {
         north.setBackground(panel.getBackground());
         north.setLayout(new BorderLayout());
 
+        JPanel empty = new JPanel();
+        empty.setBackground(background);
         north.add(new JPanel(), BorderLayout.NORTH);
         nameLabel = new JLabel("New Playlist");
         nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -80,7 +85,13 @@ public class NewPlaylist extends JFrame {
          * center panel places at the center of the panel
          */
         JPanel center = new JPanel();
-        center.setLayout(new GridLayout(6, 1));
+
+        center.setLayout(new GridLayout(songs.size(), 1));
+
+//        center.setBorder(LineBorder.createBlackLineBorder());
+//        JScrollPane scrollPane = new JScrollPane(center,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        scrollPane.setPreferredSize(new Dimension(600, 600));
+
 
         center.add(Box.createRigidArea(new Dimension(0, 5)));
         center.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -114,7 +125,7 @@ public class NewPlaylist extends JFrame {
                 /**
                  * here instead of adding songs to playlist, i add playlist to songs(almost like album)
                  */
-                for(int i = 0; i < songs.size() ; i++){
+                for (int i = 0; i < songs.size(); i++) {
 
                     songs.get(i).addPlaylist(playlist);
                 }
@@ -126,14 +137,18 @@ public class NewPlaylist extends JFrame {
         panel.add(create, BorderLayout.SOUTH);
 
 
-        setSize(250, 400);
+//        setSize(250, 400);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 70);
 //        pack();
         setVisible(true);
     }
-    public Playlist getPlaylist(){
+
+    public Playlist getPlaylist() {
         return this.playlist;
     }
-    public boolean isDone(){ return isDone;}
+
+    public boolean isDone() {
+        return isDone;
+    }
 }

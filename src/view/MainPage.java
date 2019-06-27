@@ -33,20 +33,19 @@ public class MainPage extends JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 150);
         this.setBackground(new Color(57, 54, 50));
 
-        centralPanel = new CentralPanel(userName);
+        bottomPanel = new BottomPanel();
+        this.add(bottomPanel, BorderLayout.SOUTH);
+
+        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart());
         this.add(centralPanel, BorderLayout.CENTER);
 
         Library = new LibraryPart(getUserName());
-//        Library.setUsername(getUserName());
         Library.setShowPanel(centralPanel.getShowPanel());
         this.add(new JScrollPane(Library), BorderLayout.WEST);
 
 //        friendActivity = new FriendActivity();
 //        this.add(friendActivity,BorderLayout.EAST);
 
-
-        bottomPanel = new BottomPanel();
-        this.add(bottomPanel, BorderLayout.SOUTH);
 
         SwingUtilities.updateComponentTreeUI(this);
 

@@ -1,5 +1,7 @@
 package view.Center;
 
+import view.Player.PlayerPart;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,7 @@ public class CentralPanel extends JPanel {
 
     private ToolBar toolBar;
     private ShowPanel showPanel;
-    public CentralPanel(String userName) {
+    public CentralPanel(String userName, PlayerPart playerPart) {
         super();
 
         this.setLayout(new BorderLayout());
@@ -20,7 +22,7 @@ public class CentralPanel extends JPanel {
         toolBar.setSize(new Dimension(50, 10));
         this.add(toolBar, BorderLayout.NORTH);
 
-        showPanel = new ShowPanel();
+        showPanel = new ShowPanel(playerPart);
         this.add(showPanel,BorderLayout.CENTER);
     }
 

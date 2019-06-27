@@ -33,5 +33,7 @@ public class BottomPanel extends JPanel {
         this.add(volumeSliderPanel,BorderLayout.EAST);
     }
 
-
+    public PlayerPart getPlayerPart() {
+        return playerPart;
+    }
 }

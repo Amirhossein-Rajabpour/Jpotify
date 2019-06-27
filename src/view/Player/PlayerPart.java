@@ -4,6 +4,7 @@ import controller.PlayPartController;
 import controller.SoundController;
 import javazoom.jl.decoder.JavaLayerException;
 import model.Song;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,8 @@ import java.util.Collections;
 public class PlayerPart extends JPanel {
 
     private Color foreground;
+    private Color background;
+    private Color pressedBackground;
     private JTextField share;
     private JTextField shuffle;
     private JTextField previous;
@@ -43,28 +46,13 @@ public class PlayerPart extends JPanel {
         super();
         soundController = new SoundController();
         setSize(700, 400);
-        setBackground(new Color(40, 40, 40));
+
+        background = new Color(40, 40, 40);
+        setBackground(background);
+        pressedBackground = new Color(65, 65, 65);
         foreground = new Color(179, 179, 179);
-//        Song song1 = new Song("/Users/apple/Desktop/In the night.mpga");
-        Song song1 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
 
-        //C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3
-//        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
-        Song song2 = new Song("C:\\Users\\Asus\\Desktop\\22_Lilly_Wood_&_Robin_Schulz.mp3");
 
-        //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
-//        Song song3 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
-        Song song3 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
-
-        //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
-        songs.add(song1);
-        songs.add(song2);
-        songs.add(song3);
-        for (int i = 0; i < songs.size(); i++) {
-            playingSongs.add(i, songs.get(i));
-            shuffleSongs.add(i, songs.get(i));
-        }
-        Collections.shuffle(shuffleSongs);
         currentSong = 0;
         repeatOneIsOn = false;
         repeatAllIsOn = false;
@@ -74,15 +62,48 @@ public class PlayerPart extends JPanel {
 /**
  * new input and player in constructor in order to resume a song
  */
-            try {
-                input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                player = new PlayPartController(input);
 
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            } catch (JavaLayerException e1) {
-                e1.printStackTrace();
-            }
+            share = new JTextField("♥︎");
+            share.setBackground(this.getBackground());
+            share.setForeground(foreground);
+            share.setEditable(false);
+            share.setToolTipText("Share");
+            share.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    if (share.getBackground().equals(background)) {
+                        share.setBackground(pressedBackground);
+                        share.setToolTipText("Unshare");
+                        songs.get(currentSong).setSharable(true);
+
+                    } else {
+                        share.setBackground(background);
+                        share.setToolTipText("Share");
+                        songs.get(currentSong).setSharable(false);
+                    }
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+            add(share);
 
 
             shuffle = new JTextField("🔀");
@@ -103,14 +124,14 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (shuffle.getText().equals("🔀") && shuffle.getBackground().equals(new Color(40, 40, 40))) {
+                    if (shuffle.getText().equals("🔀") && shuffle.getBackground().equals(background)) {
 //                        shuffle.setText("➜");
-                        shuffle.setBackground(new Color(55, 55, 55));
+                        shuffle.setBackground(pressedBackground);
                         shuffle.setToolTipText("Shuffle Off");
                         playingSongs = shuffleSongs;
                     } else {
                         shuffle.setText("🔀");
-                        shuffle.setBackground(new Color(40, 40, 40));
+                        shuffle.setBackground(background);
                         shuffle.setToolTipText("Shuffle On");
                         playingSongs = songs;
                     }
@@ -142,12 +163,12 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    previous.setBackground(new Color(55, 55, 55));
+                    previous.setBackground(pressedBackground);
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    previous.setBackground(new Color(40, 40, 40));
+                    previous.setBackground(background);
 
                     player.pause();
                     playOrPause.setText("▶︎");
@@ -159,7 +180,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -187,11 +208,22 @@ public class PlayerPart extends JPanel {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
                                 player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
+                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
                                 e1.printStackTrace();
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
+                            }
+                            if (songs.get(currentSong).isSharable()) {
+                                share.setBackground(pressedBackground);
+                            } else {
+                                share.setBackground(background);
+                            }
+
+                            if (songs.get(currentSong).isFavourite()) {
+                                favorite.setText("♥︎");
+                            } else {
+                                favorite.setText("💔");
                             }
                         }
                     }
@@ -235,13 +267,13 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    playOrPause.setBackground(new Color(55, 55, 55));
+                    playOrPause.setBackground(pressedBackground);
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
 
-                    playOrPause.setBackground(new Color(40, 40, 40));
+                    playOrPause.setBackground(background);
 
                     if (playOrPause.getText().equals("▶︎")) {
                         try {
@@ -286,12 +318,12 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    next.setBackground(new Color(55, 55, 55));
+                    next.setBackground(pressedBackground);
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    next.setBackground(new Color(40, 40, 40));
+                    next.setBackground(background);
 
                     player.pause();
                     playOrPause.setText("▶︎");
@@ -303,7 +335,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -315,7 +347,7 @@ public class PlayerPart extends JPanel {
                             input = new FileInputStream(playingSongs.get(currentSong).getPath());
                             player = new PlayPartController(input);
                             progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         } catch (JavaLayerException e1) {
@@ -331,11 +363,23 @@ public class PlayerPart extends JPanel {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
                                 player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
+                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
                                 e1.printStackTrace();
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
+                            }
+
+                            if (songs.get(currentSong).isSharable()) {
+                                share.setBackground(pressedBackground);
+                            } else {
+                                share.setBackground(background);
+                            }
+
+                            if (songs.get(currentSong).isFavourite()) {
+                                favorite.setText("♥︎");
+                            } else {
+                                favorite.setText("💔");
                             }
                         }
                     }
@@ -374,23 +418,23 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (repeat.getText().equals("🔁") && repeat.getBackground().equals(new Color(40, 40, 40))) {
+                    if (repeat.getText().equals("🔁") && repeat.getBackground().equals(background)) {
                         repeat.setText("🔂");
                         repeatOneIsOn = true;
                         repeat.setToolTipText("Repeat All");
-                        repeat.setBackground(new Color(55, 55, 55));
+                        repeat.setBackground(pressedBackground);
                         // Right the ActionEvent here Amirhosein
                     } else if (repeat.getText().equals("🔂")) {
                         repeat.setText("🔁");
                         repeatOneIsOn = false;
                         repeatAllIsOn = true;
                         repeat.setToolTipText("Repeat Off");
-                        repeat.setBackground(new Color(55, 55, 55));
-                    } else if (repeat.getText().equals("🔁") && repeat.getBackground().equals(new Color(55, 55, 55))) {
+                        repeat.setBackground(pressedBackground);
+                    } else if (repeat.getText().equals("🔁") && repeat.getBackground().equals(pressedBackground)) {
                         repeat.setText("🔁");
                         repeatAllIsOn = false;
                         repeat.setToolTipText("Repeat One");
-                        repeat.setBackground(new Color(40, 40, 40));
+                        repeat.setBackground(background);
                     }
                 }
 
@@ -428,10 +472,12 @@ public class PlayerPart extends JPanel {
                     if (favorite.getText().equals("♥︎")) {
                         favorite.setText("💔");
                         favorite.setToolTipText("Unlike");
-                        // Right the ActionEvent here Amirhosein
+                        songs.get(currentSong).setFavourite(true);
+
                     } else {
                         favorite.setText("♥︎");
                         favorite.setToolTipText("Like");
+                        songs.get(currentSong).setFavourite(false);
                     }
                 }
 
@@ -455,15 +501,34 @@ public class PlayerPart extends JPanel {
     }
 
     public void setSongs(ArrayList<Song> songs, int initialIndex) {
+
         this.songs = songs;
         this.currentSong = initialIndex;
+        playingSongs = new ArrayList<>();
+        shuffleSongs = new ArrayList<>();
+
         for (int i = 0; i < songs.size(); i++) {
-            playingSongs.add(i, songs.get(i));
-            shuffleSongs.add(i, songs.get(i));
+            playingSongs.add(songs.get(i));
+            shuffleSongs.add(songs.get(i));
         }
         Collections.shuffle(shuffleSongs);
         this.progressBarPanel.refresh((int) this.playingSongs.get(currentSong).getDuration());
-        songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(),playingSongs.get(currentSong).getTitle(),playingSongs.get(currentSong).getArtistName(),playingSongs.get(currentSong).getAlbumName());
+        songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+        if (player != null && playOrPause.getText().equals("⏸")) {
+            player.pause();
+            playOrPause.setText("▶︎");
+            playOrPause.setToolTipText("Play");
+        }
+        try {
+            input = new FileInputStream(playingSongs.get(currentSong).getPath());
+            player = new PlayPartController(input);
+
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (JavaLayerException e1) {
+            e1.printStackTrace();
+        }
+
     }
 
     public void setProgressBarPanel(ProgressBarPanel progressBarPanel) {
@@ -474,28 +539,14 @@ public class PlayerPart extends JPanel {
         this.songInfoPanel = songInfoPanel;
     }
 
-    public void setSongLocationInSeconds(int second) {
-        player.pause();
-//        player.s
+    public void playerPause() {
+        this.player.pause();
     }
 
-//    public static<T> void shuffle(ArrayList<Song> songs)
-//    {
-//        Random random = new Random();
-//
-//        // start from end of the list
-//        for (int i = songs.size() - 1; i >= 1; i--)
-//        {
-//            // get a random index j such that 0 <= j <= i
-//            int j = random.nextInt(i + 1);
-//
-//            // swap element at i'th position in the list with element at
-//            // randomly generated index j
-//            Song obj = songs.get(i);
-//            songs.set(i, songs.get(j));
-//            songs.set(j, obj);
-//        }
-//    }
+    public void setSongLocationInSeconds(int second) {
+        player.pause();
+    }
+
 
     //progressBar actionMethod that pauses goes to the particular point of the song must be added here
 }
