@@ -13,35 +13,6 @@ import static javax.sound.sampled.AudioSystem.getClip;
 
 public class AudioController {
 
-    private float ctrl;
-//    public SoundController(float ctrl){
-//        this.ctrl = ctrl;
-//    }
-
-
-//    public void setGain(float ctrl)
-//    {
-//        try {
-//            Mixer.Info[] infos = AudioSystem.getMixerInfo();
-//            for (Mixer.Info info: infos)
-//            {
-//                Mixer mixer = AudioSystem.getMixer(info);
-//                if (mixer.isLineSupported(Port.Info.SPEAKER))
-//                {
-//                    Port port = (Port)mixer.getLine(Port.Info.SPEAKER);
-//                    port.open();
-//                    if (port.isControlSupported(FloatControl.Type.VOLUME))
-//                    {
-//                        FloatControl volume =  (FloatControl)port.getControl(FloatControl.Type.VOLUME);
-//                        volume.setValue(ctrl);
-//                    }
-//                    port.close();
-//                }
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null,"Erro\n"+e);
-//        }
-//    }
 
     public static void setMasterOutputVolume(float value) {
         if (value < 0 || value > 1)
