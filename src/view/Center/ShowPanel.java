@@ -1,7 +1,6 @@
 package view.Center;
 
 import model.Album;
-import model.Playlist;
 import model.Song;
 import view.Player.PlayerPart;
 
@@ -68,48 +67,14 @@ public class ShowPanel extends JPanel {
     public void setAlbums(ArrayList<Album> albums, ArrayList<Song> songs) {
 
         this.albums = albums;
-//        albumButtons = new JButton[albums.size()];
-//
-//        for (int i = 0; i < albums.size(); i++) {
-//
-//            albumButtons[i] = new JButton();
-//            albumButtons[i].setSize(100, 10);
-//
-//
-//            if (albums.get(i).getFirstSong() != null) {
-//
-//
-//                ImageIcon albumImgIcon;
-//                if (albums.get(i).getFirstSong().getArtwork() != null) {
-//                    albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
-//                } else {
-//                    albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
-//                }
-//                Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
-//                Icon icon = new ImageIcon(img);
-//                albumButtons[i].setIcon(icon);
-//
-//
-//                albumButtons[i].setText(albums.get(i).getAlbumName());
-//
-//                add(albumButtons[i]);
-//                this.add(Box.createRigidArea(new Dimension(10, 10)));
-//            }
-//        }
-
         albumBtns = new AlbumBtn[albums.size()];
 
         for (int i = 0; i < albums.size(); i++) {
 
-            albumBtns[i] = (AlbumBtn) new AlbumBtn(songs, albums.get(i), playerPart, this);
-//            playlistBtns[i].setSize(100, 40);
-
+            albumBtns[i] = new AlbumBtn(songs, albums.get(i), playerPart, this);
             add(albumBtns[i]);
 
-//            this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
-
-
         this.setVisible(true);
     }
 
@@ -121,18 +86,14 @@ public class ShowPanel extends JPanel {
      */
     public void setPlaylists(ArrayList<String> playlistNames, ArrayList<Song> songs) {
 
-
         this.playlistNames = playlistNames;
         playlistBtns = new PlaylistBtn[playlistNames.size()];
 
         for (int i = 0; i < playlistNames.size(); i++) {
 
-            playlistBtns[i] = (PlaylistBtn) new PlaylistBtn(songs, playlistNames.get(i), playerPart, this);
-//            playlistBtns[i].setSize(100, 40);
-
+            playlistBtns[i] = new PlaylistBtn(songs, playlistNames.get(i), playerPart, this);
             add(playlistBtns[i]);
 
-//            this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
     }
