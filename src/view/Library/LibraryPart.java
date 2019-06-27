@@ -25,6 +25,7 @@ import java.util.stream.Stream;
 
 public class LibraryPart extends JPanel {
 
+    private JTextField editPlaylistBtn;
     private JLabel options;
     private JLabel icon;
     private JLabel Jpotify;
@@ -256,19 +257,6 @@ public class LibraryPart extends JPanel {
                 showPanel.removeAll();
                 showPanel.repaint();
 
-//                ArrayList<Song> songsForAlbum = new ArrayList<>();
-////              ArrayList<Album> updatedAlbums = new ArrayList<>();
-//                try {
-//                    songsForAlbum = loadSongs(username);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
-//
-//                for(Song song: songsForAlbum){
-//
-//                    addToAlbum(song);
-//                }
-
                 showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
@@ -367,7 +355,7 @@ public class LibraryPart extends JPanel {
 /**
  * This button creates and adds a new playlist
  */
-        newPlaylistBtn = new JTextField("   New Playlis");
+        newPlaylistBtn = new JTextField("   New Playlist");
         newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
         newPlaylistBtn.setEditable(false);
         newPlaylistBtn.setBackground(this.getBackground());
@@ -398,6 +386,43 @@ public class LibraryPart extends JPanel {
             }
         });
         add(newPlaylistBtn);
+
+
+        editPlaylistBtn = new JTextField("   Edit Playlists");
+        editPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
+        editPlaylistBtn.setEditable(false);
+        editPlaylistBtn.setBackground(this.getBackground());
+        editPlaylistBtn.setForeground(foreground);
+        editPlaylistBtn.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                editPlaylistBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                editPlaylistBtn.setBackground(getBackground());
+                albumsBtn.setBackground(getBackground());
+                showPanel.removeAll();
+                showPanel.repaint();
+
+                showPanel.setPlaylists(playlistNames, songs);
+                showPanel.revalidate();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        add(editPlaylistBtn);
 
 
 /**

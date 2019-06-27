@@ -4,6 +4,7 @@ import model.Song;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -54,7 +55,9 @@ public class PlaylistBtn extends JPanel {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+//                if(e.getButton() == MouseEvent.BUTTON2) {
+//                    System.out.println("cnabcajbcalcb");
+//                }
             }
 
             @Override

@@ -66,21 +66,26 @@ public class ShowPanel extends JPanel {
             albumButtons[i].setSize(100, 10);
 
 
-            ImageIcon albumImgIcon;
-            if (albums.get(i).getFirstSong().getArtwork() != null) {
-                albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
-            } else {
-                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+
+            if (albums.get(i).getFirstSong() != null) {
+
+
+                ImageIcon albumImgIcon;
+                if (albums.get(i).getFirstSong().getArtwork() != null) {
+                    albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
+                } else {
+                    albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+                }
+                Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
+                Icon icon = new ImageIcon(img);
+                albumButtons[i].setIcon(icon);
+
+
+                albumButtons[i].setText(albums.get(i).getAlbumName());
+
+                add(albumButtons[i]);
+                this.add(Box.createRigidArea(new Dimension(10, 10)));
             }
-            Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
-            Icon icon = new ImageIcon(img);
-            albumButtons[i].setIcon(icon);
-
-
-            albumButtons[i].setText(albums.get(i).getAlbumName());
-
-            add(albumButtons[i]);
-            this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
     }
