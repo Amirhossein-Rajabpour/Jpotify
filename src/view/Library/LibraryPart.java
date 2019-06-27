@@ -4,6 +4,7 @@ import model.Album;
 import model.Playlist;
 import model.Song;
 import view.Center.ShowPanel;
+import view.Player.PlayerPart;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -59,7 +60,7 @@ public class LibraryPart extends JPanel {
     ArrayList<Song> sharedSongs = new ArrayList<>();
 
 
-    public LibraryPart(String user) throws IOException {
+    public LibraryPart(String user, PlayerPart playerPart) throws IOException {
 
         super();
         this.setPreferredSize(new Dimension(110, 400));
@@ -301,7 +302,7 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 EditBtn.setBackground(getBackground());
 
-                removeSong = new RemoveSong(songs,getLibrarypartItself());
+                removeSong = new RemoveSong(songs,getLibrarypartItself(), playerPart);
 
             }
 
@@ -733,8 +734,7 @@ public class LibraryPart extends JPanel {
 
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
-        for(Song song: songs)
-            addToAlbum(song);
+
     }
 
     public void setAlbums(ArrayList<Album> albums) {
