@@ -53,26 +53,6 @@ public class PlayerPart extends JPanel {
         foreground = new Color(179, 179, 179);
 
 
-        Song song1 = new Song("/Users/apple/Desktop/In the night.mpga");
-//        Song song1 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3");
-
-        //C:\\Users\\Asus\\Desktop\\50-Cent-Candy-Shop-@Otaghe8Bot.mp3
-        Song song2 = new Song("/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
-//        Song song2 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
-
-        //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
-        Song song3 = new Song("/Users/apple/Desktop/Another Brick Together (Original Mix).mpga");
-//        Song song3 = new Song("C:\\\\Users\\\\Asus\\\\Desktop\\\\Cheri Cheri Lady - Modern Talking.mp3");
-
-        //C:\\Users\\Asus\\Desktop\\Cheri Cheri Lady - Modern Talking.mp3
-        songs.add(song1);
-        songs.add(song2);
-        songs.add(song3);
-        for (int i = 0; i < songs.size(); i++) {
-            playingSongs.add(i, songs.get(i));
-            shuffleSongs.add(i, songs.get(i));
-        }
-        Collections.shuffle(shuffleSongs);
         currentSong = 0;
         repeatOneIsOn = false;
         repeatAllIsOn = false;
@@ -82,16 +62,6 @@ public class PlayerPart extends JPanel {
 /**
  * new input and player in constructor in order to resume a song
  */
-            try {
-                input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                player = new PlayPartController(input);
-
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            } catch (JavaLayerException e1) {
-                e1.printStackTrace();
-            }
-
 
             share = new JTextField("♥︎");
             share.setBackground(this.getBackground());
@@ -244,20 +214,20 @@ public class PlayerPart extends JPanel {
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             }
+                            if (songs.get(currentSong).isSharable()) {
+                                share.setBackground(pressedBackground);
+                            } else {
+                                share.setBackground(background);
+                            }
+
+                            if (songs.get(currentSong).isFavourite()) {
+                                favorite.setText("♥︎");
+                            } else {
+                                favorite.setText("💔");
+                            }
                         }
                     }
 
-                    if (songs.get(currentSong).isSharable()) {
-                        share.setBackground(pressedBackground);
-                    } else {
-                        share.setBackground(background);
-                    }
-
-                    if (songs.get(currentSong).isFavourite()) {
-                        favorite.setText("♥︎");
-                    }else{
-                        favorite.setText("💔");
-                    }
 
                 }
 
@@ -399,19 +369,19 @@ public class PlayerPart extends JPanel {
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             }
+
+                            if (songs.get(currentSong).isSharable()) {
+                                share.setBackground(pressedBackground);
+                            } else {
+                                share.setBackground(background);
+                            }
+
+                            if (songs.get(currentSong).isFavourite()) {
+                                favorite.setText("♥︎");
+                            } else {
+                                favorite.setText("💔");
+                            }
                         }
-                    }
-
-                    if (songs.get(currentSong).isSharable()) {
-                        share.setBackground(pressedBackground);
-                    } else {
-                        share.setBackground(background);
-                    }
-
-                    if (songs.get(currentSong).isFavourite()) {
-                        favorite.setText("♥︎");
-                    } else {
-                        favorite.setText("💔");
                     }
 
 
@@ -531,15 +501,34 @@ public class PlayerPart extends JPanel {
     }
 
     public void setSongs(ArrayList<Song> songs, int initialIndex) {
+
         this.songs = songs;
         this.currentSong = initialIndex;
+        playingSongs = new ArrayList<>();
+        shuffleSongs = new ArrayList<>();
+
         for (int i = 0; i < songs.size(); i++) {
-            playingSongs.add(i, songs.get(i));
-            shuffleSongs.add(i, songs.get(i));
+            playingSongs.add(songs.get(i));
+            shuffleSongs.add(songs.get(i));
         }
         Collections.shuffle(shuffleSongs);
         this.progressBarPanel.refresh((int) this.playingSongs.get(currentSong).getDuration());
         songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+        if (player != null && playOrPause.getText().equals("⏸")) {
+            player.pause();
+            playOrPause.setText("▶︎");
+            playOrPause.setToolTipText("Play");
+        }
+        try {
+            input = new FileInputStream(playingSongs.get(currentSong).getPath());
+            player = new PlayPartController(input);
+
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (JavaLayerException e1) {
+            e1.printStackTrace();
+        }
+
     }
 
     public void setProgressBarPanel(ProgressBarPanel progressBarPanel) {
@@ -548,6 +537,10 @@ public class PlayerPart extends JPanel {
 
     public void setSongInfoPanel(SongInfoPanel songInfoPanel) {
         this.songInfoPanel = songInfoPanel;
+    }
+
+    public void playerPause() {
+        this.player.pause();
     }
 
     public void setSongLocationInSeconds(int second) {
