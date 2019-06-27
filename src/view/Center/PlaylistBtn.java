@@ -18,6 +18,12 @@ public class PlaylistBtn extends JPanel {
     private PlayerPart playerPart;
     private ArrayList<Song> songs;
     private ArrayList<Song> showSongs;
+    private Color background;
+    private Color foreground;
+    private Color pressedBackground;
+    private Font font1;
+    private JLabel name;
+    private JPanel data;
 
     public PlaylistBtn(ArrayList<Song> songs, String playlistName, PlayerPart playerPart, ShowPanel showPanel) {
 
@@ -27,47 +33,50 @@ public class PlaylistBtn extends JPanel {
         this.songs = songs;
         this.showSongs = new ArrayList<>();
 
+        this.setPreferredSize(new Dimension(100,40));
 
-        JLabel jLabel = new JLabel(playlistName);
-        this.add(jLabel);
+        background = new Color(50, 50, 50);
+        foreground = new Color(210, 210, 210);
+        pressedBackground = new Color(65, 65, 65);
+        this.setBackground(background);
+        this.font1 = new Font("Arial", Font.BOLD, 13);
+
+        data = new JPanel(new FlowLayout());
+        data.setBackground(background);
+        data.setForeground(foreground);
+
+        name = new JLabel(playlistName);
+        data.add(name);
+        name.setForeground(foreground);
+        name.setBackground(background);
 
 
         for (int i = 0; i < songs.size(); i++) {
-
-            System.out.println(playlistName + ";;;;");
 
             for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
                 if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)) {
                     showSongs.add(songs.get(i));
-                    System.out.println(playlistName);
                 }
-
             }
-
-
-//            if (songs.get(i).getPlaylists().contains(playlistName)){
-//                showSongs.add(songs.get(i));
-//                System.out.println(playlistName);
-//            }
 
         }
 
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//                if(e.getButton() == MouseEvent.BUTTON2) {
-//                    System.out.println("cnabcajbcalcb");
-//                }
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                name.setBackground(pressedBackground);
+                data.setBackground(pressedBackground);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                name.setBackground(background);
+                data.setBackground(background);
                 showPanel.removeAll();
                 showPanel.repaint();
                 showPanel.setSongs(showSongs);
@@ -96,6 +105,8 @@ public class PlaylistBtn extends JPanel {
                 }
             }
         });
+
+        this.add(data);
 
 
     }
