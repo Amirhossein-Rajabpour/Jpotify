@@ -2,7 +2,6 @@ package view.Center;
 
 import model.Album;
 import model.Song;
-import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -41,7 +40,6 @@ public class ShowPanel extends JPanel {
         this.songBtns = null;
         this.songBtns = new SongBtn[songs.size()];
 
-
 //        this.setLayout(new GridLayout(songs.size() + 10, 1));
 //        JScrollPane scrollPane = new JScrollPane(this);
 //        JScrollPane scrollPane = new JScrollPane(this,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -50,7 +48,7 @@ public class ShowPanel extends JPanel {
 
         for (int i = 0; i < songs.size(); i++) {
 
-            songBtns[i] = new SongBtn(playerPart,songs,i );
+            songBtns[i] = new SongBtn(playerPart,songs,i);
             songBtns[i].setPreferredSize(new Dimension(130,180));
             add(songBtns[i]);
 
@@ -60,11 +58,7 @@ public class ShowPanel extends JPanel {
 
     public void setAlbums(ArrayList<Album> albums){
 
-
-//        for(Song song: songs){
-//            Album album = new Album(song.getAlbumName());
-//            albums.add(album);
-//        }
+        this.albums = albums;
         albumButtons = new JButton[albums.size()];
 
         for (int i = 0; i < albums.size(); i++) {
@@ -91,5 +85,4 @@ public class ShowPanel extends JPanel {
         }
         this.setVisible(true);
     }
-
 }
