@@ -48,6 +48,7 @@ public class SongBtn extends JPanel {
         this.setBackground(background);
         this.font1 = new Font("Arial", Font.BOLD, 13);
         this.font2 = new Font("Arial", Font.ITALIC, 11);
+        this.setPreferredSize(new Dimension(130, 170));
 
         icon = new JLabel();
         icon.setHorizontalAlignment(SwingConstants.CENTER);
