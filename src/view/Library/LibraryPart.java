@@ -643,6 +643,10 @@ public class LibraryPart extends JPanel {
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
+
+                        for(Playlist playlist: ((Song)obj).getPlaylists())
+                            addPlaylistName(playlist.getPlaylistName());
+
                         if (((Song) obj).isFavourite() == true)
                             favouriteSongs.add((Song) obj);
 
