@@ -40,6 +40,9 @@ public class WelcomePage extends JFrame {
 
         this.setLayout(new BorderLayout());
 
+//        ImageIcon zelos = new Image("/Users/apple/Desktop/JpotifyWhite.png");
+//        setIconImage(zelos);
+
         background = new Color(49, 53, 53);
         foreground = new Color(195, 195, 195);
 

@@ -127,8 +127,12 @@ public class NewPlaylist extends JFrame {
                  */
                 for (int i = 0; i < songs.size(); i++) {
 
-                    songs.get(i).addPlaylist(playlist);
+                    if (songCheckbox[i].isSelected()) {
+                        songs.get(i).addPlaylist(playlist);
+                    }
                 }
+
+                libraryPart.addPlaylistName(name);
 //                libraryPart.savePlaylists(playlist);
                 setVisible(false);
             }

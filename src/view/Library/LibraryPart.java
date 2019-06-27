@@ -50,6 +50,7 @@ public class LibraryPart extends JPanel {
     private RemoveSong removeSong;
 
 
+
     ArrayList<Song> songs = new ArrayList<>();
     /**
      * playlist doesnt have arraylist in library and they are shown in showpanel exactly like favourite songs.
@@ -58,6 +59,7 @@ public class LibraryPart extends JPanel {
     ArrayList<Album> albums = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
     ArrayList<Song> sharedSongs = new ArrayList<>();
+    private ArrayList<String> playlistNames = new ArrayList<>();
 
 
     public LibraryPart(String user, PlayerPart playerPart) throws IOException {
@@ -345,6 +347,10 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 playlistBtn.setBackground(getBackground());
                 //
+                showPanel.removeAll();
+                showPanel.repaint();
+                showPanel.setPlaylists(playlistNames, songs);
+                showPanel.revalidate();
 
             }
 
@@ -727,6 +733,10 @@ public class LibraryPart extends JPanel {
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
     LibraryPart getLibrarypartItself() { return this; }
+
+    public void addPlaylistName (String name){
+        this.playlistNames.add(name);
+    }
 
     public void removeSpecificSong(String path){ new File(path).delete(); }
 
