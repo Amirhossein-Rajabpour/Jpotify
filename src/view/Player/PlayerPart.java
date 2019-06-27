@@ -508,8 +508,10 @@ public class PlayerPart extends JPanel {
         if (songs.size() == 0) {
             progressBarPanel.refresh(0);
             songInfoPanel.refresh(null, null, null, null);
-            player.pause();
-            player.close();
+            if (player != null) {
+                player.pause();
+                player.close();
+            }
         } else {
             this.songs = songs;
             this.currentSong = initialIndex;
