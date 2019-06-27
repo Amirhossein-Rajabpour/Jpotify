@@ -58,7 +58,7 @@ public class ShowPanel extends JPanel {
         setVisible(true);
     }
 
-    public void setAlbums(ArrayList<Album> albums) {
+    public void setAlbums(ArrayList<Album> albums){
 
 
 //        for(Song song: songs){

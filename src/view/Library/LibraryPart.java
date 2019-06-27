@@ -265,7 +265,6 @@ public class LibraryPart extends JPanel {
 //
 //                    addToAlbum(song);
 //                }
-
                 showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
@@ -699,8 +698,8 @@ public class LibraryPart extends JPanel {
 
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
-        for(Song song: songs)
-            addToAlbum(song);
+//        for(Song song: songs)
+//            addToAlbum(song);
     }
 
     public void setAlbums(ArrayList<Album> albums) {

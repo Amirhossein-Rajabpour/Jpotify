@@ -1,6 +1,8 @@
 package view.Player;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class VolumeSliderPanel extends JPanel{
@@ -14,6 +16,12 @@ public class VolumeSliderPanel extends JPanel{
         slider.setMaximum(100);
         slider.setToolTipText("Volume");
         slider.setPreferredSize(new Dimension(130,25));
+        slider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+            }
+        });
         add(slider);
     }
 }

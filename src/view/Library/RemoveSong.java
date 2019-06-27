@@ -42,20 +42,25 @@ public class RemoveSong extends JFrame {
                     if (songCheckbox[i].isSelected()) {
 
                         libraryPart.removeSpecificSong(libraryPart.getUsername() + "/songs/" + songs.get(i).getTitle());
+                        songs.remove(songs.get(i));
 
                     }
                 }
+                System.out.println(songs.size());
+                libraryPart.setSongs(songs);
 
-                try {
-                    libraryPart.setSongs(libraryPart.loadSongs(libraryPart.getUsername()));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
 
 
 /**
- * this part of code updates library songs and albums.
+ * this part of code updates library songs and albums.(still not working)
  */
+                ArrayList<Album> loadedAlbums = new ArrayList<>();
+                    for(Song song: songs )
+                    {
+                        Album album = new Album(song.getAlbumName());
+                        loadedAlbums.add(album);
+                    }
+                    libraryPart.setAlbums(loadedAlbums);
 //                try {
 //                    ArrayList<Album> loadedAlbums = new ArrayList<>();
 //                    for(Song song: libraryPart.loadSongs(libraryPart.getUsername()) )
