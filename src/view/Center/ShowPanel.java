@@ -42,13 +42,12 @@ public class ShowPanel extends JPanel {
         this.songs = null;
         this.songs = songs;
         this.songBtns = null;
-        System.out.println("size " + songs.size());
         this.songBtns = new SongBtn[songs.size()];
 
         for (int i = 0; i < songs.size(); i++) {
 
             songBtns[i] = new SongBtn(playerPart,songs,i);
-            songBtns[i].setPreferredSize(new Dimension(130,180));
+            songBtns[i].setPreferredSize(new Dimension(130,10));
             add(songBtns[i]);
 
         }
@@ -101,18 +100,6 @@ public class ShowPanel extends JPanel {
 
             playlistBtns[i] = (PlaylistBtn) new PlaylistBtn(songs, playlistNames.get(i), playerPart, this);
             playlistBtns[i].setSize(100, 40);
-
-
-//            ImageIcon albumImgIcon;
-//            if (playlistNames.get(i).getFirstSong().getArtwork() != null) {
-//                albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
-//            } else {
-//                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
-//            }
-//            Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
-//            Icon icon = new ImageIcon(img);
-//            albumButtons[i].setIcon(icon);
-
 
             add(playlistBtns[i]);
 
