@@ -28,7 +28,7 @@ public class AlbumBtn extends JPanel {
     private Font font2;
 
 
-    public AlbumBtn(PlayerPart playerPart, Album album) {
+    public AlbumBtn(PlayerPart playerPart, Album album, ArrayList<Song> songs) {
 
         super();
 
