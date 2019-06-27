@@ -52,7 +52,7 @@ public class ShowPanel extends JPanel {
         for (int i = 0; i < songs.size(); i++) {
 
             songBtns[i] = new SongBtn(playerPart,songs,i);
-            songBtns[i].setPreferredSize(new Dimension(130,10));
+            songBtns[i].setPreferredSize(new Dimension(130,150));
             add(songBtns[i]);
 
         }
