@@ -111,8 +111,10 @@ public class NewPlaylist extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 name = nameTextField.getText();
+                if (!libraryPart.getPlaylistName().contains(name)) {
 
-                playlist = new Playlist(name);
+
+                    playlist = new Playlist(name);
 
 //                for (int i = 0; i < arrayListSize; i++) {
 //
@@ -122,15 +124,20 @@ public class NewPlaylist extends JFrame {
 //                }
 //                libraryPart.addPlaylist(playlist);
 
-                /**
-                 * here instead of adding songs to playlist, i add playlist to songs(almost like album)
-                 */
-                for (int i = 0; i < songs.size(); i++) {
+                    /**
+                     * here instead of adding songs to playlist, i add playlist to songs(almost like album)
+                     */
+                    for (int i = 0; i < songs.size(); i++) {
 
-                    songs.get(i).addPlaylist(playlist);
-                }
+                        if (songCheckbox[i].isSelected()) {
+                            songs.get(i).addPlaylist(playlist);
+                        }
+                    }
+
+                    libraryPart.addPlaylistName(name);
 //                libraryPart.savePlaylists(playlist);
-                setVisible(false);
+                    setVisible(false);
+                }else setVisible(false);
             }
         });
 

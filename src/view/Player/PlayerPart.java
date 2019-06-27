@@ -505,33 +505,39 @@ public class PlayerPart extends JPanel {
 
     public void setSongs(ArrayList<Song> songs, int initialIndex) {
 
-        this.songs = songs;
-        this.currentSong = initialIndex;
-        playingSongs = new ArrayList<>();
-        shuffleSongs = new ArrayList<>();
-
-        for (int i = 0; i < songs.size(); i++) {
-            playingSongs.add(songs.get(i));
-            shuffleSongs.add(songs.get(i));
-        }
-        Collections.shuffle(shuffleSongs);
-        this.progressBarPanel.refresh((int) this.playingSongs.get(currentSong).getDuration());
-        songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-        if (player != null && playOrPause.getText().equals("⏸")) {
+        if (songs.size() == 0) {
+            progressBarPanel.refresh(0);
+            songInfoPanel.refresh(null, null, null, null);
             player.pause();
-            playOrPause.setText("▶︎");
-            playOrPause.setToolTipText("Play");
-        }
-        try {
-            input = new FileInputStream(playingSongs.get(currentSong).getPath());
-            player = new PlayPartController(input);
+            player.close();
+        } else {
+            this.songs = songs;
+            this.currentSong = initialIndex;
+            playingSongs = new ArrayList<>();
+            shuffleSongs = new ArrayList<>();
 
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        } catch (JavaLayerException e1) {
-            e1.printStackTrace();
-        }
+            for (int i = 0; i < songs.size(); i++) {
+                playingSongs.add(songs.get(i));
+                shuffleSongs.add(songs.get(i));
+            }
+            Collections.shuffle(shuffleSongs);
+            this.progressBarPanel.refresh((int) this.playingSongs.get(currentSong).getDuration());
+            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+            if (player != null && playOrPause.getText().equals("⏸")) {
+                player.pause();
+                playOrPause.setText("▶︎");
+                playOrPause.setToolTipText("Play");
+            }
+            try {
+                input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                player = new PlayPartController(input);
 
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (JavaLayerException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     public void setProgressBarPanel(ProgressBarPanel progressBarPanel) {
@@ -541,6 +547,7 @@ public class PlayerPart extends JPanel {
     public void setSongInfoPanel(SongInfoPanel songInfoPanel) {
         this.songInfoPanel = songInfoPanel;
     }
+
 
     public void playerPause() {
         this.player.pause();

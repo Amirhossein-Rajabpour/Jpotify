@@ -1,6 +1,7 @@
 package model;
 
 import com.mpatric.mp3agic.*;
+
 import java.awt.*;
 import java.io.IOException;
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class Song implements Serializable {
     ArrayList<Playlist> playlists = new ArrayList<>();
 
 
-    public Song(String path){
+    public Song(String path) {
 
         this.path = path;
         try {
@@ -49,17 +50,27 @@ public class Song implements Serializable {
         isSharable = false;
     }
 
-    public void addPlaylist(Playlist playlist){ playlists.add(playlist);}
+    public void addPlaylist(Playlist playlist) {
+        playlists.add(playlist);
+    }
 
-    public boolean isSharable() { return isSharable; }
+    public boolean isSharable() {
+        return isSharable;
+    }
 
-    public void setSharable(boolean sharable) { isSharable = sharable; }
+    public void setSharable(boolean sharable) {
+        isSharable = sharable;
+    }
 
-    public void setFavourite(boolean favourite) { isFavourite = favourite; }
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 
-    public boolean isFavourite() { return isFavourite; }
+    public boolean isFavourite() {
+        return isFavourite;
+    }
 
-    public void setLastTimePlayed(){
+    public void setLastTimePlayed() {
         lastTimePlayed = Instant.now().toEpochMilli();
     }
 
@@ -87,55 +98,55 @@ public class Song implements Serializable {
         return artistName;
     }
 
-    public long getDuration() { return duration; }
+    public long getDuration() {
+        return duration;
+    }
 
-    public void setDuration() { duration = mp3file.getLengthInSeconds(); }
+    public void setDuration() {
+        duration = mp3file.getLengthInSeconds();
+    }
 
     /**
      * This method checks weather the mp3 file is id3v1 or id3v2
      * and then set the title according to that
      */
     public void setTitle() {
-        if(mp3file.hasId3v1Tag()){
+        if (mp3file.hasId3v1Tag()) {
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
             title = id3v1Tag.getTitle();
-        }
-        else if(mp3file.hasId3v2Tag()){
+        } else if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             title = id3v2Tag.getTitle();
-        }
-        else title = "not readable title";
+        } else title = "not readable title";
 
     }
+
     /**
      * This method checks weather the mp3 file is id3v1 or id3v2
      * and then set the artistName according to that
      */
     public void setArtistName() {
-        if(mp3file.hasId3v1Tag()){
+        if (mp3file.hasId3v1Tag()) {
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
             artistName = id3v1Tag.getArtist();
-        }
-        else if(mp3file.hasId3v2Tag()){
+        } else if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             artistName = id3v2Tag.getArtist();
-        }
-        else artistName = "not readable artist name";
+        } else artistName = "not readable artist name";
     }
+
     /**
      * This method checks weather the mp3 file is id3v1 or id3v2
      * and then set the AlbumName according to that
      */
     public void setAlbumName() {
-        if(mp3file.hasId3v1Tag()){
+        if (mp3file.hasId3v1Tag()) {
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
             albumName = id3v1Tag.getAlbum();
-        }
-        else if(mp3file.hasId3v2Tag()){
+        } else if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             albumName = id3v2Tag.getAlbum();
-        }
-        else albumName = "not readable album name";
+        } else albumName = "not readable album name";
 
     }
 
@@ -144,13 +155,18 @@ public class Song implements Serializable {
      * and this method reads the file and set the artwork
      */
     public void setArtwork() {
-        if(mp3file.hasId3v2Tag()) {
+        if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             artwork = id3v2Tag.getAlbumImage();
 
         }
     }
-    public void removeAlbum(){
+
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void removeAlbum() {
         albumName = null;
     }
 

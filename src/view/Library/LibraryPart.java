@@ -4,6 +4,7 @@ import model.Album;
 import model.Playlist;
 import model.Song;
 import view.Center.ShowPanel;
+import view.Player.PlayerPart;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,6 +25,7 @@ import java.util.stream.Stream;
 
 public class LibraryPart extends JPanel {
 
+    private JTextField editPlaylistBtn;
     private JLabel options;
     private JLabel icon;
     private JLabel Jpotify;
@@ -57,9 +59,10 @@ public class LibraryPart extends JPanel {
     ArrayList<Album> albums = new ArrayList<>();
     ArrayList<Song> favouriteSongs = new ArrayList<>();
     ArrayList<Song> sharedSongs = new ArrayList<>();
+    private ArrayList<String> playlistNames = new ArrayList<>();
 
 
-    public LibraryPart(String user) throws IOException {
+    public LibraryPart(String user, PlayerPart playerPart) throws IOException {
 
         super();
         this.setPreferredSize(new Dimension(110, 400));
@@ -254,18 +257,6 @@ public class LibraryPart extends JPanel {
                 showPanel.removeAll();
                 showPanel.repaint();
 
-//                ArrayList<Song> songsForAlbum = new ArrayList<>();
-////              ArrayList<Album> updatedAlbums = new ArrayList<>();
-//                try {
-//                    songsForAlbum = loadSongs(username);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
-//
-//                for(Song song: songsForAlbum){
-//
-//                    addToAlbum(song);
-//                }
                 showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
@@ -300,7 +291,7 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 EditBtn.setBackground(getBackground());
 
-                removeSong = new RemoveSong(songs,getLibrarypartItself());
+                removeSong = new RemoveSong(songs, getLibrarypartItself(), playerPart);
 
             }
 
@@ -343,6 +334,10 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 playlistBtn.setBackground(getBackground());
                 //
+                showPanel.removeAll();
+                showPanel.repaint();
+                showPanel.setPlaylists(playlistNames, songs);
+                showPanel.revalidate();
 
             }
 
@@ -360,7 +355,7 @@ public class LibraryPart extends JPanel {
 /**
  * This button creates and adds a new playlist
  */
-        newPlaylistBtn = new JTextField("   New Playlis");
+        newPlaylistBtn = new JTextField("   New Playlist");
         newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
         newPlaylistBtn.setEditable(false);
         newPlaylistBtn.setBackground(this.getBackground());
@@ -391,6 +386,43 @@ public class LibraryPart extends JPanel {
             }
         });
         add(newPlaylistBtn);
+
+
+        editPlaylistBtn = new JTextField("   Edit Playlists");
+        editPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
+        editPlaylistBtn.setEditable(false);
+        editPlaylistBtn.setBackground(this.getBackground());
+        editPlaylistBtn.setForeground(foreground);
+        editPlaylistBtn.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                editPlaylistBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                editPlaylistBtn.setBackground(getBackground());
+                albumsBtn.setBackground(getBackground());
+                showPanel.removeAll();
+                showPanel.repaint();
+
+                showPanel.setPlaylists(playlistNames, songs);
+                showPanel.revalidate();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        add(editPlaylistBtn);
 
 
 /**
@@ -462,9 +494,9 @@ public class LibraryPart extends JPanel {
                 favouriteSongs = new ArrayList<>();
 
                 for (Song song : songs) {
-                        if (song.isFavourite() == true && !favouriteSongs.contains(song)) {
-                            favouriteSongs.add(song);
-                        }
+                    if (song.isFavourite() == true && !favouriteSongs.contains(song)) {
+                        favouriteSongs.add(song);
+                    }
 
                 }
                 showPanel.setSongs(favouriteSongs);
@@ -514,7 +546,9 @@ public class LibraryPart extends JPanel {
      *
      * @param
      */
-    public void addFavourite(Song song) { favouriteSongs.add(song); }
+    public void addFavourite(Song song) {
+        favouriteSongs.add(song);
+    }
 
     /**
      * this method add each song to it's album HashMap
@@ -525,7 +559,7 @@ public class LibraryPart extends JPanel {
 
         if (albums.contains(song.getAlbumName())) {
             for (Album album : albums) {
-                if (song.getAlbumName().equals(album.getAlbumName()) ) {
+                if (song.getAlbumName().equals(album.getAlbumName())) {
                     album.addSong(song);
                 }
             }
@@ -576,9 +610,13 @@ public class LibraryPart extends JPanel {
      * @return
      */
 
-    public void setShowPanel(ShowPanel showPanel) { this.showPanel = showPanel; }
+    public void setShowPanel(ShowPanel showPanel) {
+        this.showPanel = showPanel;
+    }
 
-    public ShowPanel getShowPanel() { return showPanel; }
+    public ShowPanel getShowPanel() {
+        return showPanel;
+    }
 
     public void setUsername(String username) {
         username = new String();
@@ -605,7 +643,7 @@ public class LibraryPart extends JPanel {
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
-                        if(((Song)obj).isFavourite() == true)
+                        if (((Song) obj).isFavourite() == true)
                             favouriteSongs.add((Song) obj);
 
                     } catch (FileNotFoundException e) {
@@ -724,16 +762,29 @@ public class LibraryPart extends JPanel {
 
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
-    LibraryPart getLibrarypartItself() { return this; }
+    LibraryPart getLibrarypartItself() {
+        return this;
+    }
 
-    public void removeSpecificSong(String path){ new File(path).delete(); }
+    public ArrayList<String> getPlaylistName() {
+        return this.playlistNames;
+    }
 
-    public String getUsername() { return username; }
+    public void addPlaylistName(String name) {
+        this.playlistNames.add(name);
+    }
+
+    public void removeSpecificSong(String path) {
+        new File(path).delete();
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
-//        for(Song song: songs)
-//            addToAlbum(song);
+
     }
 
     public void setAlbums(ArrayList<Album> albums) {

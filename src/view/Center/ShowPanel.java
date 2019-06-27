@@ -1,6 +1,7 @@
 package view.Center;
 
 import model.Album;
+import model.Playlist;
 import model.Song;
 import view.Player.PlayerPart;
 
@@ -15,11 +16,14 @@ public class ShowPanel extends JPanel {
 
     private Color background;
     private JButton[] albumButtons;
+    private PlaylistBtn[] playlistBtns;
     private SongBtn[] songBtns;
     private AlbumBtn[] albumBtns;
     private PlayerPart playerPart;
+
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
+    private ArrayList<String> playlistNames;
 
 
     public ShowPanel(PlayerPart playerPart) {
@@ -38,13 +42,8 @@ public class ShowPanel extends JPanel {
         this.songs = null;
         this.songs = songs;
         this.songBtns = null;
+        System.out.println("size " + songs.size());
         this.songBtns = new SongBtn[songs.size()];
-
-//        this.setLayout(new GridLayout(songs.size() + 10, 1));
-//        JScrollPane scrollPane = new JScrollPane(this);
-//        JScrollPane scrollPane = new JScrollPane(this,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        scrollPane.setPreferredSize(new Dimension(600, 600));
-
 
         for (int i = 0; i < songs.size(); i++) {
 
@@ -67,20 +66,56 @@ public class ShowPanel extends JPanel {
             albumButtons[i].setSize(100, 10);
 
 
-            ImageIcon albumImgIcon;
-            if (albums.get(i).getFirstSong().getArtwork() != null) {
-                albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
-            } else {
-                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+
+            if (albums.get(i).getFirstSong() != null) {
+
+
+                ImageIcon albumImgIcon;
+                if (albums.get(i).getFirstSong().getArtwork() != null) {
+                    albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
+                } else {
+                    albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+                }
+                Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
+                Icon icon = new ImageIcon(img);
+                albumButtons[i].setIcon(icon);
+
+
+                albumButtons[i].setText(albums.get(i).getAlbumName());
+
+                add(albumButtons[i]);
+                this.add(Box.createRigidArea(new Dimension(10, 10)));
             }
-            Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
-            Icon icon = new ImageIcon(img);
-            albumButtons[i].setIcon(icon);
+        }
+        this.setVisible(true);
+    }
 
 
-            albumButtons[i].setText(albums.get(i).getAlbumName());
+    public void setPlaylists(ArrayList<String> playlistNames, ArrayList<Song> songs) {
 
-            add(albumButtons[i]);
+
+        this.playlistNames = playlistNames;
+        playlistBtns = new PlaylistBtn[playlistNames.size()];
+
+        for (int i = 0; i < playlistNames.size(); i++) {
+
+            playlistBtns[i] = (PlaylistBtn) new PlaylistBtn(songs, playlistNames.get(i), playerPart, this);
+            playlistBtns[i].setSize(100, 40);
+
+
+//            ImageIcon albumImgIcon;
+//            if (playlistNames.get(i).getFirstSong().getArtwork() != null) {
+//                albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
+//            } else {
+//                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+//            }
+//            Image img = albumImgIcon.getImage().getScaledInstance(100, 100, i);
+//            Icon icon = new ImageIcon(img);
+//            albumButtons[i].setIcon(icon);
+
+
+            add(playlistBtns[i]);
+
             this.add(Box.createRigidArea(new Dimension(10, 10)));
         }
         this.setVisible(true);
