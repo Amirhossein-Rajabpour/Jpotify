@@ -3,6 +3,7 @@ package view.Library;
 import model.Album;
 import model.Song;
 import view.Player.PlayerPart;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -58,8 +59,8 @@ public class RemoveSong extends JFrame {
                 ArrayList<Album> loadedAlbums = new ArrayList<>();
                 for (Song song : songs) {
                     Album album = new Album(song.getAlbumName());
-                    loadedAlbums.add(album);
 
+                    loadedAlbums.add(album);
                 }
                 libraryPart.setAlbums(loadedAlbums);
 

@@ -10,7 +10,7 @@ public class Album {
     private String albumName;
     ArrayList<Song> albumSongs = new ArrayList<>();
 
-    public Album(String albumName){
+    public Album(String albumName) {
         this.albumName = albumName;
     }
 
@@ -32,26 +32,34 @@ public class Album {
 
     /**
      * add a song to album's songs arraylist
+     *
      * @param song
      */
-    public void addSong(Song song){
+    public void addSong(Song song) {
         albumSongs.add(song);
+    }
+
+    public void removeSong(Song song) {
+        if (albumSongs != null && albumSongs.contains(song)) {
+            albumSongs.remove(song);
+        }
     }
 
     /**
      * this method gets first song of album for album artwork
+     *
      * @return
      */
-    public Song getFirstSong(){
-        if(getAlbumSongs().size() != 0)
-       return albumSongs.get(0);
-        else
-        {
+    public Song getFirstSong() {
+        if (getAlbumSongs().size() != 0)
+            return albumSongs.get(0);
+        else {
             System.out.println("error");
             return null;
 
         }
 
     }
+
 
 }

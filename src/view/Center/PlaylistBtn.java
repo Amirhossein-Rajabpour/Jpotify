@@ -36,7 +36,7 @@ public class PlaylistBtn extends JPanel {
         this.songs = songs;
         this.showSongs = new ArrayList<>();
 
-        this.setPreferredSize(new Dimension(100,40));
+        this.setPreferredSize(new Dimension(100, 40));
 
         background = new Color(50, 50, 50);
         foreground = new Color(210, 210, 210);

@@ -257,7 +257,7 @@ public class LibraryPart extends JPanel {
                 showPanel.removeAll();
                 showPanel.repaint();
 
-                showPanel.setAlbums(albums);
+                showPanel.setAlbums(albums, songs);
                 showPanel.revalidate();
             }
 
@@ -805,5 +805,9 @@ public class LibraryPart extends JPanel {
      */
     public void setAlbums(ArrayList<Album> albums) {
         this.albums = albums;
+    }
+
+    public ArrayList<Album> getAlbums() {
+        return albums;
     }
 }
