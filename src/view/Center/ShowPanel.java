@@ -73,22 +73,31 @@ public class ShowPanel extends JPanel {
             albumButtons[i].setSize(100, 50);
 
 
-            ImageIcon albumImgIcon;
-            if (albums.get(i).getFirstSong().getArtwork() != null) {
-                albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
-            } else {
-                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
-            }
-            Image img = albumImgIcon.getImage().getScaledInstance(40, 40, i);
-            Icon icon = new ImageIcon(img);
-            albumButtons[i].setIcon(icon);
+                ImageIcon albumImgIcon;
+//                if(albums.get(i).getFirstSong() == null)
+//                    System.out.println("shit");
+//                else{
+                    if (albums.get(i).getFirstSong().getArtwork() != null) {
+                        albumImgIcon = new ImageIcon(albums.get(i).getFirstSong().getArtwork());
+                    } else {
+                        albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+                    }
+                    Image img = albumImgIcon.getImage().getScaledInstance(40, 40, i);
+                    Icon icon = new ImageIcon(img);
+                    albumButtons[i].setIcon(icon);
 
+                    albumButtons[i].setText(albums.get(i).getAlbumName());
 
-            albumButtons[i].setText(albums.get(i).getAlbumName());
+                    add(albumButtons[i]);
+                    this.add(Box.createRigidArea(new Dimension(10, 10)));
+                }
 
-            add(albumButtons[i]);
-            this.add(Box.createRigidArea(new Dimension(10, 10)));
-        }
+//            }
+
         this.setVisible(true);
+    }
+
+    public void addAlbums(ArrayList<Album> Albums) {
+        this.albums = Albums;
     }
 }

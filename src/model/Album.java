@@ -30,7 +30,15 @@ public class Album {
         albumSongs.add(song);
     }
     public Song getFirstSong(){
+        if(getAlbumSongs().size() != 0)
        return albumSongs.get(0);
+        else
+        {
+            System.out.println("error");
+            return null;
+
+        }
+
     }
 
 }

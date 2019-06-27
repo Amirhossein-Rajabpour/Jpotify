@@ -266,7 +266,20 @@ public class LibraryPart extends JPanel {
 //                    addToAlbum(song);
 //                }
 
-                showPanel.setAlbums(albums);
+
+//                ArrayList<Album> loadedAlbums = new ArrayList<>();
+//                try {
+//                    for(Song song: loadSongs(getUsername()) )
+//                    {
+//                        Album album = new Album(song.getAlbumName());
+//                        loadedAlbums.add(album);
+//
+//                    }
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                }
+//                showPanel.addAlbums(loadedAlbums);
+                showPanel.setAlbums(getAlbums());
                 showPanel.revalidate();
             }
 
@@ -683,8 +696,6 @@ public class LibraryPart extends JPanel {
         return songs;
     }
 
-//    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
-
     LibraryPart getLibrarypartItself() { return this; }
 
     public void removeSpecificSong(String path){ new File(path).delete(); }
@@ -697,7 +708,7 @@ public class LibraryPart extends JPanel {
             addToAlbum(song);
     }
 
-    public void setAlbums(ArrayList<Album> albums) {
-        this.albums = albums;
-    }
+    public void setAlbums(ArrayList<Album> albums) { this.albums = albums; }
+
+    public ArrayList<Album> getAlbums() { return albums; }
 }
