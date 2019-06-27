@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * this is programs main page which connects and shows all elements and panels of the program
+ */
 public class MainPage extends JFrame {
 
     private String userName;

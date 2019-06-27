@@ -15,6 +15,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * this class handles play and pause and next and previous and also shuffle features for songs
+ * also a song can be added to favourite songs here and also be marked as sharable on network
+ */
 public class PlayerPart extends JPanel {
 
     private Color foreground;
@@ -38,7 +42,6 @@ public class PlayerPart extends JPanel {
     private boolean repeatOneIsOn;
     private SongInfoPanel songInfoPanel;
     private AudioController audioController;
-    private LibraryPart libraryPart;
 
 
     public PlayerPart() {
@@ -107,7 +110,9 @@ public class PlayerPart extends JPanel {
             });
             add(share);
 
-
+/**
+ * playing on shuffle mode
+ */
             shuffle = new JTextField("🔀");
             shuffle.setBackground(this.getBackground());
             shuffle.setForeground(foreground);
@@ -151,7 +156,9 @@ public class PlayerPart extends JPanel {
             });
             add(shuffle);
 
-
+/**
+ * going to previous song
+ */
             previous = new JTextField("𝄅◀︎");
             previous.setBackground(this.getBackground());
             previous.setForeground(foreground);
@@ -171,7 +178,9 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     previous.setBackground(background);
-
+/**
+ * playing and pausing and multithreading here
+ */
                     player.pause();
                     playOrPause.setText("▶︎");
                     playOrPause.setToolTipText("Play");
@@ -305,7 +314,9 @@ public class PlayerPart extends JPanel {
                 }
             });
             add(playOrPause);
-
+/**
+ * going to next song
+ */
 
             next = new JTextField("▶𝄅");
             next.setBackground(this.getBackground());
@@ -401,7 +412,9 @@ public class PlayerPart extends JPanel {
             });
             add(next);
 
-
+/**
+ * repeating song
+ */
             repeat = new JTextField("🔁");
             repeat.setBackground(this.getBackground());
             repeat.setForeground(foreground);
@@ -503,6 +516,11 @@ public class PlayerPart extends JPanel {
         }
     }
 
+    /**
+     * this method sets an array for player and also mention which element of array should be played
+     * @param songs
+     * @param initialIndex
+     */
     public void setSongs(ArrayList<Song> songs, int initialIndex) {
 
         if (songs.size() == 0) {

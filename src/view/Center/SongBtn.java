@@ -10,14 +10,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * this jpanel connects songs to player and songs can be played by clicking them here
+ */
 public class SongBtn extends JPanel {
 
     private ArrayList<Song> songs;
     private Song song;
     private int index;
     private PlayerPart playerPart;
-
-
     private JLabel icon;
     private JLabel title;
     private JLabel album;

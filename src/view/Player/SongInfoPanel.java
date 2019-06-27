@@ -3,6 +3,9 @@ package view.Player;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * this class show song information like title, artist, artwork and album on the down and left side of the frame
+ */
 public class SongInfoPanel extends JPanel {
 
     private JLabel icon;
@@ -61,6 +64,13 @@ public class SongInfoPanel extends JPanel {
 
     }
 
+    /**
+     * updates song information on player
+     * @param artwork
+     * @param title
+     * @param artistName
+     * @param albumName
+     */
     public void refresh(byte[] artwork, String title, String artistName, String albumName) {
 
         icon.setHorizontalAlignment(SwingConstants.CENTER);

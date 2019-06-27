@@ -11,6 +11,9 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * playlists are shown in the center through jpanels
+ */
 public class PlaylistBtn extends JPanel {
 
     private ArrayList<String> playlistNames;

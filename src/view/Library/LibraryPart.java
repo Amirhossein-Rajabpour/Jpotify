@@ -21,6 +21,7 @@ import java.util.stream.Stream;
 
 /**
  * This JPanel is placed at the left side of MainPaige which includes library and playlists
+ * this class also manages reading and writing song for program
  */
 
 public class LibraryPart extends JPanel {
@@ -161,6 +162,10 @@ public class LibraryPart extends JPanel {
                 fileChooserBtn.setBackground(pressedBackground);
             }
 
+            /**
+             * here user choose a song from computer and it adds to the program songs for user and it saves in a specific folder
+             * @param e
+             */
             @Override
             public void mouseReleased(MouseEvent e) {
                 fileChooserBtn.setBackground(getBackground());
@@ -173,11 +178,6 @@ public class LibraryPart extends JPanel {
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     addSong(selectedFile.getAbsolutePath());
                     saveSong(selectedFile.getAbsolutePath());
-//                    try {
-//                        songs = loadSongs(username);
-//                    } catch (IOException e1) {
-//                        e1.printStackTrace();
-//                    }
                     System.out.println("song saved");
                 }
             }
@@ -271,7 +271,9 @@ public class LibraryPart extends JPanel {
         });
         add(albumsBtn);
 
-
+/**
+ * by clicking this button a new panel will be opened and user and choose what songs to be deleted from the program
+ */
         EditBtn = new JTextField("   Edit");
         EditBtn.setFont(new Font("Arial", Font.BOLD, 9));
         EditBtn.setBackground(this.getBackground());
@@ -313,7 +315,9 @@ public class LibraryPart extends JPanel {
         playlistLabel.setForeground(foreground);
         playlistLabel.setBackground(this.getBackground());
         add(playlistLabel);
-
+/**
+ * this button shows all existed playlists for user
+ */
 
         playlistBtn = new JTextField("   Playlists");
         playlistBtn.setFont(new Font("Arial", Font.BOLD, 9));
@@ -520,7 +524,7 @@ public class LibraryPart extends JPanel {
 
     /**
      * Adds a song to songs arraylist
-     *
+     * and also adds song to related album
      * @param path
      */
     void addSong(String path) {
@@ -551,7 +555,7 @@ public class LibraryPart extends JPanel {
     }
 
     /**
-     * this method add each song to it's album HashMap
+     * this method add each song to it's album class
      *
      * @param song
      */
@@ -578,7 +582,7 @@ public class LibraryPart extends JPanel {
 //    }
 
     /**
-     * this method save added song to the program
+     * this method save added song to the program(create a file for it and write it)
      *
      * @param path
      */
@@ -618,11 +622,12 @@ public class LibraryPart extends JPanel {
         return showPanel;
     }
 
-    public void setUsername(String username) {
-        username = new String();
-        this.username = username;
-    }
-
+    /**
+     * this method reads and loads all users songs and albums and add them to the program
+     * @param username
+     * @return
+     * @throws IOException
+     */
     public ArrayList<Song> loadSongs(String username) throws IOException {
 
         ArrayList<Song> loadedSongs = new ArrayList<Song>();
@@ -644,7 +649,7 @@ public class LibraryPart extends JPanel {
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
 
-                        for(Playlist playlist: ((Song)obj).getPlaylists())
+                        for(Playlist playlist: ((Song)obj).getPlaylists()) // i dont know why it doesnt work
                             addPlaylistName(playlist.getPlaylistName());
 
                         if (((Song) obj).isFavourite() == true)
@@ -666,12 +671,7 @@ public class LibraryPart extends JPanel {
         return loadedSongs;
     }
 
-    /**
-     * this method writes playlist into file
-     * it creates a file with playlist name and then write each song separately on it.
-     *
-     * @param savingplaylist
-     */
+
 //    public void savePlaylists(Playlist savingplaylist) {
 //
 //        new File(username + "/playlists/" + savingplaylist.getPlaylistName()).mkdir();
@@ -698,13 +698,6 @@ public class LibraryPart extends JPanel {
 //
 //    }
 
-    /**
-     * this method reads users previous playlists (not working)
-     *
-     * @param username
-     * @return
-     * @throws IOException
-     */
 //    public ArrayList<Playlist> loadPlaylists(String username) throws IOException {
 //
 //        ArrayList<Playlist> loadedPlaylists = new ArrayList<Playlist>();
@@ -766,18 +759,31 @@ public class LibraryPart extends JPanel {
 
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
+    /**
+     * it returns hte library itself
+     * @return
+     */
     LibraryPart getLibrarypartItself() {
         return this;
     }
-
+    /**
+     * it returns library playlist name only which is an arraylist of string
+     * @return
+     */
     public ArrayList<String> getPlaylistName() {
         return this.playlistNames;
     }
-
+    /**
+     * adds a name to playlist names arraylist for library
+     * @param name
+     */
     public void addPlaylistName(String name) {
         this.playlistNames.add(name);
     }
-
+    /**
+     * this method removes a song from library with its file
+     * @param path
+     */
     public void removeSpecificSong(String path) {
         new File(path).delete();
     }
@@ -785,12 +791,18 @@ public class LibraryPart extends JPanel {
     public String getUsername() {
         return username;
     }
-
+    /**
+     * sets library songs
+     * @param songs
+     */
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
 
     }
-
+    /**
+     * sets library albums
+     * @param albums
+     */
     public void setAlbums(ArrayList<Album> albums) {
         this.albums = albums;
     }

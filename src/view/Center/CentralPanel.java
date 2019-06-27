@@ -7,6 +7,7 @@ import java.awt.*;
 
 /**
  * CentralPanel at the center of the MainPage frame
+ * this panel includes a search bar and a main panel for showing songs and albums and other features of the program
  */
 public class CentralPanel extends JPanel {
 

@@ -3,6 +3,9 @@ package view.Friends;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * this panel shows friends activities through network connection
+ */
 public class FriendActivity extends JPanel {
 
     private JLabel friendActivity;
