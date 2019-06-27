@@ -46,22 +46,28 @@ public class RemoveSong extends JFrame {
                     }
                 }
 
-/**
- * this part of code updates library songs and albums.
- */
                 try {
                     libraryPart.setSongs(libraryPart.loadSongs(libraryPart.getUsername()));
-                    ArrayList<Album> loadedAlbums = new ArrayList<>();
-                    for(Song song: libraryPart.loadSongs(libraryPart.getUsername()) )
-                    {
-                        Album album = new Album(song.getAlbumName());
-                        loadedAlbums.add(album);
-
-                    }
-                    libraryPart.setAlbums(loadedAlbums);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
+
+
+/**
+ * this part of code updates library songs and albums.
+ */
+//                try {
+//                    ArrayList<Album> loadedAlbums = new ArrayList<>();
+//                    for(Song song: libraryPart.loadSongs(libraryPart.getUsername()) )
+//                    {
+//                        Album album = new Album(song.getAlbumName());
+//                        loadedAlbums.add(album);
+//
+//                    }
+//                    libraryPart.setAlbums(loadedAlbums);
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                }
 
                 libraryPart.getShowPanel().revalidate();
                 setVisible(false);
