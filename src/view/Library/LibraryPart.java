@@ -266,21 +266,7 @@ public class LibraryPart extends JPanel {
 //                    addToAlbum(song);
 //                }
 
-
-//                ArrayList<Album> loadedAlbums = new ArrayList<>();
-//                try {
-//                    for(Song song: loadSongs(getUsername()) )
-//                    {
-//                        Album album = new Album(song.getAlbumName());
-//                        loadedAlbums.add(album);
-//
-//                    }
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
-//                showPanel.addAlbums(loadedAlbums);
-                    showPanel.setAlbums(albums);
-
+                showPanel.setAlbums(albums);
                 showPanel.revalidate();
             }
 
@@ -569,6 +555,7 @@ public class LibraryPart extends JPanel {
     public ArrayList<Song> loadSongs(String username) throws IOException {
 
         ArrayList<Song> loadedSongs = new ArrayList<Song>();
+        boolean cont = true;
 
         try (Stream<Path> filePathStream = Files.walk(Paths.get(username + "/songs/"))) {
             filePathStream.forEach(filePath -> {
@@ -702,6 +689,8 @@ public class LibraryPart extends JPanel {
         return songs;
     }
 
+//    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
+
     LibraryPart getLibrarypartItself() { return this; }
 
     public void removeSpecificSong(String path){ new File(path).delete(); }
@@ -714,7 +703,7 @@ public class LibraryPart extends JPanel {
             addToAlbum(song);
     }
 
-    public void setAlbums(ArrayList<Album> albums) { this.albums = albums; }
-
-    public ArrayList<Album> getAlbums() { return albums; }
+    public void setAlbums(ArrayList<Album> albums) {
+        this.albums = albums;
+    }
 }
