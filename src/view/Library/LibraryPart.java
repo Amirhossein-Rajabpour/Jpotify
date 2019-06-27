@@ -435,6 +435,7 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 favouriteBtn.setBackground(getBackground());
+
                 for (Song song : songs) {
                     if (song.isFavourite() == true) {
                         favouriteSongs.add(song);
@@ -484,13 +485,9 @@ public class LibraryPart extends JPanel {
     /**
      * Adds a song to user's favourites songs
      *
-     * @param path
+     * @param
      */
-    public void addFavourite(String path) {
-
-        song = new Song(path);
-        favouriteSongs.add(song);
-    }
+    public void addFavourite(Song song) { favouriteSongs.add(song); }
 
     /**
      * this method add each song to it's album HashMap

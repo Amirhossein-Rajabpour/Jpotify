@@ -1,6 +1,7 @@
 package view.Center;
 
 import model.Song;
+import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -32,7 +33,6 @@ public class SongBtn extends JPanel {
     public SongBtn(PlayerPart playerPart, ArrayList<Song> songs, int index) {
 
         super();
-
 
         this.songs = songs;
         this.index = index;

@@ -4,6 +4,7 @@ import controller.PlayPartController;
 import controller.SoundController;
 import javazoom.jl.decoder.JavaLayerException;
 import model.Song;
+import view.Library.LibraryPart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +38,7 @@ public class PlayerPart extends JPanel {
     private boolean repeatOneIsOn;
     private SongInfoPanel songInfoPanel;
     private SoundController soundController;
+    private LibraryPart libraryPart;
 
 
     public PlayerPart() {
@@ -473,6 +475,7 @@ public class PlayerPart extends JPanel {
                         favorite.setText("💔");
                         favorite.setToolTipText("Unlike");
                         songs.get(currentSong).setFavourite(true);
+                        System.out.println("liked");
 
                     } else {
                         favorite.setText("♥︎");
