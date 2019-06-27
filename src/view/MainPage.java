@@ -40,7 +40,6 @@ public class MainPage extends JFrame {
         this.add(centralPanel, BorderLayout.CENTER);
 
         library = new LibraryPart(getUserName());
-//        Library.setUsername(getUserName());
         library.setShowPanel(centralPanel.getShowPanel());
         JScrollPane jscrollPane = new JScrollPane(library);
         jscrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -51,8 +50,6 @@ public class MainPage extends JFrame {
         JScrollPane scrollPane = new JScrollPane(friendActivity);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, BorderLayout.EAST);
-        //        friendActivity = new FriendActivity();
-//        this.add(friendActivity,BorderLayout.EAST);
 
 
         SwingUtilities.updateComponentTreeUI(this);

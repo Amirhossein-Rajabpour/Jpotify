@@ -35,6 +35,7 @@ public class LibraryPart extends JPanel {
     private JTextField albumsBtn;
     private JTextField EditBtn;
     private JLabel playlistLabel;
+    private JTextField playlistBtn;
     private JTextField newPlaylistBtn;
     private JTextField sharedPlaylistBtn;
     private JTextField favouriteBtn;
@@ -61,10 +62,10 @@ public class LibraryPart extends JPanel {
     public LibraryPart(String user) throws IOException {
 
         super();
-        this.setPreferredSize(new Dimension(110,700));
+        this.setPreferredSize(new Dimension(110, 400));
         setSize(400, 400);
         this.setBackground(new Color(24, 24, 24));
-        setLayout(new GridLayout(29, 1));
+        setLayout(new GridLayout(19, 1));
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
 
@@ -300,7 +301,7 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 EditBtn.setBackground(getBackground());
 
-                removeSong = new RemoveSong(songs,getLibrarypartItself());
+                removeSong = new RemoveSong(songs, getLibrarypartItself());
 
             }
 
@@ -322,6 +323,39 @@ public class LibraryPart extends JPanel {
         playlistLabel.setForeground(foreground);
         playlistLabel.setBackground(this.getBackground());
         add(playlistLabel);
+
+
+        playlistBtn = new JTextField("   Playlists");
+        playlistBtn.setFont(new Font("Arial", Font.BOLD, 9));
+        playlistBtn.setEditable(false);
+        playlistBtn.setBackground(this.getBackground());
+        playlistBtn.setForeground(foreground);
+        playlistBtn.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                playlistBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                playlistBtn.setBackground(getBackground());
+                //
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        add(playlistBtn);
 
 
 /**
@@ -455,11 +489,11 @@ public class LibraryPart extends JPanel {
         int exist = 0;
         song = new Song(path);
 
-        for(Song song: songs){
-            if(song.getPath().equals(path) )
+        for (Song song : songs) {
+            if (song.getPath().equals(path))
                 exist = 1;
         }
-        if(exist == 0){
+        if (exist == 0) {
             songs.add(song);
             System.out.println(song.getTitle());
             System.out.println(song.getAlbumName());
@@ -488,7 +522,7 @@ public class LibraryPart extends JPanel {
 
         if (albums.contains(song.getAlbumName())) {
             for (Album album : albums) {
-                if (song.getAlbumName().equals(album.getAlbumName()) ) {
+                if (song.getAlbumName().equals(album.getAlbumName())) {
                     album.addSong(song);
                 }
             }
@@ -539,9 +573,13 @@ public class LibraryPart extends JPanel {
      * @return
      */
 
-    public void setShowPanel(ShowPanel showPanel) { this.showPanel = showPanel; }
+    public void setShowPanel(ShowPanel showPanel) {
+        this.showPanel = showPanel;
+    }
 
-    public ShowPanel getShowPanel() { return showPanel; }
+    public ShowPanel getShowPanel() {
+        return showPanel;
+    }
 
     public void setUsername(String username) {
         username = new String();
@@ -685,15 +723,21 @@ public class LibraryPart extends JPanel {
 
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
-    LibraryPart getLibrarypartItself() { return this; }
+    LibraryPart getLibrarypartItself() {
+        return this;
+    }
 
-    public void removeSpecificSong(String path){ new File(path).delete(); }
+    public void removeSpecificSong(String path) {
+        new File(path).delete();
+    }
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
-        for(Song song: songs)
+        for (Song song : songs)
             addToAlbum(song);
     }
 

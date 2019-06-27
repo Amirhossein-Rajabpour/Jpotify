@@ -15,12 +15,12 @@ public class FriendActivity extends JPanel {
     public FriendActivity() {
         super();
 
-        backGround = new Color(24,24,24);
+        backGround = new Color(24, 24, 24);
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
 
-        this.setMaximumSize(new Dimension(200,700));
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.setMaximumSize(new Dimension(200, 700));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(backGround);
 
         add(Box.createRigidArea(new Dimension(0, 5)));
