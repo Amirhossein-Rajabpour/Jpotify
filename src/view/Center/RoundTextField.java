@@ -6,6 +6,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * this is programs search bar
+ */
 public class RoundTextField extends JTextField {
     private static JTextField empty;
     private Color color;

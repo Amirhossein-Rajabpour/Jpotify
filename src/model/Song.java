@@ -54,6 +54,10 @@ public class Song implements Serializable {
         playlists.add(playlist);
     }
 
+    /**
+     * this feature is for using song in network. if true it means song can be shared on network
+     * @return
+     */
     public boolean isSharable() {
         return isSharable;
     }
@@ -66,6 +70,10 @@ public class Song implements Serializable {
         isFavourite = favourite;
     }
 
+    /**
+     * each song can be added to user's favourites songs. this method says if a song is liked by the user or not
+     * @return
+     */
     public boolean isFavourite() {
         return isFavourite;
     }
@@ -162,6 +170,10 @@ public class Song implements Serializable {
         }
     }
 
+    /**
+     * each song can be added to many playlists that's why each song has an arraylist of playlists
+     * @return
+     */
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
     }

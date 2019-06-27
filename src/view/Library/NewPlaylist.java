@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * this class creates a new playlist and adds that playlist to users songs
+ */
 public class NewPlaylist extends JFrame {
 
     private final Color background;
@@ -23,13 +26,11 @@ public class NewPlaylist extends JFrame {
     private int arrayListSize;
     private String name;
     private Playlist playlist;
-    private boolean isDone;
 
 
     public NewPlaylist(ArrayList<Song> songs, LibraryPart libraryPart) {
 
         super();
-        isDone = false;
 
         foreground = new Color(195, 195, 195);
         background = new Color(59, 63, 63);
@@ -133,6 +134,8 @@ public class NewPlaylist extends JFrame {
                             songs.get(i).addPlaylist(playlist);
                         }
                     }
+                    for(Song song: songs)
+                    libraryPart.saveSong(song.getPath());
 
                     libraryPart.addPlaylistName(name);
 //                libraryPart.savePlaylists(playlist);
@@ -155,7 +158,4 @@ public class NewPlaylist extends JFrame {
         return this.playlist;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
 }

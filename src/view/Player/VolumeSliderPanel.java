@@ -7,6 +7,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
+/**
+ * this class increase and decreases volume of the song using a slider on the right side of the panel
+ */
 public class VolumeSliderPanel extends JPanel{
 
     private JSlider slider;

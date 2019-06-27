@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 /**
  * this class is a container which shows songs, albums, playlists and  etc in the middle part of the program
+ * also it connects to program's player and library.
  */
 public class ShowPanel extends JPanel {
 
@@ -37,6 +38,10 @@ public class ShowPanel extends JPanel {
 
     }
 
+    /**
+     * shows song
+     * @param songs
+     */
     public void setSongs(ArrayList<Song> songs) {
 
         this.songs = null;
@@ -54,7 +59,11 @@ public class ShowPanel extends JPanel {
         setVisible(true);
     }
 
-    public void setAlbums(ArrayList<Album> albums) {
+    /**
+     * shows albums
+     * @param albums
+     */
+    public void setAlbums(ArrayList<Album> albums){
 
         this.albums = albums;
         albumButtons = new JButton[albums.size()];
@@ -89,7 +98,11 @@ public class ShowPanel extends JPanel {
         this.setVisible(true);
     }
 
-
+    /**
+     * shows playlists
+     * @param playlistNames
+     * @param songs
+     */
     public void setPlaylists(ArrayList<String> playlistNames, ArrayList<Song> songs) {
 
 

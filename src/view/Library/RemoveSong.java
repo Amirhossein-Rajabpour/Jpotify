@@ -1,18 +1,17 @@
 package view.Library;
 
 import model.Album;
-import model.Playlist;
 import model.Song;
 import view.Player.PlayerPart;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
+/**
+ * this class opens a frame and user select what songs to be deleted
+ */
 public class RemoveSong extends JFrame {
 
     private JCheckBox[] songCheckbox;
@@ -47,8 +46,6 @@ public class RemoveSong extends JFrame {
                         libraryPart.removeSpecificSong(libraryPart.getUsername() + "/songs/" + songs.get(i).getTitle());
                         songs.remove(songs.get(i));
                         playerPart.setSongs(songs, 0);
-
-
                     }
                 }
 

@@ -3,6 +3,9 @@ package view.Player;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * container for bottom of the program which contains other panels like player
+ */
 public class BottomPanel extends JPanel {
 
     private Color background;

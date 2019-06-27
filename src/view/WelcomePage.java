@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+/**
+ * this is login page which reads username and user's friends id for networking
+ */
 public class WelcomePage extends JFrame {
 
     private static final int WIDTH = 350, HEIGHT = 500;
