@@ -46,7 +46,9 @@ public class MainPage extends JFrame {
         library.setShowPanel(centralPanel.getShowPanel());
         JScrollPane jscrollPane = new JScrollPane(library);
         jscrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        this.add(jscrollPane, BorderLayout.WEST);
+//        jscrollPane.setBackground(new Color(24, 24, 24));
+//        this.add(jscrollPane, BorderLayout.WEST);
+        this.add(library, BorderLayout.WEST);
 
 
         friendActivity = new FriendActivity();
