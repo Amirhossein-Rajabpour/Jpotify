@@ -14,7 +14,7 @@ public class MainPage extends JFrame {
 
     private String userName;
     private String friendsId;
-    private LibraryPart Library;
+    private LibraryPart library;
     private BottomPanel bottomPanel;
     private CentralPanel centralPanel;
     private FriendActivity friendActivity;
@@ -39,12 +39,17 @@ public class MainPage extends JFrame {
         centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart());
         this.add(centralPanel, BorderLayout.CENTER);
 
-        Library = new LibraryPart(getUserName());
-        Library.setShowPanel(centralPanel.getShowPanel());
-        this.add(new JScrollPane(Library), BorderLayout.WEST);
+        library = new LibraryPart(getUserName());
+        library.setShowPanel(centralPanel.getShowPanel());
+        JScrollPane jscrollPane = new JScrollPane(library);
+        jscrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        this.add(jscrollPane, BorderLayout.WEST);
 
-//        friendActivity = new FriendActivity();
-//        this.add(friendActivity,BorderLayout.EAST);
+
+        friendActivity = new FriendActivity();
+        JScrollPane scrollPane = new JScrollPane(friendActivity);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        this.add(scrollPane, BorderLayout.EAST);
 
 
         SwingUtilities.updateComponentTreeUI(this);
