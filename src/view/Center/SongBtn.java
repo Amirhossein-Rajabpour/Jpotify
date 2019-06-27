@@ -1,7 +1,6 @@
 package view.Center;
 
 import model.Song;
-import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -44,7 +43,6 @@ public class SongBtn extends JPanel {
         foreground = new Color(210, 210, 210);
         pressedBackground = new Color(65, 65, 65);
 
-//        this.setLayout(new GridLayout(2, 1));
         this.setLayout(new BorderLayout());
         this.setBackground(background);
         this.font1 = new Font("Arial", Font.BOLD, 13);
@@ -65,7 +63,6 @@ public class SongBtn extends JPanel {
         this.add(icon, BorderLayout.CENTER);
 
         data = new JPanel();
-//        data.setPreferredSize(new Dimension(80, 10));
         data.setLayout(new BorderLayout());
         data.setBackground(background);
 
