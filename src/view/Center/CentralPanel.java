@@ -23,8 +23,14 @@ public class CentralPanel extends JPanel {
         toolBar.setSize(new Dimension(50, 10));
         this.add(toolBar, BorderLayout.NORTH);
 
+
         showPanel = new ShowPanel(playerPart);
-        this.add(showPanel,BorderLayout.CENTER);
+        JScrollPane jscrollPane = new JScrollPane(showPanel);
+        jscrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jscrollPane.setBackground(new Color(33, 33, 33));
+        this.add(jscrollPane, BorderLayout.CENTER);
+
+//        this.add(showPanel,BorderLayout.CENTER);
     }
 
     public void setShowPanel(ShowPanel showPanel){

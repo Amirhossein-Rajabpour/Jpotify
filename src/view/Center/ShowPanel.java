@@ -31,7 +31,7 @@ public class ShowPanel extends JPanel {
         super();
         this.playerPart = playerPart;
         background = new Color(33, 33, 33);
-        this.setPreferredSize(new Dimension(1000, 700));
+        this.setPreferredSize(new Dimension(200, 70));
         this.setLayout(new FlowLayout());
         this.setBackground(background);
 
