@@ -50,7 +50,6 @@ public class LibraryPart extends JPanel {
     private RemoveSong removeSong;
 
 
-
     ArrayList<Song> songs = new ArrayList<>();
     /**
      * playlist doesnt have arraylist in library and they are shown in showpanel exactly like favourite songs.
@@ -304,7 +303,7 @@ public class LibraryPart extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 EditBtn.setBackground(getBackground());
 
-                removeSong = new RemoveSong(songs,getLibrarypartItself(), playerPart);
+                removeSong = new RemoveSong(songs, getLibrarypartItself(), playerPart);
 
             }
 
@@ -470,9 +469,9 @@ public class LibraryPart extends JPanel {
                 favouriteSongs = new ArrayList<>();
 
                 for (Song song : songs) {
-                        if (song.isFavourite() == true && !favouriteSongs.contains(song)) {
-                            favouriteSongs.add(song);
-                        }
+                    if (song.isFavourite() == true && !favouriteSongs.contains(song)) {
+                        favouriteSongs.add(song);
+                    }
 
                 }
                 showPanel.setSongs(favouriteSongs);
@@ -522,7 +521,9 @@ public class LibraryPart extends JPanel {
      *
      * @param
      */
-    public void addFavourite(Song song) { favouriteSongs.add(song); }
+    public void addFavourite(Song song) {
+        favouriteSongs.add(song);
+    }
 
     /**
      * this method add each song to it's album HashMap
@@ -533,7 +534,7 @@ public class LibraryPart extends JPanel {
 
         if (albums.contains(song.getAlbumName())) {
             for (Album album : albums) {
-                if (song.getAlbumName().equals(album.getAlbumName()) ) {
+                if (song.getAlbumName().equals(album.getAlbumName())) {
                     album.addSong(song);
                 }
             }
@@ -584,9 +585,13 @@ public class LibraryPart extends JPanel {
      * @return
      */
 
-    public void setShowPanel(ShowPanel showPanel) { this.showPanel = showPanel; }
+    public void setShowPanel(ShowPanel showPanel) {
+        this.showPanel = showPanel;
+    }
 
-    public ShowPanel getShowPanel() { return showPanel; }
+    public ShowPanel getShowPanel() {
+        return showPanel;
+    }
 
     public void setUsername(String username) {
         username = new String();
@@ -613,7 +618,7 @@ public class LibraryPart extends JPanel {
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
-                        if(((Song)obj).isFavourite() == true)
+                        if (((Song) obj).isFavourite() == true)
                             favouriteSongs.add((Song) obj);
 
                     } catch (FileNotFoundException e) {
@@ -732,15 +737,25 @@ public class LibraryPart extends JPanel {
 
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
-    LibraryPart getLibrarypartItself() { return this; }
+    LibraryPart getLibrarypartItself() {
+        return this;
+    }
 
-    public void addPlaylistName (String name){
+    public ArrayList<String> getPlaylistName() {
+        return this.playlistNames;
+    }
+
+    public void addPlaylistName(String name) {
         this.playlistNames.add(name);
     }
 
-    public void removeSpecificSong(String path){ new File(path).delete(); }
+    public void removeSpecificSong(String path) {
+        new File(path).delete();
+    }
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
