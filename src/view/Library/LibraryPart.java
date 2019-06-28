@@ -47,6 +47,7 @@ public class LibraryPart extends JPanel {
     private Color pressedBackground;
     private Album album;
     private String username;
+    private PlayerPart playerPart;
     private NewPlaylist newPlaylist;
     private RemoveSong removeSong;
 
@@ -70,6 +71,7 @@ public class LibraryPart extends JPanel {
         setLayout(new GridLayout(19, 1));
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
+        this.playerPart = playerPart;
 
         username = user;
         if (new File(username + "/songs/").list().length > 0) {
@@ -537,6 +539,8 @@ public class LibraryPart extends JPanel {
             albums.add(album);
             album.addSong(song);
         }
+        playerPart.setAlbums(albums);
+
 
     }
 
@@ -628,26 +632,12 @@ public class LibraryPart extends JPanel {
             });
         }
 
+        playerPart.setAlbums(albums);
         return loadedSongs;
     }
 
 
-    /**
-     * this method takes an arraylis and an index and put the index song at the beggining of the arraylist and shift other parts
-     *
-     * @param songs
-     * @param index
-     * @return
-     */
-    public ArrayList<Song> sortSongs(ArrayList<Song> songs, int index) {
 
-        Song tmp = new Song(songs.get(index).getPath());
-        for (int i = index; i > 1; i--) {
-            songs.set(i, songs.get(i - 1));
-        }
-        songs.set(0, tmp);
-        return songs;
-    }
 
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 

@@ -3,6 +3,7 @@ package view.Player;
 import controller.PlayPartController;
 import controller.AudioController;
 import javazoom.jl.decoder.JavaLayerException;
+import model.Album;
 import model.Song;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -41,6 +43,7 @@ public class PlayerPart extends JPanel {
     private boolean repeatOneIsOn;
     private SongInfoPanel songInfoPanel;
     private AudioController audioController;
+    private ArrayList<Album> albums;
 
 
     public PlayerPart() {
@@ -295,7 +298,10 @@ public class PlayerPart extends JPanel {
                             try {
 
                                 player.play();
+                                progressBarPanel.iterate();
 
+                                sortSongs(currentSong);
+                                sortAlbums(currentSong);
 //                            soundController.setGain();
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
@@ -596,6 +602,49 @@ public class PlayerPart extends JPanel {
 
     public void setSongInfoPanel(SongInfoPanel songInfoPanel) {
         this.songInfoPanel = songInfoPanel;
+    }
+
+    /**
+     * this method takes an arraylis and an index and put the index song at the beggining of the arraylist and shift other parts
+     *
+     * @param index
+     * @return
+     */
+    public void sortSongs(int index) {
+
+        Song tmp;
+        tmp = songs.get(index);
+        for (int i = index; i >= 1; i--) {
+            songs.set(i, songs.get(i - 1));
+        }
+        songs.set(0, tmp);
+
+    }
+
+    public void sortAlbums(int index) {
+
+        for (int i = 0; i < albums.size(); i++) {
+            if (songs.get(index).getAlbumName().equals(albums.get(i).getAlbumName())) {
+                index = i;
+                break;
+            }
+        }
+
+        Album tmp;
+        tmp = albums.get(index);
+        for (int i = index; i >= 1; i--) {
+            albums.set(i, albums.get(i - 1));
+        }
+        albums.set(0, tmp);
+
+    }
+
+    public void setAlbums(ArrayList<Album> albums) {
+        this.albums = albums;
+    }
+
+    public void setCurrentSec(long sec) {
+
     }
 
 

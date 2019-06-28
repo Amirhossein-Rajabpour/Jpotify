@@ -59,6 +59,7 @@ public class ShowPanel extends JPanel {
             add(songBtns[i]);
 
         }
+        playerPart.setAlbums(albums);
         setVisible(true);
     }
 
@@ -80,6 +81,7 @@ public class ShowPanel extends JPanel {
             add(albumBtns[i]);
 
         }
+        playerPart.setAlbums(albums);
         this.setVisible(true);
     }
 
