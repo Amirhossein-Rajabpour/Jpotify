@@ -131,4 +131,18 @@ public class PlaylistBtn extends JPanel {
 
 
     }
+
+    public ArrayList<Song> getShowSongs() {
+        return showSongs;
+    }
+
+    public String getPlaylistName() {
+        return playlistName;
+    }
+
+    public void setPlaylistName(String playlistName) {
+        this.playlistName = playlistName;
+    }
+
+
 }
