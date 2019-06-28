@@ -14,10 +14,14 @@ public class FriendActivity extends JPanel {
     private Color backGround;
     private Color foreground;
     private Color pressedBackground;
+    private Font Bfont;
+    private Font Sfont;
 
     public FriendActivity() {
         super();
 
+        Sfont = new Font("Arial", Font.BOLD, 11);
+        Bfont = new Font("Arial", Font.BOLD, 9);
         backGround = new Color(24, 24, 24);
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
