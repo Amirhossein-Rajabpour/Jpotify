@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ProgressBarPanel extends JPanel {
+public class ProgressBarPanel extends JPanel implements Runnable {
 
     private JTextField passed;
     private Color background;
@@ -65,20 +65,33 @@ public class ProgressBarPanel extends JPanel {
         this.progressBar.setValue(0);
         this.total.setText("" + songDuration / 60 + ":" + songDuration % 60);
         this.passed.setText("00:00");
+        this.num = 0;
+        this.isPlaying = false;
     }
 
     public void iterate() {
-        System.out.println(num);
+
         while (num < progressBar.getMaximum() && isPlaying == true) {
+            System.out.println(num);
             progressBar.setValue(num);
+            passed.setText("" + progressBar.getValue() / 60 + ":" + progressBar.getValue() % 60);
+//            progressBar.revalidate();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
+            num++;
         }
     }
 
     public void stop() {
         isPlaying = false;
+    }
+
+
+    @Override
+    public void run() {
+        isPlaying = true;
+        iterate();
     }
 }

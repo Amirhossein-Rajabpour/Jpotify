@@ -43,6 +43,7 @@ public class PlayerPart extends JPanel {
     private SongInfoPanel songInfoPanel;
     private AudioController audioController;
     private ArrayList<Album> albums;
+    private Thread thread;
 
 
     public PlayerPart() {
@@ -305,7 +306,10 @@ public class PlayerPart extends JPanel {
                             try {
 
                                 player.play();
-                                progressBarPanel.iterate();
+
+                                thread = new Thread(progressBarPanel);
+                                thread.start();
+
 
                                 sortSongs(currentSong);
                                 sortAlbums(currentSong);
@@ -317,6 +321,7 @@ public class PlayerPart extends JPanel {
                             playOrPause.setToolTipText("Pause");
                         } else {
                             player.pause();
+                            progressBarPanel.stop();
                             playOrPause.setText("▶︎");
                             playOrPause.setToolTipText("Play");
                         }
