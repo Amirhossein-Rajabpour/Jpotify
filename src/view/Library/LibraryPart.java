@@ -172,8 +172,7 @@ public class LibraryPart extends JPanel {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                    addSong(selectedFile.getAbsolutePath());
-                    saveSong(selectedFile.getAbsolutePath());
+                    saveSong(addSong(selectedFile.getAbsolutePath()));
                     System.out.println("song saved");
                 }
             }
@@ -492,7 +491,7 @@ public class LibraryPart extends JPanel {
      *
      * @param path
      */
-    void addSong(String path) {
+    Song addSong(String path) {
 
         int exist = 0;
         song = new Song(path);
@@ -508,6 +507,7 @@ public class LibraryPart extends JPanel {
             addToAlbum(song);
         }
 
+        return song;
     }
 
     /**
@@ -543,12 +543,11 @@ public class LibraryPart extends JPanel {
     /**
      * this method save added song to the program(create a file for it and write it)
      *
-     * @param path
+     * @param
      */
-    public void saveSong(String path) {
+    public void saveSong(Song song) {
 
-        Song song = new Song(path);
-//        addToAlbum(song);
+//        Song song = new Song(path);
         try {
             FileOutputStream f = new FileOutputStream(new File(username + "/songs/" + song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -609,8 +608,8 @@ public class LibraryPart extends JPanel {
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
 
-//                        for (Playlist playlist : ((Song) obj).getPlaylists()) // i dont know why it doesnt work
-//                            addPlaylistName(playlist.getPlaylistName());
+                        for (String playlistNames : ((Song) obj).getPlaylists()) // i dont know why it doesnt work
+                            addPlaylistName(playlistNames);
 
                         if (((Song) obj).isFavourite() == true)
                             favouriteSongs.add((Song) obj);
