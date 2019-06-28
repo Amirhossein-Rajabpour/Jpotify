@@ -69,6 +69,7 @@ public class EditPlaylist extends JFrame {
                         songs.get(i).addPlaylist(nameTextfield.getText());
                     }
                 }
+                libraryPart.getPlaylistName().remove(playlisName);
                 setVisible(false);
             }
         });
