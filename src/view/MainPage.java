@@ -47,10 +47,8 @@ public class MainPage extends JFrame {
         this.add(library, BorderLayout.WEST);
 
 
-        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart(),library);
+        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart());
         this.add(centralPanel, BorderLayout.CENTER);
-
-
 
         friendActivity = new FriendActivity();
         JScrollPane scrollPane = new JScrollPane(friendActivity);

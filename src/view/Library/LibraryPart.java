@@ -51,13 +51,13 @@ public class LibraryPart extends JPanel {
     private RemoveSong removeSong;
 
 
-    ArrayList<Song> songs = new ArrayList<>();
+    private ArrayList<Song> songs = new ArrayList<>();
     /**
      * playlist doesnt have arraylist in library and they are shown in showpanel exactly like favourite songs.
      */
-    ArrayList<Album> albums = new ArrayList<>();
-    ArrayList<Song> favouriteSongs = new ArrayList<>();
-    ArrayList<Song> sharedSongs = new ArrayList<>();
+    private ArrayList<Album> albums = new ArrayList<>();
+    private ArrayList<Song> favouriteSongs = new ArrayList<>();
+    private ArrayList<Song> sharedSongs = new ArrayList<>();
     private ArrayList<String> playlistNames = new ArrayList<>();
 
 
@@ -335,7 +335,7 @@ public class LibraryPart extends JPanel {
                 playlistBtn.setBackground(getBackground());
                 showPanel.removeAll();
                 showPanel.repaint();
-                showPanel.setPlaylists(playlistNames, songs);
+                showPanel.setPlaylists(playlistNames, songs, getLibrarypartItself());
                 showPanel.revalidate();
 
             }

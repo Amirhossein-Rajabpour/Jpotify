@@ -21,17 +21,15 @@ public class ShowPanel extends JPanel {
     private SongBtn[] songBtns;
     private AlbumBtn[] albumBtns;
     private PlayerPart playerPart;
-    private LibraryPart libraryPart;
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
     private ArrayList<String> playlistNames;
 
 
-    public ShowPanel(PlayerPart playerPart, LibraryPart libraryPart) {
+    public ShowPanel(PlayerPart playerPart) {
 
         super();
         this.playerPart = playerPart;
-        this.libraryPart = libraryPart;
         background = new Color(33, 33, 33);
 //        this.setPreferredSize(new Dimension(300, 1000));
 //        this.setMaximumSize(new Dimension(2, 7000));
@@ -91,7 +89,7 @@ public class ShowPanel extends JPanel {
      * @param playlistNames
      * @param songs
      */
-    public void setPlaylists(ArrayList<String> playlistNames, ArrayList<Song> songs) {
+    public void setPlaylists(ArrayList<String> playlistNames, ArrayList<Song> songs, LibraryPart libraryPart) {
 
         this.setPreferredSize(new Dimension(300, ((songs.size() / 4) + 1) * 155));
 

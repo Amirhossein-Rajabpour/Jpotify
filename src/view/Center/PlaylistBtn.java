@@ -63,7 +63,7 @@ public class PlaylistBtn extends JPanel {
 
             for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
-                if(songs.get(i).getPlaylists().get(j) != null){
+                if (songs.get(i).getPlaylists().get(j) != null) {
                     if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)) {
                         showSongs.add(songs.get(i));
                     }
@@ -75,18 +75,17 @@ public class PlaylistBtn extends JPanel {
 
         icon = new JLabel();
 
-//        if (showSongs.get(0) != null) {
-//            ImageIcon albumImgIcon;
-//            if (showSongs.get(0).getArtwork() != null) {
-//                albumImgIcon = new ImageIcon(showSongs.get(0).getArtwork());
-//            } else {
-//                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
-//            }
-//            Image img = albumImgIcon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
-//            Icon icon1 = new ImageIcon(img);
-//            icon.setIcon(icon1);
-//
-//        }
+        if (showSongs.size() != 0) {
+            ImageIcon albumImgIcon;
+            if (showSongs.get(0).getArtwork() != null) {
+                albumImgIcon = new ImageIcon(showSongs.get(0).getArtwork());
+            } else {
+                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+            }
+            Image img = albumImgIcon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
+            Icon icon1 = new ImageIcon(img);
+            icon.setIcon(icon1);
+        }
         this.add(icon, BorderLayout.CENTER);
 
         this.addMouseListener(new MouseListener() {
@@ -125,7 +124,7 @@ public class PlaylistBtn extends JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (me.getButton() == MouseEvent.BUTTON3) {
-                    editPlaylist = new EditPlaylist(songs,playlistName, libraryPart);
+                    editPlaylist = new EditPlaylist(songs, playlistName, libraryPart);
                 }
             }
         });
@@ -139,7 +138,7 @@ public class PlaylistBtn extends JPanel {
         return showSongs;
     }
 
-    public PlaylistBtn getPlaylistBtnItSelf(){
+    public PlaylistBtn getPlaylistBtnItSelf() {
         return this;
     }
 
