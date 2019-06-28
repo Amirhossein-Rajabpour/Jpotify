@@ -64,7 +64,7 @@ public class LibraryPart extends JPanel {
     public LibraryPart(String user, PlayerPart playerPart) throws IOException {
 
         super();
-        this.setPreferredSize(new Dimension(90, 400));
+        this.setPreferredSize(new Dimension(102, 750));
         setSize(400, 400);
         this.setBackground(new Color(24, 24, 24));
         setLayout(new GridLayout(19, 1));
