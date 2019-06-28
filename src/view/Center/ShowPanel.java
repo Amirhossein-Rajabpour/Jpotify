@@ -31,7 +31,9 @@ public class ShowPanel extends JPanel {
         super();
         this.playerPart = playerPart;
         background = new Color(33, 33, 33);
-        this.setPreferredSize(new Dimension(200, 70));
+//        this.setPreferredSize(new Dimension(300, 1000));
+//        this.setMaximumSize(new Dimension(2, 7000));
+//        this.setSize(new Dimension(2000, 7));
         this.setLayout(new FlowLayout());
         this.setBackground(background);
 
@@ -43,6 +45,8 @@ public class ShowPanel extends JPanel {
      * @param songs
      */
     public void setSongs(ArrayList<Song> songs) {
+
+        this.setPreferredSize(new Dimension(300, ((songs.size() / 4) + 1) * 170));
 
         this.songs = null;
         this.songs = songs;
@@ -65,6 +69,8 @@ public class ShowPanel extends JPanel {
      */
     public void setAlbums(ArrayList<Album> albums, ArrayList<Song> songs) {
 
+        this.setPreferredSize(new Dimension(300, ((songs.size() / 4) + 1) * 155));
+
         this.albums = albums;
         albumBtns = new AlbumBtn[albums.size()];
 
@@ -84,6 +90,8 @@ public class ShowPanel extends JPanel {
      * @param songs
      */
     public void setPlaylists(ArrayList<String> playlistNames, ArrayList<Song> songs) {
+
+        this.setPreferredSize(new Dimension(300, ((songs.size() / 4) + 1) * 155));
 
         this.playlistNames = playlistNames;
         playlistBtns = new PlaylistBtn[playlistNames.size()];
