@@ -68,7 +68,7 @@ public class PlayerPart extends JPanel {
  * new input and player in constructor in order to resume a song
  */
 
-            share = new JTextField("♥︎");
+            share = new JTextField("➚");
             share.setBackground(this.getBackground());
             share.setForeground(foreground);
             share.setEditable(false);
@@ -86,15 +86,21 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (share.getBackground().equals(background)) {
-                        share.setBackground(pressedBackground);
-                        share.setToolTipText("Unshare");
-                        songs.get(currentSong).setSharable(true);
+                    if (songs.size() != 0) {
+                        if (share.getBackground().equals(background)) {
+                            share.setBackground(pressedBackground);
+                            share.setToolTipText("Unshare");
+                            if (songs.size() != 0) {
+                                songs.get(currentSong).setSharable(true);
+                            }
 
-                    } else {
-                        share.setBackground(background);
-                        share.setToolTipText("Share");
-                        songs.get(currentSong).setSharable(false);
+                        } else {
+                            share.setBackground(background);
+                            share.setToolTipText("Share");
+                            if (songs.size() != 0) {
+                                songs.get(currentSong).setSharable(false);
+                            }
+                        }
                     }
                 }
 
@@ -131,16 +137,18 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (shuffle.getText().equals("🔀") && shuffle.getBackground().equals(background)) {
+                    if (songs.size() != 0) {
+                        if (shuffle.getText().equals("🔀") && shuffle.getBackground().equals(background)) {
 //                        shuffle.setText("➜");
-                        shuffle.setBackground(pressedBackground);
-                        shuffle.setToolTipText("Shuffle Off");
-                        playingSongs = shuffleSongs;
-                    } else {
-                        shuffle.setText("🔀");
-                        shuffle.setBackground(background);
-                        shuffle.setToolTipText("Shuffle On");
-                        playingSongs = songs;
+                            shuffle.setBackground(pressedBackground);
+                            shuffle.setToolTipText("Shuffle Off");
+                            playingSongs = shuffleSongs;
+                        } else {
+                            shuffle.setText("🔀");
+                            shuffle.setBackground(background);
+                            shuffle.setToolTipText("Shuffle On");
+                            playingSongs = songs;
+                        }
                     }
                 }
 
@@ -181,40 +189,13 @@ public class PlayerPart extends JPanel {
 /**
  * playing and pausing and multithreading here
  */
-                    player.pause();
-                    playOrPause.setText("▶︎");
-                    playOrPause.setToolTipText("Play");
+                    if (songs.size() != 0) {
+                        player.pause();
+                        playOrPause.setText("▶︎");
+                        playOrPause.setToolTipText("Play");
 
-                    if (repeatOneIsOn) {
-                        currentSong = currentSong;
-                        try {
-                            input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                            player = new PlayPartController(input);
-                            progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                    } else if (repeatAllIsOn && currentSong == 0) {
-                        currentSong = playingSongs.size() - 1;
-                        try {
-                            input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                            player = new PlayPartController(input);
-                            progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                    } else {
-                        if (currentSong != 0) {
-                            currentSong--;
-                            /**
-                             * new input and player here for going to next song
-                             */
+                        if (repeatOneIsOn) {
+                            currentSong = currentSong;
                             try {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
                                 player = new PlayPartController(input);
@@ -225,24 +206,52 @@ public class PlayerPart extends JPanel {
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             }
-                            if (songs.get(currentSong).isSharable()) {
-                                share.setBackground(pressedBackground);
-                                share.setToolTipText("Unshare");
-                            } else {
-                                share.setBackground(background);
-                                share.setToolTipText("Share");
+                        } else if (repeatAllIsOn && currentSong == 0) {
+                            currentSong = playingSongs.size() - 1;
+                            try {
+                                input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                                player = new PlayPartController(input);
+                                progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            } catch (JavaLayerException e1) {
+                                e1.printStackTrace();
                             }
+                        } else {
+                            if (currentSong != 0) {
+                                currentSong--;
+                                /**
+                                 * new input and player here for going to next song
+                                 */
+                                try {
+                                    input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                                    player = new PlayPartController(input);
+                                    progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                                    songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+                                } catch (FileNotFoundException e1) {
+                                    e1.printStackTrace();
+                                } catch (JavaLayerException e1) {
+                                    e1.printStackTrace();
+                                }
+                                if (songs.get(currentSong).isSharable()) {
+                                    share.setBackground(pressedBackground);
+                                    share.setToolTipText("Unshare");
+                                } else {
+                                    share.setBackground(background);
+                                    share.setToolTipText("Share");
+                                }
 
-                            if (songs.get(currentSong).isFavourite()) {
-                                favorite.setText("💔");
-                                favorite.setToolTipText("Unlike");
-                            } else {
-                                favorite.setText("♥︎");
-                                favorite.setToolTipText("Like");
+                                if (songs.get(currentSong).isFavourite()) {
+                                    favorite.setText("💔");
+                                    favorite.setToolTipText("Unlike");
+                                } else {
+                                    favorite.setText("♥︎");
+                                    favorite.setToolTipText("Like");
+                                }
                             }
                         }
                     }
-
 
                 }
 
@@ -350,41 +359,13 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     next.setBackground(background);
+                    if (songs.size() != 0) {
+                        player.pause();
+                        playOrPause.setText("▶︎");
+                        playOrPause.setToolTipText("Play");
 
-                    player.pause();
-                    playOrPause.setText("▶︎");
-                    playOrPause.setToolTipText("Play");
-
-                    if (repeatOneIsOn) {
-                        currentSong = currentSong;
-                        try {
-                            input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                            player = new PlayPartController(input);
-                            progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                    } else if (repeatAllIsOn && currentSong == playingSongs.size() - 1) {
-                        currentSong = 0;
-                        try {
-                            input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                            player = new PlayPartController(input);
-                            progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                    } else {
-                        if (currentSong != playingSongs.size() - 1) {
-                            currentSong++;
-                            /**
-                             * new input and player here for going to next song
-                             */
+                        if (repeatOneIsOn) {
+                            currentSong = currentSong;
                             try {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
                                 player = new PlayPartController(input);
@@ -395,21 +376,50 @@ public class PlayerPart extends JPanel {
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             }
-
-                            if (songs.get(currentSong).isSharable()) {
-                                share.setBackground(pressedBackground);
-                                share.setToolTipText("Unshare");
-                            } else {
-                                share.setBackground(background);
-                                share.setToolTipText("Share");
+                        } else if (repeatAllIsOn && currentSong == playingSongs.size() - 1) {
+                            currentSong = 0;
+                            try {
+                                input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                                player = new PlayPartController(input);
+                                progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            } catch (JavaLayerException e1) {
+                                e1.printStackTrace();
                             }
+                        } else {
+                            if (currentSong != playingSongs.size() - 1) {
+                                currentSong++;
+                                /**
+                                 * new input and player here for going to next song
+                                 */
+                                try {
+                                    input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                                    player = new PlayPartController(input);
+                                    progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                                    songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+                                } catch (FileNotFoundException e1) {
+                                    e1.printStackTrace();
+                                } catch (JavaLayerException e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            if (songs.get(currentSong).isFavourite()) {
-                                favorite.setText("💔");
-                                favorite.setToolTipText("Unlike");
-                            } else {
-                                favorite.setText("♥︎");
-                                favorite.setToolTipText("Like");
+                                if (songs.get(currentSong).isSharable()) {
+                                    share.setBackground(pressedBackground);
+                                    share.setToolTipText("Unshare");
+                                } else {
+                                    share.setBackground(background);
+                                    share.setToolTipText("Share");
+                                }
+
+                                if (songs.get(currentSong).isFavourite()) {
+                                    favorite.setText("💔");
+                                    favorite.setToolTipText("Unlike");
+                                } else {
+                                    favorite.setText("♥︎");
+                                    favorite.setToolTipText("Like");
+                                }
                             }
                         }
                     }
@@ -450,23 +460,25 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (repeat.getText().equals("🔁") && repeat.getBackground().equals(background)) {
-                        repeat.setText("🔂");
-                        repeatOneIsOn = true;
-                        repeat.setToolTipText("Repeat All");
-                        repeat.setBackground(pressedBackground);
-                        // Right the ActionEvent here Amirhosein
-                    } else if (repeat.getText().equals("🔂")) {
-                        repeat.setText("🔁");
-                        repeatOneIsOn = false;
-                        repeatAllIsOn = true;
-                        repeat.setToolTipText("Repeat Off");
-                        repeat.setBackground(pressedBackground);
-                    } else if (repeat.getText().equals("🔁") && repeat.getBackground().equals(pressedBackground)) {
-                        repeat.setText("🔁");
-                        repeatAllIsOn = false;
-                        repeat.setToolTipText("Repeat One");
-                        repeat.setBackground(background);
+                    if (songs.size() != 0) {
+                        if (repeat.getText().equals("🔁") && repeat.getBackground().equals(background)) {
+                            repeat.setText("🔂");
+                            repeatOneIsOn = true;
+                            repeat.setToolTipText("Repeat All");
+                            repeat.setBackground(pressedBackground);
+                            // Right the ActionEvent here Amirhosein
+                        } else if (repeat.getText().equals("🔂")) {
+                            repeat.setText("🔁");
+                            repeatOneIsOn = false;
+                            repeatAllIsOn = true;
+                            repeat.setToolTipText("Repeat Off");
+                            repeat.setBackground(pressedBackground);
+                        } else if (repeat.getText().equals("🔁") && repeat.getBackground().equals(pressedBackground)) {
+                            repeat.setText("🔁");
+                            repeatAllIsOn = false;
+                            repeat.setToolTipText("Repeat One");
+                            repeat.setBackground(background);
+                        }
                     }
                 }
 
@@ -501,16 +513,21 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (favorite.getText().equals("♥︎")) {
-                        favorite.setText("💔");
-                        favorite.setToolTipText("Unlike");
-                        songs.get(currentSong).setFavourite(true);
-                        System.out.println("liked");
+                    if (songs.size() != 0) {
+                        if (favorite.getText().equals("♥︎")) {
+                            favorite.setText("💔");
+                            favorite.setToolTipText("Unlike");
+                            if (songs.size() != 0) {
+                                songs.get(currentSong).setFavourite(true);
+                            }
+                            System.out.println("liked");
 
-                    } else {
-                        favorite.setText("♥︎");
-                        favorite.setToolTipText("Like");
-                        songs.get(currentSong).setFavourite(false);
+                        } else {
+                            favorite.setText("♥︎");
+                            favorite.setToolTipText("Like");
+
+                            songs.get(currentSong).setFavourite(false);
+                        }
                     }
                 }
 
