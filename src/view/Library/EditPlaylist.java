@@ -26,6 +26,7 @@ public class EditPlaylist extends JFrame {
 
         super();
         setLayout(new FlowLayout());
+        setSize(300,300);
 
         nameLabel = new JLabel("Edit your playlist name and songs");
         add(nameLabel);
