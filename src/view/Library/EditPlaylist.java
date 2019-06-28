@@ -70,6 +70,9 @@ public class EditPlaylist extends JFrame {
                     }
                 }
                 libraryPart.getPlaylistName().remove(playlisName);
+
+                for(Song song: songs)
+                    libraryPart.saveSong(song);
                 setVisible(false);
             }
         });
