@@ -1,8 +1,6 @@
 package view.Player;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,7 +11,7 @@ public class ProgressBarPanel extends JPanel {
     private Color background;
     private JProgressBar progressBar;
     private JTextField total;
-    private int num;
+    private int num = 0;
     private boolean isPlaying;
 
 
@@ -31,7 +29,7 @@ public class ProgressBarPanel extends JPanel {
         passed.setForeground(new Color(179, 179, 179));
         this.add(passed);
 
-        progressBar = new JProgressBar(0, 100);
+        progressBar = new JProgressBar(0, 0);
         progressBar.setStringPainted(false);
         progressBar.setBorderPainted(true);
         progressBar.addMouseListener(new MouseAdapter() {
@@ -41,6 +39,8 @@ public class ProgressBarPanel extends JPanel {
                 int mouseX = e.getX();
                 int progressBarVal = (int) Math.round(((double) mouseX / (double) progressBar.getWidth()) * progressBar.getMaximum());
                 progressBar.setValue(progressBarVal);
+                num = progressBarVal;
+                passed.setText("" + progressBar.getValue() / 60 + ":" + progressBar.getValue() % 60);
             }
         });
         this.add(progressBar);
@@ -68,13 +68,17 @@ public class ProgressBarPanel extends JPanel {
     }
 
     public void iterate() {
-        while (num < 100 && isPlaying == true) {
+        System.out.println(num);
+        while (num < progressBar.getMaximum() && isPlaying == true) {
             progressBar.setValue(num);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
-            num += 95;
         }
+    }
+
+    public void stop() {
+        isPlaying = false;
     }
 }
