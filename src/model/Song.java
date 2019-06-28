@@ -46,7 +46,7 @@ public class Song implements Serializable {
         setArtwork();
         setTitle();
         setDuration();
-        isFavourite = false;
+//        isFavourite = false;
         isSharable = false;
     }
 

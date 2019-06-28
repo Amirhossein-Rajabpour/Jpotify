@@ -135,7 +135,7 @@ public class NewPlaylist extends JFrame {
                         }
                     }
                     for(Song song: songs)
-                    libraryPart.saveSong(song.getPath());
+                    libraryPart.saveSong(song);
 
                     libraryPart.addPlaylistName(name);
 //                libraryPart.savePlaylists(playlist);
