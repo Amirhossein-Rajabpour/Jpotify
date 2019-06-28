@@ -609,8 +609,8 @@ public class LibraryPart extends JPanel {
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
 
-                        for (Playlist playlist : ((Song) obj).getPlaylists()) // i dont know why it doesnt work
-                            addPlaylistName(playlist.getPlaylistName());
+//                        for (Playlist playlist : ((Song) obj).getPlaylists()) // i dont know why it doesnt work
+//                            addPlaylistName(playlist.getPlaylistName());
 
                         if (((Song) obj).isFavourite() == true)
                             favouriteSongs.add((Song) obj);

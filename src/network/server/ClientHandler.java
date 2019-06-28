@@ -14,29 +14,31 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
 
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
+        while (true) {
+            BufferedReader bufferedReader = null;
+            try {
+                bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String input = null;
+            try {
+                input = bufferedReader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            PrintWriter printWriter = null;
+            try {
+                printWriter = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            printWriter.println(input);
+            printWriter.flush();
+
         }
-
-        String input = null;
-        try {
-            input = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        PrintWriter printWriter = null;
-        try {
-            printWriter = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        printWriter.println(input);
-        printWriter.flush();
-
     }
 }

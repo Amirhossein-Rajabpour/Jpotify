@@ -1,13 +1,22 @@
+import network.client.Client;
+import network.server.Server;
 import view.WelcomePage;
+
+import java.io.IOException;
 
 /**
  * main :)
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         WelcomePage welcomePage = new WelcomePage();
-//        ImageIcon zelos = new ImageIcon("/Users/apple/Desktop/JpotifyWhite.png");
-//        welcomePage.setIconImage(zelos.getImage());
+
+//        Server server = new Server();
+//        new Thread(server).start();
+//
+//        Client client = new Client("localhost", 4422);
+
+
     }
 }

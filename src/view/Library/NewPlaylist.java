@@ -115,7 +115,7 @@ public class NewPlaylist extends JFrame {
                 if (!libraryPart.getPlaylistName().contains(name)) {
 
 
-                    playlist = new Playlist(name);
+//                    playlist = new Playlist(name);
 
 //                for (int i = 0; i < arrayListSize; i++) {
 //
@@ -131,7 +131,7 @@ public class NewPlaylist extends JFrame {
                     for (int i = 0; i < songs.size(); i++) {
 
                         if (songCheckbox[i].isSelected()) {
-                            songs.get(i).addPlaylist(playlist);
+                            songs.get(i).addPlaylist(name);
                         }
                     }
                     for(Song song: songs)
