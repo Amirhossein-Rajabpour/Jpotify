@@ -182,5 +182,7 @@ public class Song implements Serializable {
         albumName = null;
     }
 
+    public void removePlaylist(Playlist playlist){ if(playlists.contains(playlist))playlists.remove(playlist); }
+
 
 }

@@ -2,6 +2,7 @@ package view.Center;
 
 import model.Song;
 import view.Library.EditPlaylist;
+import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -29,8 +30,9 @@ public class PlaylistBtn extends JPanel {
     private Font font1;
     private JLabel name;
     private JPanel data;
+    private EditPlaylist editPlaylist;
 
-    public PlaylistBtn(ArrayList<Song> songs, String playlistName, PlayerPart playerPart, ShowPanel showPanel) {
+    public PlaylistBtn(ArrayList<Song> songs, String playlistName, PlayerPart playerPart, ShowPanel showPanel, LibraryPart libraryPart) {
 
         super();
         this.playerPart = playerPart;
@@ -61,27 +63,30 @@ public class PlaylistBtn extends JPanel {
 
             for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
-                if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)) {
-                    showSongs.add(songs.get(i));
+                if(songs.get(i).getPlaylists().get(j) != null){
+                    if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)) {
+                        showSongs.add(songs.get(i));
+                    }
                 }
+
             }
 
         }
 
         icon = new JLabel();
 
-        if (showSongs.get(0) != null) {
-            ImageIcon albumImgIcon;
-            if (showSongs.get(0).getArtwork() != null) {
-                albumImgIcon = new ImageIcon(showSongs.get(0).getArtwork());
-            } else {
-                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
-            }
-            Image img = albumImgIcon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
-            Icon icon1 = new ImageIcon(img);
-            icon.setIcon(icon1);
-
-        }
+//        if (showSongs.get(0) != null) {
+//            ImageIcon albumImgIcon;
+//            if (showSongs.get(0).getArtwork() != null) {
+//                albumImgIcon = new ImageIcon(showSongs.get(0).getArtwork());
+//            } else {
+//                albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+//            }
+//            Image img = albumImgIcon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
+//            Icon icon1 = new ImageIcon(img);
+//            icon.setIcon(icon1);
+//
+//        }
         this.add(icon, BorderLayout.CENTER);
 
         this.addMouseListener(new MouseListener() {
@@ -120,8 +125,7 @@ public class PlaylistBtn extends JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (me.getButton() == MouseEvent.BUTTON3) {
-                    System.out.println("salam");
-                    EditPlaylist editPlaylist = new EditPlaylist(showSongs, getPlaylistBtnItSelf());
+                    editPlaylist = new EditPlaylist(songs,playlistName, libraryPart);
                 }
             }
         });

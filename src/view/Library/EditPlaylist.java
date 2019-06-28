@@ -20,9 +20,10 @@ public class EditPlaylist extends JFrame {
     private JTextField nameTextfield;
     private JLabel nameLabel;
     private JButton editButton;
+    private JButton deletePlaylist;
     private Playlist Playlist;
 
-    public EditPlaylist(ArrayList<Song> songs, PlaylistBtn playlistBtn) {
+    public EditPlaylist(ArrayList<Song> songs, String playlisName  , LibraryPart libraryPart) {
 
         super();
         setLayout(new FlowLayout());
@@ -32,7 +33,7 @@ public class EditPlaylist extends JFrame {
         add(nameLabel);
 
         nameTextfield = new JTextField();
-        nameTextfield.setText(playlistBtn.getPlaylistName());
+        nameTextfield.setText(playlisName);
         add(nameTextfield);
 
         allSongsChechbox = new JCheckBox[songs.size()];
@@ -47,8 +48,9 @@ public class EditPlaylist extends JFrame {
         for(int i = 0; i < songs.size() ;  i++){
             for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
-                if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistBtn.getPlaylistName()))
-                    allSongsChechbox[i].isSelected();
+                if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlisName)) {
+                    allSongsChechbox[i].setSelected(true);
+                }
             }
         }
 
@@ -58,13 +60,27 @@ public class EditPlaylist extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                playlistBtn.setPlaylistName(nameTextfield.getText());
+                for(int j = 0; j < songs.size(); j++)
+                    songs.get(j).removePlaylist(returnPlaylist(songs,playlisName));
 
                 for(int i = 0; i < songs.size() ; i++){
                     if(allSongsChechbox[i].isSelected()){
-                        songs.get(i).addPlaylist(returnPlaylist(songs, playlistBtn));
+                        songs.get(i).addPlaylist(returnPlaylist(songs, playlisName));
                     }
                 }
+                setVisible(false);
+            }
+        });
+
+        deletePlaylist = new JButton("Remove playlist");
+        add(deletePlaylist);
+        deletePlaylist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                for(int j = 0; j < songs.size(); j++)
+                    songs.get(j).removePlaylist(returnPlaylist(songs,playlisName));
+
                 setVisible(false);
             }
         });
@@ -75,17 +91,20 @@ public class EditPlaylist extends JFrame {
     /**
      * this method returns the playlist which is common in playlistBtn and songs playlist arraylist
      * @param songs
-     * @param playlistBtn
+     * @param playlisName
      * @return
      */
-    public Playlist returnPlaylist(ArrayList<Song> songs , PlaylistBtn playlistBtn){
+    public Playlist returnPlaylist(ArrayList<Song> songs , String playlisName){
 
         outer : for(int i = 0; i < songs.size() ;  i++){
                       for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
-                          if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistBtn.getPlaylistName()))
-                             return songs.get(i).getPlaylists().get(j);
-                             break outer;
+                          if (songs.get(i).getPlaylists().get(j) != null) {
+
+                              if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(),playlisName))
+                                  return songs.get(i).getPlaylists().get(j);
+                              break outer;
+                          }
                       }
                  }
 

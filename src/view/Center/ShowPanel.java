@@ -2,6 +2,7 @@ package view.Center;
 
 import model.Album;
 import model.Song;
+import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -20,16 +21,17 @@ public class ShowPanel extends JPanel {
     private SongBtn[] songBtns;
     private AlbumBtn[] albumBtns;
     private PlayerPart playerPart;
-
+    private LibraryPart libraryPart;
     ArrayList<Song> songs = new ArrayList<>();
     ArrayList<Album> albums = new ArrayList<>();
     private ArrayList<String> playlistNames;
 
 
-    public ShowPanel(PlayerPart playerPart) {
+    public ShowPanel(PlayerPart playerPart, LibraryPart libraryPart) {
 
         super();
         this.playerPart = playerPart;
+        this.libraryPart = libraryPart;
         background = new Color(33, 33, 33);
 //        this.setPreferredSize(new Dimension(300, 1000));
 //        this.setMaximumSize(new Dimension(2, 7000));
@@ -98,7 +100,7 @@ public class ShowPanel extends JPanel {
 
         for (int i = 0; i < playlistNames.size(); i++) {
 
-            playlistBtns[i] = new PlaylistBtn(songs, playlistNames.get(i), playerPart, this);
+            playlistBtns[i] = new PlaylistBtn(songs, playlistNames.get(i), playerPart, this, libraryPart);
             add(playlistBtns[i]);
 
         }

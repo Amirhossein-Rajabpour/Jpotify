@@ -1,5 +1,6 @@
 package view.Center;
 
+import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class CentralPanel extends JPanel {
 
     private ToolBar toolBar;
     private ShowPanel showPanel;
-    public CentralPanel(String userName, PlayerPart playerPart) {
+    public CentralPanel(String userName, PlayerPart playerPart, LibraryPart libraryPart) {
         super();
 
         this.setLayout(new BorderLayout());
@@ -24,7 +25,7 @@ public class CentralPanel extends JPanel {
         this.add(toolBar, BorderLayout.NORTH);
 
 
-        showPanel = new ShowPanel(playerPart);
+        showPanel = new ShowPanel(playerPart, libraryPart);
         JScrollPane jscrollPane = new JScrollPane(showPanel);
         jscrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jscrollPane.setBackground(new Color(33, 33, 33));

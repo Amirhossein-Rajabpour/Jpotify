@@ -39,14 +39,17 @@ public class MainPage extends JFrame {
         bottomPanel = new BottomPanel();
         this.add(bottomPanel, BorderLayout.SOUTH);
 
-        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart());
-        this.add(centralPanel, BorderLayout.CENTER);
 
         library = new LibraryPart(getUserName(), bottomPanel.getPlayerPart());
         library.setShowPanel(centralPanel.getShowPanel());
         JScrollPane jscrollPane = new JScrollPane(library);
         jscrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(library, BorderLayout.WEST);
+
+
+        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart(),library);
+        this.add(centralPanel, BorderLayout.CENTER);
+
 
 
         friendActivity = new FriendActivity();
