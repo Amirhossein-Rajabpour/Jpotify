@@ -226,14 +226,18 @@ public class PlayerPart extends JPanel {
                             }
                             if (songs.get(currentSong).isSharable()) {
                                 share.setBackground(pressedBackground);
+                                share.setToolTipText("Unshare");
                             } else {
                                 share.setBackground(background);
+                                share.setToolTipText("Share");
                             }
 
                             if (songs.get(currentSong).isFavourite()) {
-                                favorite.setText("♥︎");
-                            } else {
                                 favorite.setText("💔");
+                                favorite.setToolTipText("Unlike");
+                            } else {
+                                favorite.setText("♥︎");
+                                favorite.setToolTipText("Like");
                             }
                         }
                     }
@@ -384,14 +388,18 @@ public class PlayerPart extends JPanel {
 
                             if (songs.get(currentSong).isSharable()) {
                                 share.setBackground(pressedBackground);
+                                share.setToolTipText("Unshare");
                             } else {
                                 share.setBackground(background);
+                                share.setToolTipText("Share");
                             }
 
                             if (songs.get(currentSong).isFavourite()) {
-                                favorite.setText("♥︎");
-                            } else {
                                 favorite.setText("💔");
+                                favorite.setToolTipText("Unlike");
+                            } else {
+                                favorite.setText("♥︎");
+                                favorite.setToolTipText("Like");
                             }
                         }
                     }
@@ -568,7 +576,7 @@ public class PlayerPart extends JPanel {
                 share.setBackground(pressedBackground);
                 share.setToolTipText("Unshare");
             } else {
-                share.setBackground(this.getBackground());
+                share.setBackground(background);
                 share.setToolTipText("Share");
             }
         }
