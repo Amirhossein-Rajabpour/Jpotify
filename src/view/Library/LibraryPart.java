@@ -408,13 +408,19 @@ public class LibraryPart extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 sharedPlaylistBtn.setBackground(getBackground());
+
+                showPanel.removeAll();
+                showPanel.repaint();
+                sharedSongs = null;
+                sharedSongs = new ArrayList<>();
+
                 for (Song song : songs) {
-                    if (song.isSharable() == true) {
+                    if (song.isSharable()) {
                         sharedSongs.add(song);
                     }
                 }
                 showPanel.setSongs(sharedSongs);
-
+                showPanel.revalidate();
             }
 
             @Override
@@ -456,7 +462,7 @@ public class LibraryPart extends JPanel {
                 favouriteSongs = new ArrayList<>();
 
                 for (Song song : songs) {
-                    if (song.isFavourite() == true && !favouriteSongs.contains(song)) {
+                    if (song.isFavourite() /*&& !favouriteSongs.contains(song)*/) {
                         favouriteSongs.add(song);
                     }
 
