@@ -420,6 +420,8 @@ public class LibraryPart extends JPanel {
                         sharedSongs.add(song);
                     }
                 }
+                for(Song song: songs)
+                    saveSong(song);
                 showPanel.setSongs(sharedSongs);
                 showPanel.revalidate();
             }
@@ -467,6 +469,9 @@ public class LibraryPart extends JPanel {
                         favouriteSongs.add(song);
                     }
 
+                }
+                for(Song song: songs){
+                    saveSong(song);
                 }
                 showPanel.setSongs(favouriteSongs);
                 showPanel.revalidate();
@@ -528,17 +533,21 @@ public class LibraryPart extends JPanel {
      */
     public void addToAlbum(Song song) throws NullPointerException {
 
-        if (albums.contains(song.getAlbumName())) {
-            for (Album album : albums) {
-                if (song.getAlbumName().equals(album.getAlbumName())) {
-                    album.addSong(song);
-                }
+
+        int exist = 0;
+        for(Album album: albums){
+            if(album.getAlbumName().equals(song.getAlbumName())){
+                album.addSong(song);
+                exist = 1;
+                break;
             }
-        } else {
+        }
+        if(exist == 0) {
             album = new Album(song.getAlbumName());
             albums.add(album);
             album.addSong(song);
         }
+
         playerPart.setAlbums(albums);
 
 
@@ -612,7 +621,7 @@ public class LibraryPart extends JPanel {
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
 
-                        for (String playlistNames : ((Song) obj).getPlaylists()) // i dont know why it doesnt work
+                        for (String playlistNames : ((Song) obj).getPlaylists())
                             addPlaylistName(playlistNames);
 
                         if (((Song) obj).isFavourite() == true)
@@ -631,7 +640,7 @@ public class LibraryPart extends JPanel {
             });
         }
 
-        playerPart.setAlbums(albums);
+//        playerPart.setAlbums(albums);
         return loadedSongs;
     }
 

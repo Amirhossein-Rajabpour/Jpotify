@@ -627,13 +627,13 @@ public class PlayerPart extends JPanel {
                 break;
             }
         }
-
-        Album tmp;
-        tmp = albums.get(index);
-        for (int i = index; i >= 1; i--) {
-            albums.set(i, albums.get(i - 1));
-        }
-        albums.set(0, tmp);
+//
+//        Album tmp;
+//        tmp = albums.get(index);
+//        for (int i = index; i >= 1; i--) {
+//            albums.set(i, albums.get(i - 1));
+//        }
+//        albums.set(0, tmp);
 
     }
 
