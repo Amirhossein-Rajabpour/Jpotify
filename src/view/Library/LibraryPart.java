@@ -420,6 +420,8 @@ public class LibraryPart extends JPanel {
                         sharedSongs.add(song);
                     }
                 }
+                for(Song song: songs)
+                    saveSong(song);
                 showPanel.setSongs(sharedSongs);
                 showPanel.revalidate();
             }
@@ -531,17 +533,21 @@ public class LibraryPart extends JPanel {
      */
     public void addToAlbum(Song song) throws NullPointerException {
 
-        if (albums.contains(song.getAlbumName())) {
-            for (Album album : albums) {
-                if (song.getAlbumName().equals(album.getAlbumName())) {
-                    album.addSong(song);
-                }
+
+        int exist = 0;
+        for(Album album: albums){
+            if(album.getAlbumName().equals(song.getAlbumName())){
+                album.addSong(song);
+                exist = 1;
+                break;
             }
-        } else {
+        }
+        if(exist == 0) {
             album = new Album(song.getAlbumName());
             albums.add(album);
             album.addSong(song);
         }
+
         playerPart.setAlbums(albums);
 
 
