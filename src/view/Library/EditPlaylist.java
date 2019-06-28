@@ -76,19 +76,19 @@ public class EditPlaylist extends JFrame {
 
         deletePlaylist = new JButton("Remove playlist");
         add(deletePlaylist);
-//        deletePlaylist.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                for(int j = 0; j < songs.size(); j++)
-//                    songs.get(j).removePlaylist(returnPlaylist(songs,playlisName));
-//
-//                setVisible(false);
-//            }
-//        });
-//
+        deletePlaylist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                for(int j = 0; j < songs.size(); j++)
+                    songs.get(j).removePlaylist(nameTextfield.getText());
+
+                libraryPart.getPlaylistName().remove(playlisName);
+                setVisible(false);
+            }
+        });
+
         setVisible(true);
-//    }
 
     }
 }
