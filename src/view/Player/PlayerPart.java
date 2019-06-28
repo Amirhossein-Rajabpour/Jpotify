@@ -518,6 +518,7 @@ public class PlayerPart extends JPanel {
 
     /**
      * this method sets an array for player and also mention which element of array should be played
+     *
      * @param songs
      * @param initialIndex
      */
@@ -557,7 +558,23 @@ public class PlayerPart extends JPanel {
             } catch (JavaLayerException e1) {
                 e1.printStackTrace();
             }
+            if (songs.get(initialIndex).isFavourite()) {
+                favorite.setText("💔");
+                favorite.setToolTipText("Unlike");
+            } else {
+                favorite.setText("♥︎");
+                favorite.setToolTipText("Like");
+            }
+            if (songs.get(initialIndex).isSharable()) {
+                share.setBackground(pressedBackground);
+                share.setToolTipText("Unshare");
+            } else {
+                share.setBackground(this.getBackground());
+                share.setToolTipText("Share");
+            }
         }
+
+
     }
 
     public void setProgressBarPanel(ProgressBarPanel progressBarPanel) {
