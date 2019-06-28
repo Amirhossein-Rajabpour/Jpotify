@@ -468,6 +468,9 @@ public class LibraryPart extends JPanel {
                     }
 
                 }
+                for(Song song: songs){
+                    saveSong(song);
+                }
                 showPanel.setSongs(favouriteSongs);
                 showPanel.revalidate();
             }
@@ -612,7 +615,7 @@ public class LibraryPart extends JPanel {
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
 
-                        for (String playlistNames : ((Song) obj).getPlaylists()) // i dont know why it doesnt work
+                        for (String playlistNames : ((Song) obj).getPlaylists())
                             addPlaylistName(playlistNames);
 
                         if (((Song) obj).isFavourite() == true)
@@ -631,7 +634,7 @@ public class LibraryPart extends JPanel {
             });
         }
 
-        playerPart.setAlbums(albums);
+//        playerPart.setAlbums(albums);
         return loadedSongs;
     }
 
