@@ -289,22 +289,28 @@ public class PlayerPart extends JPanel {
 
                     playOrPause.setBackground(background);
 
-                    if (playOrPause.getText().equals("▶︎")) {
-                        try {
+                    if (player != null) {
+                        if (playOrPause.getText().equals("▶︎")) {
 
-                            player.play();
+                            try {
+
+                                player.play();
+
 //                            soundController.setGain();
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
+                            } catch (JavaLayerException e1) {
+                                e1.printStackTrace();
+                            }
+                            playOrPause.setText("⏸");
+                            playOrPause.setToolTipText("Pause");
+                        } else {
+                            player.pause();
+                            playOrPause.setText("▶︎");
+                            playOrPause.setToolTipText("Play");
                         }
-                        playOrPause.setText("⏸");
-                        playOrPause.setToolTipText("Pause");
-                    } else {
-                        player.pause();
-                        playOrPause.setText("▶︎");
-                        playOrPause.setToolTipText("Play");
+
                     }
                 }
+
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
