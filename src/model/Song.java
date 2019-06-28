@@ -25,7 +25,7 @@ public class Song implements Serializable {
     private boolean isSharable;
     transient Mp3File mp3file;
 
-    ArrayList<Playlist> playlists = new ArrayList<>();
+    ArrayList<String> playlists = new ArrayList<>();
 
 
     public Song(String path) {
@@ -50,8 +50,8 @@ public class Song implements Serializable {
         isSharable = false;
     }
 
-    public void addPlaylist(Playlist playlist) {
-        playlists.add(playlist);
+    public void addPlaylist(String playlistName) {
+        playlists.add(playlistName);
     }
 
     /**
@@ -174,7 +174,7 @@ public class Song implements Serializable {
      * each song can be added to many playlists that's why each song has an arraylist of playlists
      * @return
      */
-    public ArrayList<Playlist> getPlaylists() {
+    public ArrayList<String> getPlaylists() {
         return playlists;
     }
 
@@ -182,7 +182,7 @@ public class Song implements Serializable {
         albumName = null;
     }
 
-    public void removePlaylist(Playlist playlist){ if(playlists.contains(playlist))playlists.remove(playlist); }
+    public void removePlaylist(String playlist){ if(playlists.contains(playlist))playlists.remove(playlist); }
 
 
 }

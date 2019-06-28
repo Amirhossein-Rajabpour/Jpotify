@@ -64,7 +64,7 @@ public class PlaylistBtn extends JPanel {
             for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
                 if(songs.get(i).getPlaylists().get(j) != null){
-                    if (Objects.equals(songs.get(i).getPlaylists().get(j).getPlaylistName(), playlistName)) {
+                    if (Objects.equals(songs.get(i).getPlaylists().get(j), playlistName)) {
                         showSongs.add(songs.get(i));
                     }
                 }
