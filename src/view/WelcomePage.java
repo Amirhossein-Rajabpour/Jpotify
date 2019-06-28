@@ -43,9 +43,6 @@ public class WelcomePage extends JFrame {
 
         this.setLayout(new BorderLayout());
 
-//        ImageIcon zelos = new ImageIcon("/Users/apple/Desktop/JpotifyWhite.png");
-//        setIconImage(zelos.getImage());
-
         background = new Color(49, 53, 53);
         foreground = new Color(195, 195, 195);
 
@@ -126,8 +123,8 @@ public class WelcomePage extends JFrame {
         userLabel.setForeground(Color.WHITE);
         south.add(userLabel);
         userTextField = new JTextField();
-//        userTextField.setForeground(foreground);
-//        userTextField.setBackground(new Color(255, 255, 255, 14));
+        userTextField.setForeground(foreground);
+        userTextField.setBackground(new Color(255, 255, 255, 14));
         south.add(userTextField);
 
         south.add(Box.createRigidArea(new Dimension(0, 15)));
@@ -137,8 +134,8 @@ public class WelcomePage extends JFrame {
         idLabel.setForeground(Color.WHITE);
         south.add(idLabel);
         idTextField = new JTextField();
-//        idTextField.setForeground(foreground);
-//        idTextField.setBackground(new Color(255, 255, 255, 14));
+        idTextField.setForeground(foreground);
+        idTextField.setBackground(new Color(255, 255, 255, 14));
         south.add(idTextField);
 
         south.add(Box.createRigidArea(new Dimension(0, 25)));
@@ -164,23 +161,6 @@ public class WelcomePage extends JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 70);
 
-//        class ImagePanel extends JComponent {
-//            private Image image;
-//            public ImagePanel(Image image) {
-//                this.image = image;
-//            }
-//            @Override
-//            protected void paintComponent(Graphics g) {
-//                super.paintComponent(g);
-//                g.drawImage(image, 0, 0, this);
-//            }
-//        }
-//
-//// elsewhere
-//        BufferedImage myImage = ImageIO.read(...);
-//        JFrame myJFrame = new JFrame("Image pane");
-//        myJFrame.setContentPane(new ImagePanel(myImage));
-
         this.setBackground(new Color(49, 53, 53));
         this.setForeground(new Color(49, 53, 53));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,18 +169,17 @@ public class WelcomePage extends JFrame {
 
     public void doClickAction() throws IOException {
 
-        if( !userTextField.getText().equals("")){
-            if(new File(userTextField.getText()).exists())
+        if (!userTextField.getText().equals("")) {
+            if (new File(userTextField.getText()).exists())
                 System.out.println("shit repetetive id");
-            else{
+            else {
                 new File(userTextField.getText()).mkdir();
                 new File(userTextField.getText() + "/songs/").mkdir();
                 System.out.println("new id");
             }
             MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
             this.setVisible(false);
-        }
-        else System.out.println("write something");
+        } else System.out.println("write something");
 
 
     }
