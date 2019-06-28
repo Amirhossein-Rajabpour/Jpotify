@@ -111,8 +111,16 @@ public class NewPlaylist extends JFrame {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                name = nameTextField.getText();
-                if (!libraryPart.getPlaylistName().contains(name)) {
+
+                if(nameTextField.getText().equals("")){
+                    System.out.println("playlist name cant be empty");
+                    setVisible(true);
+                }
+
+                else {
+
+                    name = nameTextField.getText();
+                    if (!libraryPart.getPlaylistName().contains(name)) {
 
 
 //                    playlist = new Playlist(name);
@@ -125,22 +133,25 @@ public class NewPlaylist extends JFrame {
 //                }
 //                libraryPart.addPlaylist(playlist);
 
-                    /**
-                     * here instead of adding songs to playlist, i add playlist to songs(almost like album)
-                     */
-                    for (int i = 0; i < songs.size(); i++) {
+                        /**
+                         * here instead of adding songs to playlist, i add playlist to songs(almost like album)
+                         */
+                        for (int i = 0; i < songs.size(); i++) {
 
-                        if (songCheckbox[i].isSelected()) {
-                            songs.get(i).addPlaylist(name);
+                            if (songCheckbox[i].isSelected()) {
+                                songs.get(i).addPlaylist(name);
+                            }
                         }
-                    }
-                    for(Song song: songs)
-                    libraryPart.saveSong(song);
+                        for(Song song: songs)
+                            libraryPart.saveSong(song);
 
-                    libraryPart.addPlaylistName(name);
+                        libraryPart.addPlaylistName(name);
 //                libraryPart.savePlaylists(playlist);
-                    setVisible(false);
-                }else setVisible(false);
+                        setVisible(false);
+                    }else setVisible(false);
+                }
+
+
             }
         });
 
