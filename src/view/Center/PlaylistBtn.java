@@ -1,6 +1,7 @@
 package view.Center;
 
 import model.Song;
+import view.Library.EditPlaylist;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -119,10 +120,8 @@ public class PlaylistBtn extends JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (me.getButton() == MouseEvent.BUTTON3) {
-                    JFrame editFrame = new JFrame();
-                    editFrame.setPreferredSize(new Dimension(400, 400));
-                    editFrame.setVisible(true);
                     System.out.println("salam");
+                    EditPlaylist editPlaylist = new EditPlaylist(showSongs, getPlaylistBtnItSelf());
                 }
             }
         });
@@ -135,6 +134,11 @@ public class PlaylistBtn extends JPanel {
     public ArrayList<Song> getShowSongs() {
         return showSongs;
     }
+
+    public PlaylistBtn getPlaylistBtnItSelf(){
+        return this;
+    }
+
 
     public String getPlaylistName() {
         return playlistName;
