@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -199,11 +198,7 @@ public class PlayerPart extends JPanel {
                             currentSong = currentSong;
                             try {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                try {
-                                    player = new PlayPartController(input);
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
+                                player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
                                 songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
@@ -215,11 +210,7 @@ public class PlayerPart extends JPanel {
                             currentSong = playingSongs.size() - 1;
                             try {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                try {
-                                    player = new PlayPartController(input);
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
+                                player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
                                 songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
@@ -235,11 +226,7 @@ public class PlayerPart extends JPanel {
                                  */
                                 try {
                                     input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                    try {
-                                        player = new PlayPartController(input);
-                                    } catch (IOException ex) {
-                                        ex.printStackTrace();
-                                    }
+                                    player = new PlayPartController(input);
                                     progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
                                     songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                                 } catch (FileNotFoundException e1) {
@@ -256,10 +243,10 @@ public class PlayerPart extends JPanel {
                                 }
 
                                 if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setForeground(Color.pink);
+                                    favorite.setText("💔");
                                     favorite.setToolTipText("Unlike");
                                 } else {
-                                    favorite.setForeground(foreground);
+                                    favorite.setText("♥︎");
                                     favorite.setToolTipText("Like");
                                 }
                             }
@@ -315,15 +302,20 @@ public class PlayerPart extends JPanel {
                     if (player != null) {
                         if (playOrPause.getText().equals("▶︎")) {
 
-                            player.play(0,(int)songs.get(currentSong).getDuration());
+                            try {
 
-                            thread = new Thread(progressBarPanel);
-                            thread.start();
+                                player.play();
+
+                                thread = new Thread(progressBarPanel);
+                                thread.start();
 
 
-                            sortSongs(currentSong);
-                            sortAlbums(currentSong);
+                                sortSongs(currentSong);
+                                sortAlbums(currentSong);
 //                            soundController.setGain();
+                            } catch (JavaLayerException e1) {
+                                e1.printStackTrace();
+                            }
                             playOrPause.setText("⏸");
                             playOrPause.setToolTipText("Pause");
                         } else {
@@ -380,11 +372,7 @@ public class PlayerPart extends JPanel {
                             currentSong = currentSong;
                             try {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                try {
-                                    player = new PlayPartController(input);
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
+                                player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
                                 songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
@@ -396,11 +384,7 @@ public class PlayerPart extends JPanel {
                             currentSong = 0;
                             try {
                                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                try {
-                                    player = new PlayPartController(input);
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
+                                player = new PlayPartController(input);
                                 progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
                                 songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                             } catch (FileNotFoundException e1) {
@@ -416,11 +400,7 @@ public class PlayerPart extends JPanel {
                                  */
                                 try {
                                     input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                    try {
-                                        player = new PlayPartController(input);
-                                    } catch (IOException ex) {
-                                        ex.printStackTrace();
-                                    }
+                                    player = new PlayPartController(input);
                                     progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
                                     songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
                                 } catch (FileNotFoundException e1) {
@@ -438,10 +418,10 @@ public class PlayerPart extends JPanel {
                                 }
 
                                 if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setForeground(Color.pink);
+                                    favorite.setText("💔");
                                     favorite.setToolTipText("Unlike");
                                 } else {
-                                    favorite.setForeground(foreground);
+                                    favorite.setText("♥︎");
                                     favorite.setToolTipText("Like");
                                 }
                             }
@@ -485,11 +465,12 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (repeat.getText().equals("⤿") && repeat.getBackground().equals(background)) {
+                        if (repeat.getText().equals("⟲") && repeat.getBackground().equals(background)) {
                             repeat.setText("⤿");
                             repeatOneIsOn = true;
                             repeat.setToolTipText("Repeat All");
                             repeat.setBackground(pressedBackground);
+                            // Right the ActionEvent here Amirhosein
                         } else if (repeat.getText().equals("⤿")) {
                             repeat.setText("⟲");
                             repeatOneIsOn = false;
@@ -537,8 +518,8 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (favorite.getForeground().equals(foreground)) {
-                            favorite.setForeground(Color.pink);
+                        if (favorite.getText().equals("♥︎")) {
+                            favorite.setText("💔");
                             favorite.setToolTipText("Unlike");
                             if (songs.size() != 0) {
                                 songs.get(currentSong).setFavourite(true);
@@ -546,7 +527,7 @@ public class PlayerPart extends JPanel {
                             System.out.println("liked");
 
                         } else {
-                            favorite.setForeground(foreground);
+                            favorite.setText("♥︎");
                             favorite.setToolTipText("Like");
 
                             songs.get(currentSong).setFavourite(false);
@@ -608,11 +589,7 @@ public class PlayerPart extends JPanel {
             }
             try {
                 input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                try {
-                    player = new PlayPartController(input);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                player = new PlayPartController(input);
 
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();
@@ -620,10 +597,10 @@ public class PlayerPart extends JPanel {
                 e1.printStackTrace();
             }
             if (songs.get(initialIndex).isFavourite()) {
-                favorite.setForeground(Color.pink);
+                favorite.setText("💔");
                 favorite.setToolTipText("Unlike");
             } else {
-                favorite.setForeground(foreground);
+                favorite.setText("♥︎");
                 favorite.setToolTipText("Like");
             }
             if (songs.get(initialIndex).isSharable()) {

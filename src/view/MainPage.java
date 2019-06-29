@@ -1,5 +1,6 @@
 package view;
 
+import network.server.FileServer;
 import view.Center.CentralPanel;
 import view.Center.ShowPanel;
 import view.Friends.FriendActivity;
@@ -40,11 +41,9 @@ public class MainPage extends JFrame {
         this.add(bottomPanel, BorderLayout.SOUTH);
 
 
-
-
         library = new LibraryPart(getUserName(), bottomPanel.getPlayerPart());
 
-        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart(),library);
+        centralPanel = new CentralPanel(userName, bottomPanel.getPlayerPart(), library);
         this.add(centralPanel, BorderLayout.CENTER);
 
         library.setShowPanel(centralPanel.getShowPanel());
@@ -53,8 +52,9 @@ public class MainPage extends JFrame {
         this.add(library, BorderLayout.WEST);
 
 
+        FileServer fileServer = new FileServer(4422);
 
-        friendActivity = new FriendActivity();
+        friendActivity = new FriendActivity(bottomPanel.getPlayerPart(), fileServer);
         JScrollPane scrollPane = new JScrollPane(friendActivity);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBackground(new Color(24, 24, 24));
