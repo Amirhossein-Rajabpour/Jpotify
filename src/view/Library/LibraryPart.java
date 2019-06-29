@@ -355,7 +355,7 @@ public class LibraryPart extends JPanel {
 /**
  * This button creates and adds a new playlist
  */
-        newPlaylistBtn = new JTextField("   New Playlist");
+        newPlaylistBtn = new JTextField("   ⨁ New Playlist");
         newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
         newPlaylistBtn.setEditable(false);
         newPlaylistBtn.setBackground(this.getBackground());
@@ -420,7 +420,7 @@ public class LibraryPart extends JPanel {
                         sharedSongs.add(song);
                     }
                 }
-                for(Song song: songs)
+                for (Song song : songs)
                     saveSong(song);
                 showPanel.setSongs(sharedSongs);
                 showPanel.revalidate();
@@ -470,7 +470,7 @@ public class LibraryPart extends JPanel {
                     }
 
                 }
-                for(Song song: songs){
+                for (Song song : songs) {
                     saveSong(song);
                 }
                 showPanel.setSongs(favouriteSongs);
@@ -535,14 +535,14 @@ public class LibraryPart extends JPanel {
 
 
         int exist = 0;
-        for(Album album: albums){
-            if(album.getAlbumName().equals(song.getAlbumName())){
+        for (Album album : albums) {
+            if (album.getAlbumName().equals(song.getAlbumName())) {
                 album.addSong(song);
                 exist = 1;
                 break;
             }
         }
-        if(exist == 0) {
+        if (exist == 0) {
             album = new Album(song.getAlbumName());
             albums.add(album);
             album.addSong(song);
@@ -643,8 +643,6 @@ public class LibraryPart extends JPanel {
 //        playerPart.setAlbums(albums);
         return loadedSongs;
     }
-
-
 
 
 //    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
