@@ -243,10 +243,10 @@ public class PlayerPart extends JPanel {
                                 }
 
                                 if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setText("💔");
+                                    favorite.setForeground(Color.pink);
                                     favorite.setToolTipText("Unlike");
                                 } else {
-                                    favorite.setText("♥︎");
+                                    favorite.setForeground(foreground);
                                     favorite.setToolTipText("Like");
                                 }
                             }
@@ -418,10 +418,10 @@ public class PlayerPart extends JPanel {
                                 }
 
                                 if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setText("💔");
+                                    favorite.setForeground(Color.pink);
                                     favorite.setToolTipText("Unlike");
                                 } else {
-                                    favorite.setText("♥︎");
+                                    favorite.setForeground(foreground);
                                     favorite.setToolTipText("Like");
                                 }
                             }
@@ -517,8 +517,8 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (favorite.getText().equals("♥︎")) {
-                            favorite.setText("💔");
+                        if (favorite.getForeground().equals(foreground)) {
+                            favorite.setForeground(Color.pink);
                             favorite.setToolTipText("Unlike");
                             if (songs.size() != 0) {
                                 songs.get(currentSong).setFavourite(true);
@@ -526,7 +526,7 @@ public class PlayerPart extends JPanel {
                             System.out.println("liked");
 
                         } else {
-                            favorite.setText("♥︎");
+                            favorite.setForeground(foreground);
                             favorite.setToolTipText("Like");
 
                             songs.get(currentSong).setFavourite(false);
@@ -596,10 +596,10 @@ public class PlayerPart extends JPanel {
                 e1.printStackTrace();
             }
             if (songs.get(initialIndex).isFavourite()) {
-                favorite.setText("💔");
+                favorite.setForeground(Color.pink);
                 favorite.setToolTipText("Unlike");
             } else {
-                favorite.setText("♥︎");
+                favorite.setForeground(foreground);
                 favorite.setToolTipText("Like");
             }
             if (songs.get(initialIndex).isSharable()) {
