@@ -59,8 +59,10 @@ public class AlbumBtn extends JPanel {
 
         icon = new JLabel();
 
+        ImageIcon albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
+
         if (album.getFirstSong() != null) {
-            ImageIcon albumImgIcon;
+
             if (album.getFirstSong().getArtwork() != null) {
                 albumImgIcon = new ImageIcon(album.getFirstSong().getArtwork());
             } else {
@@ -71,22 +73,20 @@ public class AlbumBtn extends JPanel {
             icon.setIcon(icon1);
 
         }
-        this.add(icon, BorderLayout.CENTER);
-
-        ImageIcon albumImgIcon = new ImageIcon("/Users/apple/Desktop/userIcon.png");
 
         for (int i = 0; i < songs.size(); i++) {
 
             if (Objects.equals(songs.get(i).getAlbumName(), album.getAlbumName())) {
                 showSongs.add(songs.get(i));
-                albumImgIcon = new ImageIcon(songs.get(i).getArtwork());
-
+//                albumImgIcon = new ImageIcon(songs.get(i).getArtwork());
             }
 
         }
         Image img = albumImgIcon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
         Icon icon1 = new ImageIcon(img);
         icon.setIcon(icon1);
+
+        this.add(icon, BorderLayout.CENTER);
 
 
         this.addMouseListener(new MouseListener() {
