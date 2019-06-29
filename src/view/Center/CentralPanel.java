@@ -14,13 +14,13 @@ public class CentralPanel extends JPanel {
 
     private ToolBar toolBar;
     private ShowPanel showPanel;
-    public CentralPanel(String userName, PlayerPart playerPart) {
+    public CentralPanel(String userName, PlayerPart playerPart,LibraryPart libraryPart) {
         super();
 
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(33, 33, 33));
 
-        toolBar = new ToolBar(userName);
+        toolBar = new ToolBar(userName, libraryPart);
         toolBar.setSize(new Dimension(50, 10));
         this.add(toolBar, BorderLayout.NORTH);
 

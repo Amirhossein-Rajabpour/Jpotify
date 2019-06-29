@@ -711,4 +711,6 @@ public class LibraryPart extends JPanel {
     public ArrayList<Album> getAlbums() {
         return albums;
     }
+
+    public ArrayList<Song> getSongs() { return songs; }
 }
