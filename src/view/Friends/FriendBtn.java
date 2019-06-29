@@ -1,6 +1,7 @@
 package view.Friends;
 
 import model.Song;
+import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -21,8 +22,9 @@ public class FriendBtn extends JTextField {
     private byte[] file;
     private ArrayList<Song> songs;
     private Song song;
+    private LibraryPart library;
 
-    public FriendBtn(Font BFont, Font SFont, Color background, Color foreground, Color pressedBackground, String path, PlayerPart playerPart) {
+    public FriendBtn(Font BFont, Font SFont, Color background, Color foreground, Color pressedBackground, String path, PlayerPart playerPart, LibraryPart library) {
 
         this.background = background;
         this.foreground = foreground;
@@ -62,7 +64,8 @@ public class FriendBtn extends JTextField {
                 repaint();
                 revalidate();
                 setBackground(getBackground());
-                playerPart.setSongs(songs, 0);
+                library.addSong(path);
+//                playerPart.setSongs(songs, 0);
             }
 
             @Override

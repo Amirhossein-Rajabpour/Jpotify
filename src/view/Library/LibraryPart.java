@@ -500,7 +500,7 @@ public class LibraryPart extends JPanel {
      *
      * @param path
      */
-    Song addSong(String path) {
+    public Song addSong(String path) {
 
         int exist = 0;
         song = new Song(path);

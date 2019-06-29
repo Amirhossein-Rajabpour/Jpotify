@@ -1,6 +1,7 @@
 package view.Friends;
 
 import network.server.FileServer;
+import view.Library.LibraryPart;
 import view.Player.PlayerPart;
 
 import javax.swing.*;
@@ -23,8 +24,9 @@ public class FriendActivity extends JPanel {
     private byte[] file;
     private PlayerPart playerPart;
     private FileServer fileServer;
+    private LibraryPart library;
 
-    public FriendActivity(PlayerPart playerPart) {
+    public FriendActivity(PlayerPart playerPart, LibraryPart libraryPart) {
         super();
 
         this.playerPart = playerPart;
@@ -57,7 +59,7 @@ public class FriendActivity extends JPanel {
 
     public void addNewParticipant( String path) {
 
-        FriendBtn name = new FriendBtn( Bfont, Sfont, background, foreground, pressedBackground, path, playerPart);
+        FriendBtn name = new FriendBtn( Bfont, Sfont, background, foreground, pressedBackground, path, playerPart, library);
 
 //        removeAll();
 //        repaint();
