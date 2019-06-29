@@ -15,26 +15,88 @@ import java.util.ArrayList;
  */
 public class RemoveSong extends JFrame {
 
+    private JPanel south;
     private JCheckBox[] songCheckbox;
     private JButton remove;
     private PlayerPart playerPart;
+    private Color background;
+    private JPanel panel;
+    private JPanel north;
+    private JPanel center;
+    private Color foreground;
+    private JLabel nameLabel;
+    private JButton create;
+    private String name;
 
     public RemoveSong(ArrayList<Song> songs, LibraryPart libraryPart, PlayerPart playerPart) {
 
         super();
-        setLayout(new FlowLayout());
-        setSize(400, 400);
+
+        foreground = new Color(195, 195, 195);
+        background = new Color(59, 63, 63);
+        this.setSize(new Dimension(260, 400));
+        this.setResizable(false);
+
+
+        /**
+         * panel is the container of north and center panels
+         */
+        panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(background);
+        this.add(panel);
+
+        /**
+         * north panel places at the north of the panel
+         */
+        north = new JPanel();
+        north.setBackground(background);
+        north.setLayout(new BorderLayout());
+
+        JPanel empty = new JPanel();
+        empty.setBackground(background);
+        JLabel emptyLabel = new JLabel();
+        empty.add(emptyLabel);
+        north.add(empty, BorderLayout.NORTH);
+        nameLabel = new JLabel("Edit songs");
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        nameLabel.setForeground(Color.lightGray);
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        north.add(nameLabel, BorderLayout.CENTER);
+        this.add(north,BorderLayout.NORTH);
+
+
+        /**
+         * center panel places at the center of the panel
+         */
+        center = new JPanel();
+
+        JScrollPane scrollPane = new JScrollPane(center);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        center.setLayout(new GridLayout(songs.size() + 2, 1));
+        center.setBackground(new Color(237,237,237));
+
 
         this.playerPart = playerPart;
         songCheckbox = new JCheckBox[songs.size()];
         for (int i = 0; i < songs.size(); i++) {
 
             songCheckbox[i] = new JCheckBox(songs.get(i).getTitle());
-            add(songCheckbox[i]);
+            center.add(songCheckbox[i]);
         }
 
-        remove = new JButton("remove");
-        add(remove);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+
+        south = new JPanel();
+        south.setBackground(background);
+        south.setLayout(new BorderLayout());
+
+
+
+        remove = new JButton("Remove");
+        south.add(remove, BorderLayout.CENTER);
         remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +130,11 @@ public class RemoveSong extends JFrame {
                 setVisible(false);
             }
         });
+        panel.add(south, BorderLayout.SOUTH);
 
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 70);
         setVisible(true);
     }
 }
