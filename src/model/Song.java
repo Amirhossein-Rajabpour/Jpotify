@@ -24,6 +24,7 @@ public class Song implements Serializable {
     private boolean isFavourite;
     private boolean isSharable;
     transient Mp3File mp3file;
+    private int bytes;
 
     ArrayList<String> playlists = new ArrayList<>();
 
@@ -46,6 +47,7 @@ public class Song implements Serializable {
         setArtwork();
         setTitle();
         setDuration();
+        setBytes();
 //        isFavourite = false;
         isSharable = false;
     }
@@ -110,6 +112,10 @@ public class Song implements Serializable {
         return duration;
     }
 
+    public int getBytes(){
+        return this.bytes;
+    }
+
     public void setDuration() {
         duration = mp3file.getLengthInSeconds();
     }
@@ -167,6 +173,12 @@ public class Song implements Serializable {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             artwork = id3v2Tag.getAlbumImage();
 
+        }
+    }
+
+    public void setBytes() {
+        if (mp3file.hasId3v2Tag()) {
+            bytes = (int)mp3file.getLength();
         }
     }
 
