@@ -52,13 +52,15 @@ public class MainPage extends JFrame {
         this.add(library, BorderLayout.WEST);
 
 
-        FileServer fileServer = new FileServer(4422);
 
-        friendActivity = new FriendActivity(bottomPanel.getPlayerPart(), fileServer, friendId);
+        friendActivity = new FriendActivity(bottomPanel.getPlayerPart());
         JScrollPane scrollPane = new JScrollPane(friendActivity);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBackground(new Color(24, 24, 24));
         this.add(scrollPane, BorderLayout.EAST);
+
+        FileServer fileServer = new FileServer(4422, friendActivity);
+        fileServer.start();
 
 
         SwingUtilities.updateComponentTreeUI(this);

@@ -1,6 +1,7 @@
 package network.server;
 
 import model.Song;
+import view.Friends.FriendActivity;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -9,8 +10,10 @@ import java.net.Socket;
 public class FileServer extends Thread {
 
     private ServerSocket socket;
+    private FriendActivity friendActivity;
 
-    public FileServer(int port) {
+    public FileServer(int port, FriendActivity friendActivity) {
+        this.friendActivity = friendActivity;
         try {
             socket = new ServerSocket(port);
         } catch (IOException e) {
@@ -23,7 +26,7 @@ public class FileServer extends Thread {
             try {
                 Socket client = socket.accept();
 
-                ClientHandler clientHandler = new ClientHandler(client);
+                ClientHandler clientHandler = new ClientHandler(client, friendActivity);
                 Thread td = new Thread(clientHandler);
                 td.start();
 
@@ -33,10 +36,5 @@ public class FileServer extends Thread {
         }
     }
 
-
-    public static void main(String[] args) {
-        FileServer fs = new FileServer(1988);
-        fs.start();
-    }
-
+    
 }

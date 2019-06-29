@@ -1,9 +1,13 @@
 package view.Friends;
 
+import model.Song;
+import view.Player.PlayerPart;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class FriendBtn extends JTextField {
 
@@ -15,8 +19,10 @@ public class FriendBtn extends JTextField {
     private String name;
     private String title;
     private byte[] file;
+    private ArrayList<Song> songs;
+    private Song song;
 
-    public FriendBtn(String name, String title, Font BFont, Font SFont, Color background, Color foreground, Color pressedBackground, byte[] file) {
+    public FriendBtn(Font BFont, Font SFont, Color background, Color foreground, Color pressedBackground, String path, PlayerPart playerPart) {
 
         this.background = background;
         this.foreground = foreground;
@@ -26,12 +32,20 @@ public class FriendBtn extends JTextField {
         this.Bfont = BFont;
         this.Sfont = SFont;
         this.file = file;
+        this.setPreferredSize(new Dimension(10,10));
+
+        songs = new ArrayList<Song>();
+        song = new Song(path);
+        songs.add(song);
 
         this.setText(name);
         this.setFont(BFont);
         this.setEditable(false);
         this.setBackground(this.getBackground());
         this.setForeground(foreground);
+
+        repaint();
+        revalidate();
 
         this.addMouseListener(new MouseListener() {
             @Override
@@ -45,7 +59,10 @@ public class FriendBtn extends JTextField {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                repaint();
+                revalidate();
                 setBackground(getBackground());
+                playerPart.setSongs(songs, 0);
             }
 
             @Override

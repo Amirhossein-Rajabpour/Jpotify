@@ -1,14 +1,18 @@
 package network.server;
 
+import view.Friends.FriendActivity;
+
 import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler implements Runnable {
 
     private Socket client;
+    private FriendActivity friendActivity;
 
-    public ClientHandler(Socket client) {
+    public ClientHandler(Socket client, FriendActivity friendActivity) {
         this.client = client;
+        this.friendActivity = friendActivity;
     }
 
 
@@ -17,14 +21,14 @@ public class ClientHandler implements Runnable {
 
 //        while (true) {
         try {
-            saveFile(client);
+            saveFile(client, friendActivity);
         } catch (IOException e) {
             e.printStackTrace();
         }
 //        }
     }
 
-    private void saveFile(Socket client) throws IOException {
+    private void saveFile(Socket client, FriendActivity friendActivity) throws IOException {
 
         BufferedReader bufferedReader = null;
         try {
@@ -62,6 +66,8 @@ public class ClientHandler implements Runnable {
             remaining -= read;
             fos.write(buffer, 0, read);
         }
+
+        friendActivity.addNewParticipant("/Users/apple/IdeaProjects/Jpotify1/" + input + ".mp3");
 
         fos.close();
         dis.close();

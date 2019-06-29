@@ -24,7 +24,7 @@ public class FriendActivity extends JPanel {
     private PlayerPart playerPart;
     private FileServer fileServer;
 
-    public FriendActivity(PlayerPart playerPart, FileServer fileServer, int friendId) {
+    public FriendActivity(PlayerPart playerPart) {
         super();
 
         this.playerPart = playerPart;
@@ -37,8 +37,9 @@ public class FriendActivity extends JPanel {
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
 
-        this.setMaximumSize(new Dimension(200, 700));
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setMaximumSize(new Dimension(120, 500));
+        this.setMinimumSize(new Dimension(200, 700));
+        this.setLayout(new GridLayout(25,1));
         this.setBackground(background);
 
         add(Box.createRigidArea(new Dimension(0, 5)));
@@ -54,13 +55,14 @@ public class FriendActivity extends JPanel {
         this.add(jSeparator);
     }
 
-    public void addNewParticipant(String fName, String title, byte[] fFile) {
+    public void addNewParticipant( String path) {
 
-        this.name = fName;
-        this.file = fFile;
-        FriendBtn name = new FriendBtn(fName, title, Bfont, Sfont, background, foreground, pressedBackground, file);
+        FriendBtn name = new FriendBtn( Bfont, Sfont, background, foreground, pressedBackground, path, playerPart);
 
+//        removeAll();
+//        repaint();
         this.add(name);
+        this.revalidate();
 
     }
 }
