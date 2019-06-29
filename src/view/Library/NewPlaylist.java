@@ -117,12 +117,10 @@ public class NewPlaylist extends JFrame {
                     if(nameTextField.equals(playlisName)){
                         exist = 1;
                         setVisible(true);
-                        System.out.println("cant be rep");
                     }
                 }
 
                 if(nameTextField.getText().equals("")){
-                    System.out.println("playlist name cant be empty");
                     setVisible(true);
                 }
 

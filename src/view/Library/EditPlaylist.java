@@ -154,6 +154,8 @@ public class EditPlaylist extends JFrame {
                     songs.get(j).removePlaylist(nameTextField.getText());
 
                 libraryPart.getPlaylistName().remove(playlisName);
+                for (Song song : songs)
+                    libraryPart.saveSong(song);
                 setVisible(false);
             }
         });
