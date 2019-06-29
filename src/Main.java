@@ -1,5 +1,3 @@
-import network.client.Client;
-import network.server.Server;
 import view.WelcomePage;
 
 import java.io.IOException;

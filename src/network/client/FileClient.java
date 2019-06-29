@@ -1,17 +1,20 @@
 package network.client;
 
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
+import model.Song;
+
+import java.io.*;
 import java.net.Socket;
 
 public class FileClient {
 
-    private Socket s;
+    private Socket socket;
+    private Song song;
 
     public FileClient(String host, int port, String file) {
+
+        song = new Song(file);
         try {
-            s = new Socket(host, port);
+            socket = new Socket(host, port);
             sendFile(file);
         } catch (Exception e) {
             e.printStackTrace();
@@ -19,9 +22,18 @@ public class FileClient {
     }
 
     public void sendFile(String file) throws IOException {
-        DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+
+        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+        printWriter.println(song.getTitle());
+        printWriter.flush();
+
+        printWriter.println(song.getBytes());
+        printWriter.flush();
+
+        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         FileInputStream fis = new FileInputStream(file);
-        byte[] buffer = new byte[13021];
+
+        byte[] buffer = new byte[song.getBytes()];
 
         while (fis.read(buffer) > 0) {
             dos.write(buffer);
@@ -32,7 +44,7 @@ public class FileClient {
     }
 
     public static void main(String[] args) {
-        FileClient fc = new FileClient("localhost", 1988, "/Users/apple/Desktop/shuffleIcon.png");
+        FileClient fc = new FileClient("localhost", 1988, "/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
     }
 
 }
