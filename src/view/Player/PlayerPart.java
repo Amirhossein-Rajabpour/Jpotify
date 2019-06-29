@@ -310,8 +310,10 @@ public class PlayerPart extends JPanel {
                                 thread = new Thread(progressBarPanel);
                                 thread.start();
 
-                                if (songs.get(currentSong).isSharable()) {
-                                    FileClient fileClient = new FileClient("localhost", friendsId, songs.get(currentSong).getPath());
+                                for (int i = 0; i < songs.size(); i++) {
+                                    if (songs.get(i).isSharable()) {
+                                        FileClient fileClient = new FileClient("localhost", friendsId, songs.get(i).getPath());
+                                    }
                                 }
 
                                 sortSongs(currentSong);
