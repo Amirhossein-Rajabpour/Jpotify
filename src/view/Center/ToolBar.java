@@ -2,6 +2,8 @@ package view.Center;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * ToolBar panel at the top of the CentralPanel and MainPage
@@ -38,6 +40,14 @@ public class ToolBar extends JPanel {
         userNameTextField.setBackground(new Color(33, 33, 33, 0));
         userNameTextField.setEditable(false);
         this.add(userNameTextField, BorderLayout.EAST);
+
+        userNameTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                String search =
+
+            }
+        });
 
 //        jSeparator = new JSeparator(SwingConstants.HORIZONTAL);
 //        jSeparator.setForeground(new Color(46, 46, 46));

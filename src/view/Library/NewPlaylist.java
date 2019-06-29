@@ -111,12 +111,22 @@ public class NewPlaylist extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                int exist = 0;
+                for(String playlisName: libraryPart.getPlaylistName()){
+
+                    if(nameTextField.equals(playlisName)){
+                        exist = 1;
+                        setVisible(true);
+                        System.out.println("cant be rep");
+                    }
+                }
+
                 if(nameTextField.getText().equals("")){
                     System.out.println("playlist name cant be empty");
                     setVisible(true);
                 }
 
-                else {
+                else if(exist == 0) {
 
                     name = nameTextField.getText();
                     if (!libraryPart.getPlaylistName().contains(name)) {
