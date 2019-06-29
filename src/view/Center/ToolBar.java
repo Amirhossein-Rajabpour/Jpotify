@@ -48,19 +48,24 @@ public class ToolBar extends JPanel {
                     searchedSongs = null;
                     searchedSongs = new ArrayList<>();
                     String search = searchBox.getText();
-                    if (search.equals("") || search.equals("🔍 Search"))
+                    if (search.equals("") || search.equals("🔍 Search")) {
                         System.out.println("nothing happened");
-                    else {
+                        showPanel.removeAll();
+                        showPanel.repaint();
+                        showPanel.revalidate();
+                    } else {
 
                         for (Song song : libraryPart.getSongs()) {
-                            if (song.getTitle().contains(search.toString()) || song.getAlbumName().contains(search.toString()) || song.getArtistName().contains(search.toString()))
+                            if (song.getTitle().contains(search.toString()) || song.getAlbumName().contains(search.toString()) || song.getArtistName().contains(search.toString())) {
                                 searchedSongs.add(song);
+                                showPanel.removeAll();
+                                showPanel.repaint();
+                                showPanel.setSongs(searchedSongs);
+                                showPanel.revalidate();
+                            }
                         }
                     }
-                    showPanel.removeAll();
-                    showPanel.repaint();
-                    showPanel.setSongs(searchedSongs);
-                    showPanel.revalidate();
+
                 }
             }
         });
