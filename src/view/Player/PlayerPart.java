@@ -5,6 +5,7 @@ import controller.AudioController;
 import javazoom.jl.decoder.JavaLayerException;
 import model.Album;
 import model.Song;
+import network.client.FileClient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +47,7 @@ public class PlayerPart extends JPanel {
     private Thread thread;
 
 
-    public PlayerPart() {
+    public PlayerPart(int friendsId) {
         // player part should work according to the playing song's place for example if the song is in play list
         // next and previous button should work with that playlist ArrayList
 
@@ -309,6 +310,9 @@ public class PlayerPart extends JPanel {
                                 thread = new Thread(progressBarPanel);
                                 thread.start();
 
+                                if (songs.get(currentSong).isSharable()) {
+                                    FileClient fileClient = new FileClient("localhost", friendsId, songs.get(currentSong).getPath());
+                                }
 
                                 sortSongs(currentSong);
                                 sortAlbums(currentSong);

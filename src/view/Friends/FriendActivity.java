@@ -1,5 +1,8 @@
 package view.Friends;
 
+import network.server.FileServer;
+import view.Player.PlayerPart;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,9 +21,15 @@ public class FriendActivity extends JPanel {
     private Font Sfont;
     private String name;
     private byte[] file;
+    private PlayerPart playerPart;
+    private FileServer fileServer;
 
-    public FriendActivity() {
+    public FriendActivity(PlayerPart playerPart, FileServer fileServer, int friendId) {
         super();
+
+        this.playerPart = playerPart;
+        this.fileServer = fileServer;
+
 
         Sfont = new Font("Arial", Font.BOLD, 11);
         Bfont = new Font("Arial", Font.BOLD, 9);

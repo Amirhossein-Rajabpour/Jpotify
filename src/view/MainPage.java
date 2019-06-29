@@ -17,7 +17,7 @@ import java.io.IOException;
 public class MainPage extends JFrame {
 
     private String userName;
-    private String friendsId;
+    private int friendId;
     private LibraryPart library;
     private BottomPanel bottomPanel;
     private CentralPanel centralPanel;
@@ -25,11 +25,11 @@ public class MainPage extends JFrame {
     private ShowPanel showPanel;
     private static final int WIDTH = 780, HEIGHT = 475;
 
-    public MainPage(String userName, String friendsId) throws IOException {
+    public MainPage(String userName, int friendId) throws IOException {
 
         super();
         this.userName = userName;
-        this.friendsId = friendsId;
+        this.friendId = friendId;
 
         this.setLayout(new BorderLayout());
         this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -37,7 +37,7 @@ public class MainPage extends JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 150);
         this.setBackground(new Color(57, 54, 50));
 
-        bottomPanel = new BottomPanel();
+        bottomPanel = new BottomPanel(friendId);
         this.add(bottomPanel, BorderLayout.SOUTH);
 
 
@@ -54,7 +54,7 @@ public class MainPage extends JFrame {
 
         FileServer fileServer = new FileServer(4422);
 
-        friendActivity = new FriendActivity(bottomPanel.getPlayerPart(), fileServer);
+        friendActivity = new FriendActivity(bottomPanel.getPlayerPart(), fileServer, friendId);
         JScrollPane scrollPane = new JScrollPane(friendActivity);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBackground(new Color(24, 24, 24));

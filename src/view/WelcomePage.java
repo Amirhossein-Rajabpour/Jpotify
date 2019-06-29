@@ -170,16 +170,16 @@ public class WelcomePage extends JFrame {
     public void doClickAction() throws IOException {
 
         if (!userTextField.getText().equals("")) {
-            if (new File(userTextField.getText()).exists())
-                System.out.println("shit repetetive id");
-            else {
+            if (new File(userTextField.getText()).exists()) {
+
+            } else {
                 new File(userTextField.getText()).mkdir();
                 new File(userTextField.getText() + "/songs/").mkdir();
-                System.out.println("new id");
             }
-            MainPage mainPage = new MainPage(userTextField.getText(), idTextField.getText());
+            int id = Integer.parseInt(idTextField.getText());
+            MainPage mainPage = new MainPage(userTextField.getText(), id);
             this.setVisible(false);
-        } else System.out.println("write something");
+        }
 
 
     }

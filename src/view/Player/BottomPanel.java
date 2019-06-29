@@ -14,26 +14,26 @@ public class BottomPanel extends JPanel {
     private SongInfoPanel songInfoPanel;
     private VolumeSliderPanel volumeSliderPanel;
 
-    public BottomPanel() {
+    public BottomPanel(int friendsId) {
         super();
 
         background = new Color(40, 40, 40);
         this.setLayout(new BorderLayout());
         this.setBackground(background);
 
-        playerPart = new PlayerPart();
+        playerPart = new PlayerPart(friendsId);
         this.add(playerPart, BorderLayout.CENTER);
 
         progressBarPanel = new ProgressBarPanel();
-        this.add(progressBarPanel,BorderLayout.SOUTH);
+        this.add(progressBarPanel, BorderLayout.SOUTH);
         playerPart.setProgressBarPanel(progressBarPanel);
 
         songInfoPanel = new SongInfoPanel();
-        this.add(songInfoPanel,BorderLayout.WEST);
+        this.add(songInfoPanel, BorderLayout.WEST);
         playerPart.setSongInfoPanel(songInfoPanel);
 
         volumeSliderPanel = new VolumeSliderPanel();
-        this.add(volumeSliderPanel,BorderLayout.EAST);
+        this.add(volumeSliderPanel, BorderLayout.EAST);
     }
 
     public PlayerPart getPlayerPart() {
