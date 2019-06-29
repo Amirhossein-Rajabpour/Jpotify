@@ -43,8 +43,5 @@ public class FileClient {
         dos.close();
     }
 
-    public static void main(String[] args) {
-        FileClient fc = new FileClient("localhost", 1988, "/Users/apple/Desktop/03 Where Did You Sleep Last Night (In The Pines).mpga");
-    }
 
 }
