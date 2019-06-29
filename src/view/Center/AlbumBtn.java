@@ -79,6 +79,9 @@ public class AlbumBtn extends JPanel {
             if (Objects.equals(songs.get(i).getAlbumName(), album.getAlbumName())) {
                 showSongs.add(songs.get(i));
 //                albumImgIcon = new ImageIcon(songs.get(i).getArtwork());
+                if (songs.get(i).getArtwork() != null) {
+                    albumImgIcon = new ImageIcon(songs.get(i).getArtwork());
+                }
             }
 
         }
