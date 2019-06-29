@@ -18,6 +18,7 @@ public class NewPlaylist extends JFrame {
     private final Color background;
     private JPanel panel;
     private JPanel north;
+    private JPanel center;
     private Color foreground;
     private JTextField nameTextField;
     private JLabel nameLabel;
@@ -49,12 +50,14 @@ public class NewPlaylist extends JFrame {
          * north panel places at the north of the panel
          */
         north = new JPanel();
-        north.setBackground(panel.getBackground());
+        north.setBackground(background);
         north.setLayout(new BorderLayout());
 
         JPanel empty = new JPanel();
         empty.setBackground(background);
-        north.add(new JPanel(), BorderLayout.NORTH);
+        JLabel emptyLabel = new JLabel();
+        empty.add(emptyLabel);
+        north.add(empty, BorderLayout.NORTH);
         nameLabel = new JLabel("New Playlist");
         nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
         nameLabel.setForeground(Color.lightGray);
@@ -85,17 +88,14 @@ public class NewPlaylist extends JFrame {
         /**
          * center panel places at the center of the panel
          */
-        JPanel center = new JPanel();
+        center = new JPanel();
 
-        center.setLayout(new GridLayout(songs.size(), 1));
+        JScrollPane scrollPane = new JScrollPane(center);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-//        center.setBorder(LineBorder.createBlackLineBorder());
-//        JScrollPane scrollPane = new JScrollPane(center,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        scrollPane.setPreferredSize(new Dimension(600, 600));
+        center.setLayout(new GridLayout(songs.size() + 2, 1));
+        center.setBackground(new Color(237,237,237));
 
-
-        center.add(Box.createRigidArea(new Dimension(0, 5)));
-        center.add(Box.createRigidArea(new Dimension(0, 5)));
 
         arrayListSize = songs.size();
         songCheckbox = new JCheckBox[arrayListSize];
@@ -104,8 +104,7 @@ public class NewPlaylist extends JFrame {
             songCheckbox[i] = new JCheckBox(songs.get(i).getTitle());
             center.add(songCheckbox[i]);
         }
-        panel.add(center, BorderLayout.CENTER);
-
+        panel.add(scrollPane, BorderLayout.CENTER);
 
         create = new JButton("create");
         create.addActionListener(new ActionListener() {
