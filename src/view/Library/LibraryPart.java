@@ -312,6 +312,44 @@ public class LibraryPart extends JPanel {
         playlistLabel.setForeground(foreground);
         playlistLabel.setBackground(this.getBackground());
         add(playlistLabel);
+
+
+        /**
+         * This button creates and adds a new playlist
+         */
+        newPlaylistBtn = new JTextField("   ⨁ New Playlist");
+        newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
+        newPlaylistBtn.setEditable(false);
+        newPlaylistBtn.setBackground(this.getBackground());
+        newPlaylistBtn.setForeground(foreground);
+        newPlaylistBtn.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                newPlaylistBtn.setBackground(pressedBackground);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                newPlaylistBtn.setBackground(getBackground());
+
+                newPlaylist = new NewPlaylist(songs, getLibrarypartItself());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        add(newPlaylistBtn);
+
+
 /**
  * this button shows all existed playlists for user
  */
@@ -350,42 +388,6 @@ public class LibraryPart extends JPanel {
             }
         });
         add(playlistBtn);
-
-
-/**
- * This button creates and adds a new playlist
- */
-        newPlaylistBtn = new JTextField("   ⨁ New Playlist");
-        newPlaylistBtn.setFont(new Font("Arial", Font.BOLD, 9));
-        newPlaylistBtn.setEditable(false);
-        newPlaylistBtn.setBackground(this.getBackground());
-        newPlaylistBtn.setForeground(foreground);
-        newPlaylistBtn.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                newPlaylistBtn.setBackground(pressedBackground);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                newPlaylistBtn.setBackground(getBackground());
-
-                newPlaylist = new NewPlaylist(songs, getLibrarypartItself());
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        add(newPlaylistBtn);
 
 
 /**
