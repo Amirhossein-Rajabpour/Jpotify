@@ -459,12 +459,11 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (repeat.getText().equals("⟲") && repeat.getBackground().equals(background)) {
+                        if (repeat.getText().equals("⤿") && repeat.getBackground().equals(background)) {
                             repeat.setText("⤿");
                             repeatOneIsOn = true;
                             repeat.setToolTipText("Repeat All");
                             repeat.setBackground(pressedBackground);
-                            // Right the ActionEvent here Amirhosein
                         } else if (repeat.getText().equals("⤿")) {
                             repeat.setText("⟲");
                             repeatOneIsOn = false;

@@ -76,7 +76,7 @@ public class LibraryPart extends JPanel {
         username = user;
         if (new File(username + "/songs/").list().length > 0) {
             songs = loadSongs(username);
-        } else System.out.println("not entered");
+        }
 
 
         options = new JLabel("      ● ● ●");
@@ -169,9 +169,7 @@ public class LibraryPart extends JPanel {
                 int result = fileChooser.showOpenDialog(fileChooser);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     saveSong(addSong(selectedFile.getAbsolutePath()));
-                    System.out.println("song saved");
                 }
             }
 
