@@ -1,41 +1,59 @@
 package controller;
 
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.AudioDevice;
-import javazoom.jl.player.Player;
-import java.io.FileInputStream;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
+import java.io.IOException;
 import java.io.InputStream;
 
 public class PlayPartController {
 
     private final static int NOTSTARTED = 0;
-    private final static int PLAYING = 1;
-    private final static int PAUSED = 2;
-    private final static int FINISHED = 3;
+    private final int PLAYING = 1;
+    private final int PAUSED = 2;
+    private final int FINISHED = 3;
+
+    public AdvancedPlayer getPlayer() {
+        return player;
+    }
 
     // the player actually doing all the work
-    private final Player player;
-
+    private AdvancedPlayer player;
     // locking object used to communicate with player thread
-    private final Object playerLock = new Object();
-
+    private Object playerLock = new Object();
     // status variable what player thread is doing/supposed to do
-    private int playerStatus = NOTSTARTED;
+    private int playerStatus;
+    private InputStream inputStream;
 
-    public PlayPartController(final InputStream inputStream) throws JavaLayerException {
-        this.player = new Player(inputStream);
+    public InputStream getInputStream() {
+        return inputStream;
     }
+
+    public PlayPartController(InputStream inputStream) throws JavaLayerException, IOException {
+        playerStatus = NOTSTARTED;
+        player = new AdvancedPlayer(inputStream);
+        this.inputStream = inputStream;
+    }
+
+    public int getPlayerStatus() {
+        return playerStatus;
+    }
+    //    public PauseablePlayer(final InputStream inputStream, final AudioDevice audioDevice) throws JavaLayerException {
+//        this.player = new Player(inputStream, audioDevice);
+//    }
 
     /**
      * Starts playback (resumes if paused)
      */
-    public void play() throws JavaLayerException {
+    public void play(int start, int end) {
         synchronized (playerLock) {
             switch (playerStatus) {
                 case NOTSTARTED:
-                    final Runnable r = new Runnable() {
-                        public void run() {
-                            playInternal();
+                    Runnable r = () -> {
+                        try {
+                            playInternal(start, end);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     };
                     final Thread t = new Thread(r);
@@ -88,11 +106,16 @@ public class PlayPartController {
         }
     }
 
-    private void playInternal() {
+    private void playInternal(int start, int end) throws IOException {
         while (playerStatus != FINISHED) {
             try {
-                if (!player.play(1)) {
-                    break;
+                if (start == 0) {
+                    if (!player.play(1)) {
+                        break;
+                    }
+                } else {
+                    boolean b;
+                    b = player.play(start, end);
                 }
             } catch (final JavaLayerException e) {
                 break;
@@ -126,4 +149,16 @@ public class PlayPartController {
         }
     }
 
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "PLAYING=" + PLAYING +
+                ", PAUSED=" + PAUSED +
+                ", FINISHED=" + FINISHED +
+                ", player=" + player +
+                ", playerLock=" + playerLock +
+                ", playerStatus=" + playerStatus +
+                '}';
+    }
 }

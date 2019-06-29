@@ -72,10 +72,8 @@ public class ProgressBarPanel extends JPanel implements Runnable {
     public void iterate() {
 
         while (num < progressBar.getMaximum() && isPlaying == true) {
-            System.out.println(num);
             progressBar.setValue(num);
             passed.setText("" + progressBar.getValue() / 60 + ":" + progressBar.getValue() % 60);
-//            progressBar.revalidate();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
