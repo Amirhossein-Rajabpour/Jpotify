@@ -247,7 +247,7 @@ public class PlayerPart extends JPanel {
                                     favorite.setForeground(Color.pink);
                                     favorite.setToolTipText("Unlike");
                                 } else {
-                                    favorite.setText("♥︎");
+                                    favorite.setForeground(foreground);
                                     favorite.setToolTipText("Like");
                                 }
                             }
@@ -267,17 +267,6 @@ public class PlayerPart extends JPanel {
                 }
             });
             add(previous);
-
-
-            ImageIcon playIcon = new ImageIcon("/Users/apple/Downloads/playIcon.png");
-            Image image = playIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-            playIcon = new ImageIcon(newimg);
-
-            ImageIcon pauseIcon = new ImageIcon("/Users/apple/Downloads/pauseIcon.png");
-            Image image2 = pauseIcon.getImage(); // transform it
-            Image newimg2 = image2.getScaledInstance(40, 20, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-            pauseIcon = new ImageIcon(newimg2);
 
 
             playOrPause = new JTextField("▶︎");
@@ -318,7 +307,6 @@ public class PlayerPart extends JPanel {
 
                                 sortSongs(currentSong);
                                 sortAlbums(currentSong);
-//                            soundController.setGain();
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             }
@@ -427,7 +415,7 @@ public class PlayerPart extends JPanel {
                                     favorite.setForeground(Color.pink);
                                     favorite.setToolTipText("Unlike");
                                 } else {
-                                    favorite.setText("♥︎");
+                                    favorite.setForeground(foreground);
                                     favorite.setToolTipText("Like");
                                 }
                             }
@@ -524,7 +512,7 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (favorite.getText().equals("♥︎")) {
+                        if (favorite.getForeground().equals(foreground)) {
                             favorite.setForeground(Color.pink);
                             favorite.setToolTipText("Unlike");
                             if (songs.size() != 0) {
@@ -533,7 +521,7 @@ public class PlayerPart extends JPanel {
                             System.out.println("liked");
 
                         } else {
-                            favorite.setText("♥︎");
+                            favorite.setForeground(foreground);
                             favorite.setToolTipText("Like");
 
                             songs.get(currentSong).setFavourite(false);
@@ -606,7 +594,7 @@ public class PlayerPart extends JPanel {
                 favorite.setForeground(Color.pink);
                 favorite.setToolTipText("Unlike");
             } else {
-                favorite.setText("♥︎");
+                favorite.setForeground(foreground);
                 favorite.setToolTipText("Like");
             }
             if (songs.get(initialIndex).isSharable()) {
@@ -654,13 +642,6 @@ public class PlayerPart extends JPanel {
                 break;
             }
         }
-//
-//        Album tmp;
-//        tmp = albums.get(index);
-//        for (int i = index; i >= 1; i--) {
-//            albums.set(i, albums.get(i - 1));
-//        }
-//        albums.set(0, tmp);
 
     }
 
@@ -682,5 +663,4 @@ public class PlayerPart extends JPanel {
     }
 
 
-    //progressBar actionMethod that pauses goes to the particular point of the song must be added here
 }
