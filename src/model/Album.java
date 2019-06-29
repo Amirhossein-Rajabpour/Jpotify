@@ -54,7 +54,6 @@ public class Album {
         if (getAlbumSongs().size() != 0)
             return albumSongs.get(0);
         else {
-            System.out.println("error");
             return null;
 
         }

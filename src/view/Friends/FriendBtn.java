@@ -33,8 +33,7 @@ public class FriendBtn extends JTextField {
         this.title = title;
         this.Bfont = BFont;
         this.Sfont = SFont;
-        this.file = file;
-        this.setPreferredSize(new Dimension(10,10));
+        this.setPreferredSize(new Dimension(10, 10));
 
         songs = new ArrayList<Song>();
         song = new Song(path);
@@ -64,10 +63,9 @@ public class FriendBtn extends JTextField {
             public void mouseReleased(MouseEvent e) {
                 repaint();
                 revalidate();
-                setBackground(getBackground());
+                setBackground(background);
                 System.out.println(path);
                 library.addSong(path);
-//                playerPart.setSongs(songs, 0);
             }
 
             @Override

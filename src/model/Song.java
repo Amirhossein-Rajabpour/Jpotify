@@ -2,12 +2,10 @@ package model;
 
 import com.mpatric.mp3agic.*;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * this class represents a song which is a mp3 file
@@ -48,7 +46,6 @@ public class Song implements Serializable {
         setTitle();
         setDuration();
         setBytes();
-//        isFavourite = false;
         isSharable = false;
     }
 

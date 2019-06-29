@@ -16,8 +16,6 @@ public class ToolBar extends JPanel {
 
     private RoundTextField searchBox;
     private JTextField userNameTextField;
-    private JSeparator jSeparator;
-
     private ArrayList<Song> searchedSongs = new ArrayList<>();
 
     public ToolBar(String userName, LibraryPart libraryPart, ShowPanel showPanel) {

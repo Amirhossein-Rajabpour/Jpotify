@@ -19,13 +19,11 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
 
-//        while (true) {
         try {
             saveFile(client, friendActivity);
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        }
     }
 
     private void saveFile(Socket client, FriendActivity friendActivity) throws IOException {

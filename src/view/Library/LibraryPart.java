@@ -75,9 +75,7 @@ public class LibraryPart extends JPanel {
 
         username = user;
         if (new File(username + "/songs/").list().length > 0) {
-            System.out.println("existed");
             songs = loadSongs(username);
-            System.out.println(songs.get(0).getAlbumName() + "zartzart");
         } else System.out.println("not entered");
 
 
@@ -139,8 +137,6 @@ public class LibraryPart extends JPanel {
         libraryLabel.setForeground(foreground);
         libraryLabel.setBackground(this.getBackground());
         add(libraryLabel);
-//        add(Box.createRigidArea(new Dimension(0, 5)));
-
 
 /**
  * This button is for adding a new song to the program
@@ -467,7 +463,7 @@ public class LibraryPart extends JPanel {
                 favouriteSongs = new ArrayList<>();
 
                 for (Song song : songs) {
-                    if (song.isFavourite() /*&& !favouriteSongs.contains(song)*/) {
+                    if (song.isFavourite()) {
                         favouriteSongs.add(song);
                     }
 
@@ -511,8 +507,6 @@ public class LibraryPart extends JPanel {
         }
         if (exist == 0) {
             songs.add(song);
-            System.out.println(song.getTitle());
-            System.out.println(song.getAlbumName());
             addToAlbum(song);
         }
 
@@ -562,7 +556,6 @@ public class LibraryPart extends JPanel {
      */
     public void saveSong(Song song) {
 
-//        Song song = new Song(path);
         try {
             FileOutputStream f = new FileOutputStream(new File(username + "/songs/" + song.getTitle()));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -611,14 +604,11 @@ public class LibraryPart extends JPanel {
             filePathStream.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
 
-                    System.out.println(filePath);
-
                     try {
                         FileInputStream fis = new FileInputStream(String.valueOf(filePath));
                         ObjectInputStream ois = new ObjectInputStream(fis);
                         Object obj = null;
 
-                        System.out.println("1");
                         obj = ois.readObject();
                         loadedSongs.add((Song) obj);
                         addToAlbum((Song) obj);
@@ -642,12 +632,9 @@ public class LibraryPart extends JPanel {
             });
         }
 
-//        playerPart.setAlbums(albums);
         return loadedSongs;
     }
 
-
-//    public void addPlaylist(Playlist playlist) { playlists.add(playlist); }
 
     /**
      * it returns hte library itself
@@ -712,5 +699,7 @@ public class LibraryPart extends JPanel {
         return albums;
     }
 
-    public ArrayList<Song> getSongs() { return songs; }
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
 }

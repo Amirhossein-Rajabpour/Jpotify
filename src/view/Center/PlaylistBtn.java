@@ -63,7 +63,7 @@ public class PlaylistBtn extends JPanel {
 
             for (int j = 0; j < songs.get(i).getPlaylists().size(); j++) {
 
-                if(songs.get(i).getPlaylists().get(j) != null){
+                if (songs.get(i).getPlaylists().get(j) != null) {
                     if (Objects.equals(songs.get(i).getPlaylists().get(j), playlistName)) {
                         showSongs.add(songs.get(i));
                     }
@@ -124,7 +124,7 @@ public class PlaylistBtn extends JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (me.getButton() == MouseEvent.BUTTON3) {
-                    editPlaylist = new EditPlaylist(songs,playlistName, libraryPart);
+                    editPlaylist = new EditPlaylist(songs, playlistName, libraryPart);
                 }
             }
         });
@@ -138,7 +138,7 @@ public class PlaylistBtn extends JPanel {
         return showSongs;
     }
 
-    public PlaylistBtn getPlaylistBtnItSelf(){
+    public PlaylistBtn getPlaylistBtnItSelf() {
         return this;
     }
 

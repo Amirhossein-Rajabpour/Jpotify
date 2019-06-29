@@ -32,7 +32,6 @@ public class CentralPanel extends JPanel {
         this.add(toolBar, BorderLayout.NORTH);
 
 
-//        this.add(showPanel,BorderLayout.CENTER);
     }
 
     public void setShowPanel(ShowPanel showPanel) {

@@ -71,14 +71,9 @@ public class EditPlaylist extends JFrame {
         north.add(nameLabel, BorderLayout.CENTER);
 
 
-//        nameLabel = new JLabel("Edit your playlist name and songs");
-//        add(nameLabel);
-
-
         nameTextField = new JTextField();
         nameTextField.setForeground(foreground);
         nameTextField.setText(playlisName);
-//        add(nameTextfield);
         north.add(nameTextField, BorderLayout.SOUTH);
         panel.add(north, BorderLayout.NORTH);
 

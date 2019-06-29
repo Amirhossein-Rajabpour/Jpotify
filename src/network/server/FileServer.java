@@ -1,6 +1,5 @@
 package network.server;
 
-import model.Song;
 import view.Friends.FriendActivity;
 
 import java.io.*;
@@ -36,5 +35,5 @@ public class FileServer extends Thread {
         }
     }
 
-    
+
 }

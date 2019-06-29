@@ -1,7 +1,5 @@
 package view;
 
-import view.MainPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

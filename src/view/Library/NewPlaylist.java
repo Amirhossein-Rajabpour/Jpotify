@@ -66,7 +66,6 @@ public class NewPlaylist extends JFrame {
 
 
         nameTextField = new JTextField();
-//        nameTextField.setText("Playlist name");
         nameTextField.setForeground(foreground);
         nameTextField.addFocusListener(new FocusListener() {
             @Override
@@ -77,7 +76,6 @@ public class NewPlaylist extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-//                nameTextField.setText("Playlist name");
                 nameTextField.setForeground(foreground);
             }
         });
@@ -94,7 +92,7 @@ public class NewPlaylist extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         center.setLayout(new GridLayout(songs.size() + 2, 1));
-        center.setBackground(new Color(237,237,237));
+        center.setBackground(new Color(237, 237, 237));
 
 
         arrayListSize = songs.size();
@@ -112,33 +110,21 @@ public class NewPlaylist extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 int exist = 0;
-                for(String playlisName: libraryPart.getPlaylistName()){
+                for (String playlisName : libraryPart.getPlaylistName()) {
 
-                    if(nameTextField.equals(playlisName)){
+                    if (nameTextField.equals(playlisName)) {
                         exist = 1;
                         setVisible(true);
                     }
                 }
 
-                if(nameTextField.getText().equals("")){
+                if (nameTextField.getText().equals("")) {
                     setVisible(true);
-                }
-
-                else if(exist == 0) {
+                } else if (exist == 0) {
 
                     name = nameTextField.getText();
                     if (!libraryPart.getPlaylistName().contains(name)) {
 
-
-//                    playlist = new Playlist(name);
-
-//                for (int i = 0; i < arrayListSize; i++) {
-//
-//                    if (songCheckbox[i].isSelected()) {
-//                        playlist.addSong(songs.get(i));
-//                    }
-//                }
-//                libraryPart.addPlaylist(playlist);
 
                         /**
                          * here instead of adding songs to playlist, i add playlist to songs(almost like album)
@@ -149,13 +135,13 @@ public class NewPlaylist extends JFrame {
                                 songs.get(i).addPlaylist(name);
                             }
                         }
-                        for(Song song: songs)
+                        for (Song song : songs)
                             libraryPart.saveSong(song);
 
                         libraryPart.addPlaylistName(name);
 //                libraryPart.savePlaylists(playlist);
                         setVisible(false);
-                    }else setVisible(false);
+                    } else setVisible(false);
                 }
 
 
@@ -165,10 +151,8 @@ public class NewPlaylist extends JFrame {
         panel.add(create, BorderLayout.SOUTH);
 
 
-//        setSize(250, 400);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2 - 70);
-//        pack();
         setVisible(true);
     }
 
