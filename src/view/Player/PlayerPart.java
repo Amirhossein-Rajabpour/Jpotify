@@ -244,7 +244,7 @@ public class PlayerPart extends JPanel {
                                 }
 
                                 if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setText("💔");
+                                    favorite.setForeground(Color.pink);
                                     favorite.setToolTipText("Unlike");
                                 } else {
                                     favorite.setText("♥︎");
@@ -322,7 +322,7 @@ public class PlayerPart extends JPanel {
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             }
-                            playOrPause.setText("⏸");
+                            playOrPause.setText("∏");
                             playOrPause.setToolTipText("Pause");
                         } else {
                             player.pause();
@@ -424,7 +424,7 @@ public class PlayerPart extends JPanel {
                                 }
 
                                 if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setText("💔");
+                                    favorite.setForeground(Color.pink);
                                     favorite.setToolTipText("Unlike");
                                 } else {
                                     favorite.setText("♥︎");
@@ -525,7 +525,7 @@ public class PlayerPart extends JPanel {
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
                         if (favorite.getText().equals("♥︎")) {
-                            favorite.setText("💔");
+                            favorite.setForeground(Color.pink);
                             favorite.setToolTipText("Unlike");
                             if (songs.size() != 0) {
                                 songs.get(currentSong).setFavourite(true);
@@ -588,7 +588,7 @@ public class PlayerPart extends JPanel {
             Collections.shuffle(shuffleSongs);
             this.progressBarPanel.refresh((int) this.playingSongs.get(currentSong).getDuration());
             songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-            if (player != null && playOrPause.getText().equals("⏸")) {
+            if (player != null && playOrPause.getText().equals("∏")) {
                 player.pause();
                 playOrPause.setText("▶︎");
                 playOrPause.setToolTipText("Play");
@@ -603,7 +603,7 @@ public class PlayerPart extends JPanel {
                 e1.printStackTrace();
             }
             if (songs.get(initialIndex).isFavourite()) {
-                favorite.setText("💔");
+                favorite.setForeground(Color.pink);
                 favorite.setToolTipText("Unlike");
             } else {
                 favorite.setText("♥︎");
