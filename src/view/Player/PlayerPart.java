@@ -120,7 +120,7 @@ public class PlayerPart extends JPanel {
 /**
  * playing on shuffle mode
  */
-            shuffle = new JTextField("🔀");
+            shuffle = new JTextField("⤨");
             shuffle.setBackground(this.getBackground());
             shuffle.setForeground(foreground);
             shuffle.setEditable(false);
@@ -139,13 +139,12 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (shuffle.getText().equals("🔀") && shuffle.getBackground().equals(background)) {
-//                        shuffle.setText("➜");
+                        if (shuffle.getText().equals("⤨") && shuffle.getBackground().equals(background)) {
                             shuffle.setBackground(pressedBackground);
                             shuffle.setToolTipText("Shuffle Off");
                             playingSongs = shuffleSongs;
                         } else {
-                            shuffle.setText("🔀");
+                            shuffle.setText("⤨");
                             shuffle.setBackground(background);
                             shuffle.setToolTipText("Shuffle On");
                             playingSongs = songs;
@@ -447,7 +446,7 @@ public class PlayerPart extends JPanel {
 /**
  * repeating song
  */
-            repeat = new JTextField("🔁");
+            repeat = new JTextField("⤿");
             repeat.setBackground(this.getBackground());
             repeat.setForeground(foreground);
             repeat.setEditable(false);
@@ -466,20 +465,19 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (songs.size() != 0) {
-                        if (repeat.getText().equals("🔁") && repeat.getBackground().equals(background)) {
-                            repeat.setText("🔂");
+                        if (repeat.getText().equals("⤿") && repeat.getBackground().equals(background)) {
+                            repeat.setText("⤿");
                             repeatOneIsOn = true;
                             repeat.setToolTipText("Repeat All");
                             repeat.setBackground(pressedBackground);
-                            // Right the ActionEvent here Amirhosein
-                        } else if (repeat.getText().equals("🔂")) {
-                            repeat.setText("🔁");
+                        } else if (repeat.getText().equals("⤿")) {
+                            repeat.setText("⟲");
                             repeatOneIsOn = false;
                             repeatAllIsOn = true;
                             repeat.setToolTipText("Repeat Off");
                             repeat.setBackground(pressedBackground);
-                        } else if (repeat.getText().equals("🔁") && repeat.getBackground().equals(pressedBackground)) {
-                            repeat.setText("🔁");
+                        } else if (repeat.getText().equals("⟲") && repeat.getBackground().equals(pressedBackground)) {
+                            repeat.setText("⤿");
                             repeatAllIsOn = false;
                             repeat.setToolTipText("Repeat One");
                             repeat.setBackground(background);
