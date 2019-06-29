@@ -49,7 +49,6 @@ public class ToolBar extends JPanel {
                     searchedSongs = new ArrayList<>();
                     String search = searchBox.getText();
                     if (search.equals("") || search.equals("🔍 Search")) {
-                        System.out.println("nothing happened");
                         showPanel.removeAll();
                         showPanel.repaint();
                         showPanel.revalidate();

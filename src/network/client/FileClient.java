@@ -21,7 +21,7 @@ public class FileClient {
     public void sendFile(String file) throws IOException {
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
         FileInputStream fis = new FileInputStream(file);
-        byte[] buffer = new byte[4096];
+        byte[] buffer = new byte[13021];
 
         while (fis.read(buffer) > 0) {
             dos.write(buffer);
@@ -32,7 +32,7 @@ public class FileClient {
     }
 
     public static void main(String[] args) {
-        FileClient fc = new FileClient("localhost", 1988, "cat.jpg");
+        FileClient fc = new FileClient("localhost", 1988, "/Users/apple/Desktop/shuffleIcon.png");
     }
 
 }
