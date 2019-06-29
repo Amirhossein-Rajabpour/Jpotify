@@ -11,24 +11,26 @@ public class FriendActivity extends JPanel {
     private JLabel friendActivity;
     private static final String FRIENDACTIVITY_LABEL = "  Friend Activity          ";
     private JSeparator jSeparator;
-    private Color backGround;
+    private Color background;
     private Color foreground;
     private Color pressedBackground;
     private Font Bfont;
     private Font Sfont;
+    private String name;
+    private byte[] file;
 
     public FriendActivity() {
         super();
 
         Sfont = new Font("Arial", Font.BOLD, 11);
         Bfont = new Font("Arial", Font.BOLD, 9);
-        backGround = new Color(24, 24, 24);
+        background = new Color(24, 24, 24);
         foreground = new Color(179, 179, 179);
         pressedBackground = new Color(45, 45, 45);
 
         this.setMaximumSize(new Dimension(200, 700));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(backGround);
+        this.setBackground(background);
 
         add(Box.createRigidArea(new Dimension(0, 5)));
         add(Box.createRigidArea(new Dimension(0, 5)));
@@ -41,5 +43,15 @@ public class FriendActivity extends JPanel {
         jSeparator = new JSeparator(SwingConstants.HORIZONTAL);
         jSeparator.setForeground(new Color(39, 39, 39));
         this.add(jSeparator);
+    }
+
+    public void addNewParticipant(String fName, String title, byte[] fFile) {
+
+        this.name = fName;
+        this.file = fFile;
+        FriendBtn name = new FriendBtn(fName, title, Bfont, Sfont, background, foreground, pressedBackground, file);
+
+        this.add(name);
+
     }
 }
