@@ -14,16 +14,12 @@ public class CentralPanel extends JPanel {
 
     private ToolBar toolBar;
     private ShowPanel showPanel;
-    public CentralPanel(String userName, PlayerPart playerPart,LibraryPart libraryPart) {
+
+    public CentralPanel(String userName, PlayerPart playerPart, LibraryPart libraryPart) {
         super();
 
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(33, 33, 33));
-
-        toolBar = new ToolBar(userName, libraryPart);
-        toolBar.setSize(new Dimension(50, 10));
-        this.add(toolBar, BorderLayout.NORTH);
-
 
         showPanel = new ShowPanel(playerPart);
         JScrollPane jscrollPane = new JScrollPane(showPanel);
@@ -31,10 +27,15 @@ public class CentralPanel extends JPanel {
         jscrollPane.setBackground(new Color(33, 33, 33));
         this.add(jscrollPane, BorderLayout.CENTER);
 
+        toolBar = new ToolBar(userName, libraryPart, showPanel);
+        toolBar.setSize(new Dimension(50, 10));
+        this.add(toolBar, BorderLayout.NORTH);
+
+
 //        this.add(showPanel,BorderLayout.CENTER);
     }
 
-    public void setShowPanel(ShowPanel showPanel){
+    public void setShowPanel(ShowPanel showPanel) {
 
         this.showPanel = showPanel;
     }
