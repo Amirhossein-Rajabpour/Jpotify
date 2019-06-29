@@ -65,6 +65,7 @@ public class FriendBtn extends JTextField {
                 repaint();
                 revalidate();
                 setBackground(getBackground());
+                System.out.println(path);
                 library.addSong(path);
 //                playerPart.setSongs(songs, 0);
             }

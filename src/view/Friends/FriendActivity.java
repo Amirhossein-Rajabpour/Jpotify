@@ -31,6 +31,7 @@ public class FriendActivity extends JPanel {
 
         this.playerPart = playerPart;
         this.fileServer = fileServer;
+        this.library = libraryPart;
 
 
         Sfont = new Font("Arial", Font.BOLD, 11);
