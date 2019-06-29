@@ -39,11 +39,12 @@ public class FriendBtn extends JTextField {
         songs = new ArrayList<Song>();
         song = new Song(path);
         songs.add(song);
+        name = song.getTitle();
 
         this.setText(name);
         this.setFont(BFont);
         this.setEditable(false);
-        this.setBackground(this.getBackground());
+        this.setBackground(background);
         this.setForeground(foreground);
 
         repaint();
