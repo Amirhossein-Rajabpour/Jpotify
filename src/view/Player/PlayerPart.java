@@ -88,19 +88,19 @@ public class PlayerPart extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (songs.size() != 0) {
+                    if (playingSongs.size() != 0) {
                         if (share.getBackground().equals(background)) {
                             share.setBackground(pressedBackground);
                             share.setToolTipText("Unshare");
-                            if (songs.size() != 0) {
-                                songs.get(currentSong).setSharable(true);
+                            if (playingSongs.size() != 0) {
+                                playingSongs.get(currentSong).setSharable(true);
                             }
 
                         } else {
                             share.setBackground(background);
                             share.setToolTipText("Share");
-                            if (songs.size() != 0) {
-                                songs.get(currentSong).setSharable(false);
+                            if (playingSongs.size() != 0) {
+                                playingSongs.get(currentSong).setSharable(false);
                             }
                         }
                     }
@@ -190,67 +190,51 @@ public class PlayerPart extends JPanel {
 /**
  * playing and pausing and multithreading here
  */
-                    if (songs.size() != 0) {
+                    if (playingSongs.size() != 0) {
+
                         player.pause();
                         playOrPause.setText("▶︎");
                         playOrPause.setToolTipText("Play");
 
                         if (repeatOneIsOn) {
                             currentSong = currentSong;
-                            try {
-                                input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                player = new PlayPartController(input);
-                                progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                            } catch (FileNotFoundException e1) {
-                                e1.printStackTrace();
-                            } catch (JavaLayerException e1) {
-                                e1.printStackTrace();
-                            }
+
                         } else if (repeatAllIsOn && currentSong == 0) {
                             currentSong = playingSongs.size() - 1;
-                            try {
-                                input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                player = new PlayPartController(input);
-                                progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                            } catch (FileNotFoundException e1) {
-                                e1.printStackTrace();
-                            } catch (JavaLayerException e1) {
-                                e1.printStackTrace();
-                            }
+
                         } else {
                             if (currentSong != 0) {
                                 currentSong--;
-                                /**
-                                 * new input and player here for going to next song
-                                 */
-                                try {
-                                    input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                    player = new PlayPartController(input);
-                                    progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                    songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                                } catch (FileNotFoundException e1) {
-                                    e1.printStackTrace();
-                                } catch (JavaLayerException e1) {
-                                    e1.printStackTrace();
-                                }
-                                if (songs.get(currentSong).isSharable()) {
-                                    share.setBackground(pressedBackground);
-                                    share.setToolTipText("Unshare");
-                                } else {
-                                    share.setBackground(background);
-                                    share.setToolTipText("Share");
-                                }
-
-                                if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setForeground(Color.pink);
-                                    favorite.setToolTipText("Unlike");
-                                } else {
-                                    favorite.setForeground(foreground);
-                                    favorite.setToolTipText("Like");
-                                }
                             }
+
+                        }
+                        /**
+                         * new input and player here for going to next song
+                         */
+                        try {
+                            input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                            player = new PlayPartController(input);
+                            progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+                        if (playingSongs.get(currentSong).isSharable()) {
+                            share.setBackground(pressedBackground);
+                            share.setToolTipText("Unshare");
+                        } else {
+                            share.setBackground(background);
+                            share.setToolTipText("Share");
+                        }
+
+                        if (playingSongs.get(currentSong).isFavourite()) {
+                            favorite.setForeground(Color.pink);
+                            favorite.setToolTipText("Unlike");
+                        } else {
+                            favorite.setForeground(foreground);
+                            favorite.setToolTipText("Like");
                         }
                     }
 
@@ -357,68 +341,53 @@ public class PlayerPart extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     next.setBackground(background);
-                    if (songs.size() != 0) {
+
+                    if (playingSongs.size() != 0) {
+
                         player.pause();
                         playOrPause.setText("▶︎");
                         playOrPause.setToolTipText("Play");
 
                         if (repeatOneIsOn) {
                             currentSong = currentSong;
-                            try {
-                                input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                player = new PlayPartController(input);
-                                progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                            } catch (FileNotFoundException e1) {
-                                e1.printStackTrace();
-                            } catch (JavaLayerException e1) {
-                                e1.printStackTrace();
-                            }
+
                         } else if (repeatAllIsOn && currentSong == playingSongs.size() - 1) {
                             currentSong = 0;
-                            try {
-                                input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                player = new PlayPartController(input);
-                                progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                            } catch (FileNotFoundException e1) {
-                                e1.printStackTrace();
-                            } catch (JavaLayerException e1) {
-                                e1.printStackTrace();
-                            }
+
                         } else {
                             if (currentSong != playingSongs.size() - 1) {
                                 currentSong++;
-                                /**
-                                 * new input and player here for going to next song
-                                 */
-                                try {
-                                    input = new FileInputStream(playingSongs.get(currentSong).getPath());
-                                    player = new PlayPartController(input);
-                                    progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
-                                    songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
-                                } catch (FileNotFoundException e1) {
-                                    e1.printStackTrace();
-                                } catch (JavaLayerException e1) {
-                                    e1.printStackTrace();
-                                }
 
-                                if (songs.get(currentSong).isSharable()) {
-                                    share.setBackground(pressedBackground);
-                                    share.setToolTipText("Unshare");
-                                } else {
-                                    share.setBackground(background);
-                                    share.setToolTipText("Share");
-                                }
-
-                                if (songs.get(currentSong).isFavourite()) {
-                                    favorite.setForeground(Color.pink);
-                                    favorite.setToolTipText("Unlike");
-                                } else {
-                                    favorite.setForeground(foreground);
-                                    favorite.setToolTipText("Like");
-                                }
                             }
+                        }
+                        /**
+                         * new input and player here for going to next song
+                         */
+                        try {
+                            input = new FileInputStream(playingSongs.get(currentSong).getPath());
+                            player = new PlayPartController(input);
+                            progressBarPanel.refresh((int) playingSongs.get(currentSong).getDuration());
+                            songInfoPanel.refresh(playingSongs.get(currentSong).getArtwork(), playingSongs.get(currentSong).getTitle(), playingSongs.get(currentSong).getArtistName(), playingSongs.get(currentSong).getAlbumName());
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        if (playingSongs.get(currentSong).isSharable()) {
+                            share.setBackground(pressedBackground);
+                            share.setToolTipText("Unshare");
+                        } else {
+                            share.setBackground(background);
+                            share.setToolTipText("Share");
+                        }
+
+                        if (playingSongs.get(currentSong).isFavourite()) {
+                            favorite.setForeground(Color.pink);
+                            favorite.setToolTipText("Unlike");
+                        } else {
+                            favorite.setForeground(foreground);
+                            favorite.setToolTipText("Like");
                         }
                     }
 
@@ -517,7 +486,6 @@ public class PlayerPart extends JPanel {
                             if (songs.size() != 0) {
                                 songs.get(currentSong).setFavourite(true);
                             }
-                            System.out.println("liked");
 
                         } else {
                             favorite.setForeground(foreground);
