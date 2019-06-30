@@ -86,7 +86,6 @@ public class PlayPartController {
     /**
      * Resumes playback. Returns true if the new state is PLAYING.
      */
-
     public boolean resume() {
         synchronized (playerLock) {
             if (playerStatus == PAUSED) {
